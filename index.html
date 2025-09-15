@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>E_LSTM_Forecasting – Daily Dashboard</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+	<style>
+		:root { --bg:#0e1116; --card:#151a22; --muted:#8a94a6; --text:#e7ecf3; --accent:#2ea3f2; --ok:#18c49c; --warn:#ffba08; --bad:#ff5c5c; }
+		html,body { height:100%; margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background:var(--bg); color:var(--text); }
+		.container { max-width: 1400px; margin: 0 auto; padding: 16px 20px 32px; }
+		h1 { font-size: 20px; margin: 0 0 10px; }
+		.controls { display:flex; gap:12px; align-items:center; flex-wrap: wrap; margin-bottom: 14px; }
+		select, input[type="text"] { background: var(--card); color: var(--text); border: 1px solid #2a3240; border-radius: 8px; padding: 8px 10px; }
+		.grid { display:grid; grid-template-columns: 1fr 1fr; grid-auto-rows: minmax(320px, auto); gap: 16px; }
+		.card { background: var(--card); border: 1px solid #1f2430; border-radius: 12px; padding: 12px; box-shadow: 0 0 0 1px rgba(255,255,255,0.02) inset; }
+		.card h2 { font-size: 16px; margin: 0 0 8px; }
+		.small { color: var(--muted); font-size: 12px; }
+		.table { width: 100%; border-collapse: collapse; }
+		.table th, .table td { border-bottom: 1px solid #222836; padding: 8px 10px; font-size: 13px; text-align: right; }
+		.table th { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .02em; font-size: 12px; }
+		.badge { display:inline-block; padding: 2px 6px; border-radius: 6px; font-size: 12px; }
+		.badge.ok { background: rgba(24,196,156,.14); color: var(--ok); }
+		.badge.warn { background: rgba(255,186,8,.14); color: var(--warn); }
+		.badge.bad { background: rgba(255,92,92,.14); color: var(--bad); }
+		.flex { display:flex; gap:10px; align-items:center; justify-content: space-between; }
+		.kpi { font-weight: 700; }
+		.footer { margin-top: 16px; color: var(--muted); font-size: 12px; }
+		@media (max-width: 1100px) { .grid { grid-template-columns: 1fr; } }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Forecast10 Dashboard</h1>
+		<div class="controls">
+			<label>
+				<span class="small">Analysis date (with Actuals, T)</span><br/>
+				<select id="dateSelect"></select>
+			</label>
+			<label>
+				<span class="small">Filter symbol</span><br/>
+				<input id="symbolFilter" type="text" placeholder="e.g. AAPL, MSFT (optional)" />
+			</label>
+			<label>
+				<span class="small">Morning date (forecasts, T+1)</span><br/>
+				<select id="morningSelect"></select>
+			</label>
+			<button id="applyBtn">Apply</button>
+			<span class="small" id="statusLine"></span>
+		</div>
+
+		<div class="grid">
+			<div class="card">
+				<h2>Scatter: F10_T / C1_T vs F10_T / A1_T</h2>
+				<div id="scatter" style="height:360px;"></div>
+				<div class="small">Axes show ratios (×). Use +/-5% gridlines to guide certification (|F10/C1| ≤ 5%).</div>
+			</div>
+			<div class="card">
+				<div class="flex"><h2>Bins (latest day)</h2><div class="small" id="binsDate"></div></div>
+				<table class="table" id="binsTable">
+					<thead><tr><th style="text-align:left">Bin</th><th>Count</th><th>Mean F10 vs A1 (%)</th><th>Trend (7d)</th></tr></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+			<div class="card" style="grid-column:1/3;">
+				<div class="flex"><h2>Certified candidates (|F10/C1| ≤ 5%) for selected day</h2><div class="small" id="certCount"></div></div>
+				<table class="table" id="actionTable">
+					<thead><tr>
+						<th style="text-align:left">Symbol</th>
+						<th style="text-align:left">Name</th>
+						<th>F10/C1 (%)</th>
+						<th>F10_T</th>
+						<th>A1_(T-1)</th>
+						<th>F10 / A1(T-1) (%)</th>
+						<th>Tech signal</th>
+					</tr></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="footer">Data sources: comparison tables and bins under ../data/processed/predictions/. Degrades gracefully when files are not present.</div>
+	</div>
+
+	<script>
+	// Configuration
+	const PRED_DIR = '../data/processed/predictions';
+	const APP_DATA_DIR = './App/data'; // preferred local cache for dashboard
+	const TECH_DIR = '../w_datalake/data/raw/technical'; // optional, may be missing
+	const BINS = [0,2,5,10,20];
+	const BIN_LABELS = ['<0%','0-2%','2-5%','5-10%','10-20%','>20%'];
+    const STAGING_DIR = './App/data/staging'; // optional 5-stock staging
+    const STAGING = { active:false, analysis_T:null, morning_Tp1:null, symbols:[] };
+
+	const dateSelect = document.getElementById('dateSelect');
+	const symbolFilter = document.getElementById('symbolFilter');
+	const statusLine = document.getElementById('statusLine');
+	const binsDate = document.getElementById('binsDate');
+
+	function ymd(date){ const y=date.getFullYear(); const m=String(date.getMonth()+1).padStart(2,'0'); const d=String(date.getDate()).padStart(2,'0'); return `${y}${m}${d}`; }
+	function addDays(date, delta){ const d=new Date(date); d.setDate(d.getDate()+delta); return d; }
+
+	async function headExists(url){ try { const res = await fetch(url, {method:'GET'}); return res.ok; } catch(e){ return false; } }
+
+    async function loadStagingMeta(){
+        try {
+            const res = await fetch(`${STAGING_DIR}/meta.json`);
+            if (!res.ok) return false;
+            const meta = await res.json();
+            STAGING.active = true;
+            STAGING.analysis_T = String(meta.analysis_T || '');
+            STAGING.morning_Tp1 = String(meta.morning_T || meta.morning_T_plus_1 || '');
+            STAGING.symbols = meta.symbols || [];
+            return true;
+        } catch(e){ return false; }
+    }
+
+	async function discoverDates(maxBack=60){
+		// Build a union of dates from: meta.latest_date, comparison tables, certified files
+		const set = new Set();
+		try { const meta = await (await fetch(`${APP_DATA_DIR}/meta.json`)).json(); if (meta && meta.latest_date) set.add(String(meta.latest_date)); } catch(e) {}
+		// scan back for comparison tables
+		const today = new Date();
+		for (let i=0;i<maxBack;i++){
+			const d = ymd(addDays(today, -i));
+			if (await headExists(`${PRED_DIR}/comparison_table_${d}.csv`)) set.add(d);
+		}
+		// probe for certified files (morning output)
+		for (let i=0;i<7;i++){
+			const d = ymd(addDays(today, -i));
+			if (await headExists(`${APP_DATA_DIR}/certified_candidates_${d}.csv`)) set.add(d);
+		}
+		return Array.from(set).sort();
+	}
+
+	async function discoverComparisonDates(maxBack=60){
+		const found = [];
+		const today = new Date();
+		for (let i=0;i<maxBack;i++){
+			const d = ymd(addDays(today, -i));
+			// Prefer App/data if present, fallback to backend predictions dir
+			if (await headExists(`${APP_DATA_DIR}/comparison_table_${d}.csv`)) { found.push(d); continue; }
+			if (await headExists(`${PRED_DIR}/comparison_table_${d}.csv`)) found.push(d);
+		}
+		return found.reverse();
+	}
+
+	async function discoverCertifiedDates(maxBack=30){
+		const found = [];
+		const today = new Date();
+		for (let i=0;i<maxBack;i++){
+			const d = ymd(addDays(today, -i));
+			if (await headExists(`${APP_DATA_DIR}/certified_candidates_${d}.csv`)) found.push(d);
+		}
+		return found.reverse();
+	}
+
+	function mapColumns(df){
+		const cols = {}; const lc = {};
+		for (const c of df.meta.fields){ lc[c.toLowerCase()] = c; }
+		const pick = (keys) => {
+			for (const k of keys){ for (const key in lc){ if (key.includes(k)) return lc[key]; } }
+			return null;
+		};
+		return {
+			f10: pick(['forecast10_t','forecast10']),
+			f1: pick(['forecast1_t','forecast1']),
+			c1: pick(['consensus1_t','consensus1','consensus']),
+			a1: pick(['actual_t','actual']),
+			name: pick(['name','company','security'])
+		};
+	}
+
+	async function loadCSV(url){
+		const txt = await (await fetch(url)).text();
+		return await new Promise((resolve)=>{
+			Papa.parse(txt, { header:true, dynamicTyping:true, skipEmptyLines:true, complete: (res)=> resolve(res) });
+		});
+	}
+
+	function toNum(v){ const x = Number(v); return Number.isFinite(x) ? x : NaN; }
+	function ratioToPct(r){ return Number.isFinite(r) ? (r-1)*100 : NaN; }
+	function fmtPct(r, digits=1){ const v = ratioToPct(r); return Number.isFinite(v) ? `${v.toFixed(digits)}%` : 'N/A'; }
+	function parseCellNumber(txt){ if (txt==null) return NaN; const s = String(txt).replace(/[%,$\s]/g,''); const n = Number(s); return Number.isFinite(n)? n : NaN; }
+
+	function enableSorting(tableId){
+		const table = document.getElementById(tableId);
+		if (!table) return;
+		const ths = table.querySelectorAll('thead th');
+		ths.forEach((th, idx)=>{
+			th.style.cursor = 'pointer';
+			th.addEventListener('click', ()=>{
+				const tbody = table.querySelector('tbody');
+				const rows = Array.from(tbody.querySelectorAll('tr'));
+				const dir = th.dataset.dir === 'asc' ? 'desc' : 'asc';
+				ths.forEach(h=> delete h.dataset.dir); th.dataset.dir = dir;
+				rows.sort((a,b)=>{
+					const av = a.children[idx]?.textContent || '';
+					const bv = b.children[idx]?.textContent || '';
+					const an = parseCellNumber(av), bn = parseCellNumber(bv);
+					let cmp;
+					if (Number.isFinite(an) && Number.isFinite(bn)) cmp = an - bn; else cmp = String(av).localeCompare(String(bv));
+					return dir==='asc' ? cmp : -cmp;
+				});
+				rows.forEach(r=> tbody.appendChild(r));
+			});
+		});
+	}
+
+	function computeScatter(df, cols, filterSymbols){
+		const x=[], y=[], text=[];
+		for (const row of df.data){
+			const sym = row.Symbol || row.symbol || row.SYMBOL || row.ticker || row.Ticker;
+			if (filterSymbols && filterSymbols.size && (!sym || !filterSymbols.has(String(sym).toUpperCase()))) continue;
+			const f10 = toNum(row[cols.f10]); const c1 = toNum(row[cols.c1]); const a1 = toNum(row[cols.a1]);
+			if (!Number.isFinite(f10) || !Number.isFinite(c1) || !Number.isFinite(a1) || c1<=0 || a1<=0) continue;
+			x.push(ratioToPct(f10 / c1));
+			y.push(ratioToPct(f10 / a1));
+			text.push(sym);
+		}
+		return {x,y,text};
+	}
+
+	function plotScatter(series){
+		const minX = Math.min(...series.x, 0);
+		const maxX = Math.max(...series.x, 0);
+		const minY = Math.min(...series.y, 0);
+		const maxY = Math.max(...series.y, 0);
+		const pad = 0.05;
+		const layout = {
+			margin:{l:40,r:10,t:10,b:40}, paper_bgcolor:'transparent', plot_bgcolor:'transparent',
+			xaxis:{title:'F10_T / C1_T (%)', gridcolor:'#1f2430', zerolinecolor:'#2a3240', ticksuffix:'%', range:[minX*(1-pad), maxX*(1+pad)]},
+			yaxis:{title:'F10_T / A1_T (%)', gridcolor:'#1f2430', zerolinecolor:'#2a3240', ticksuffix:'%', range:[minY*(1-pad), maxY*(1+pad)]},
+			shapes:[
+				{type:'line', x0:-5, x1:5, y0:0, y1:0, line:{color:'#444', width:1, dash:'dot'}},
+				{type:'line', x0:0, x1:0, y0:-5, y1:5, line:{color:'#444', width:1, dash:'dot'}}
+			],
+			showlegend:false
+		};
+		const data = [{ type:'scattergl', mode:'markers', x:series.x, y:series.y, text:series.text, hovertemplate:'%{text}<br>x=%{x:.1f}%<br>y=%{y:.1f}%<extra></extra>', marker:{ color:'#2ea3f2', size:6, opacity:0.85 } }];
+		Plotly.newPlot('scatter', data, layout, {displayModeBar:false, responsive:true});
+	}
+
+	async function loadBinsForDate(dateList, selected){
+		// prefer the selected date; fall back to latest available
+		const tryDates = [selected, ...dateList.slice().reverse()].filter(Boolean);
+		for (const d of tryDates){
+			const appUrl = `${APP_DATA_DIR}/bins_summary_${d}.csv`;
+			if (await headExists(appUrl)) { const df = await loadCSV(appUrl); return { date:d, df }; }
+			const url = `${PRED_DIR}/bins_summary_${d}.csv`;
+			if (await headExists(url)) { const df = await loadCSV(url); return { date:d, df }; }
+		}
+		return null;
+	}
+
+	function mapBinsColumns(df){
+		const lc = {}; for (const c of df.meta.fields){ lc[c.toLowerCase()] = c; }
+		const binC = lc['bin'] || lc['bins'] || Object.values(lc).find(v=>/bin/i.test(v));
+		const countC = lc['count'] || Object.values(lc).find(v=>/count/i.test(v));
+		const meanC = Object.values(lc).find(v=>/mean.*f10.*a1|mean.*error|avg.*f10/i.test(v.toLowerCase())) || Object.values(lc).find(v=>/mean/i.test(v));
+		const trendC = Object.values(lc).find(v=>/trend|7d/i.test(v.toLowerCase()));
+		return { binC, countC, meanC, trendC };
+	}
+
+	function renderBinsTable(bins){
+		const tbody = document.querySelector('#binsTable tbody');
+		tbody.innerHTML = '';
+		if (!bins || !bins.df || !bins.df.data || !bins.df.data.length){ binsDate.textContent=''; return; }
+		const { binC, countC, meanC, trendC } = mapBinsColumns(bins.df);
+		binsDate.textContent = `T=${bins.date.slice(0,4)}-${bins.date.slice(4,6)}-${bins.date.slice(6,8)}`;
+		for (const r of bins.df.data){
+			const tr = document.createElement('tr');
+			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent = r[binC]; tr.appendChild(td0);
+			const td1 = document.createElement('td'); td1.textContent = toNum(r[countC])?.toLocaleString('en-US'); tr.appendChild(td1);
+			const td2 = document.createElement('td'); td2.textContent = Number.isFinite(toNum(r[meanC])) ? `${toNum(r[meanC]).toFixed(1)}%` : 'N/A'; tr.appendChild(td2);
+			const td3 = document.createElement('td'); td3.textContent = Number.isFinite(toNum(r[trendC])) ? `${toNum(r[trendC]).toFixed(1)}%` : 'N/A'; tr.appendChild(td3);
+			tbody.appendChild(tr);
+		}
+		enableSorting('binsTable');
+	}
+
+	async function loadPrevActualMap(prevDate){
+		const url = `${PRED_DIR}/comparison_table_${prevDate}.csv`;
+		if (!(await headExists(url))) return new Map();
+		const df = await loadCSV(url);
+		const cols = {}; const lc={}; for (const c of df.meta.fields){ lc[c.toLowerCase()] = c; }
+		const a1 = (Object.keys(lc).find(k=>k.includes('actual_t'))||Object.keys(lc).find(k=>k==='actual'));
+		const a1c = lc[a1];
+		const symKey = (Object.keys(df.data[0]||{}).find(k=>k.toLowerCase()==='symbol')||'Symbol');
+		const m = new Map();
+		for (const row of df.data){ const sym = String(row[symKey]||'').toUpperCase(); const v = toNum(row[a1c]); if (sym && Number.isFinite(v)) m.set(sym, v); }
+		return m;
+	}
+
+	async function loadCertifiedIfAvailable(selectedDate){
+		const url = `${APP_DATA_DIR}/certified_candidates_${selectedDate}.csv`;
+		if (!(await headExists(url))) return null;
+		const df = await loadCSV(url);
+		const rows = [];
+		// load name map from nearest comparison table
+		let nameMap = new Map();
+		try {
+			let d = selectedDate;
+			let found = null;
+			for (let i=0;i<7;i++){
+				const test = `${APP_DATA_DIR}/comparison_table_${d}.csv`;
+				if (await headExists(test)) { found=test; break; }
+				const dt = new Date(Number(d.slice(0,4)), Number(d.slice(4,6))-1, Number(d.slice(6,8))); dt.setDate(dt.getDate()-1); d = ymd(dt);
+			}
+			if (found){ const cdf = await loadCSV(found); const cols = mapColumns(cdf); if (cols.name){ for (const rr of cdf.data){ const sym = String(rr.Symbol||rr.symbol||'').toUpperCase(); const nm = rr[cols.name]; if (sym) nameMap.set(sym, nm); } } }
+		} catch(e){}
+		for (const r of df.data){
+			const sym = String(r.symbol||r.Symbol||'').toUpperCase();
+			const ratio = toNum(r.f10_over_c1_x);
+			const growth = toNum(r.f10_over_prev_a1_x);
+			const f10 = toNum(r.f10_T);
+			const a1p = toNum(r.a1_prev);
+			const f10d = r.f10_date || '';
+			const a1pd = r.a1_prev_date || '';
+			if (!sym || !Number.isFinite(ratio)) continue;
+			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd });
+		}
+		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
+		return rows;
+	}
+
+	async function renderActionTable(selectedDate, df, cols){
+		const tbody = document.querySelector('#actionTable tbody');
+		tbody.innerHTML='';
+		// Prefer precomputed certified file for the selected date
+		let rows = await loadCertifiedIfAvailable(selectedDate);
+		if (!rows){
+			// Build previous date from comparison tables
+		const ymdPrev = (()=>{ const y=Number(selectedDate.slice(0,4)), m=Number(selectedDate.slice(4,6))-1, d=Number(selectedDate.slice(6,8)); const dt=new Date(y,m,d); dt.setDate(dt.getDate()-1); return ymd(dt); })();
+		const prevMap = await loadPrevActualMap(ymdPrev);
+		for (const r of df.data){
+			const sym = String(r.Symbol||r.symbol||r.SYMBOL||r.ticker||r.Ticker||'').toUpperCase();
+			if (!sym) continue;
+			const f10 = toNum(r[cols.f10]); const c1 = toNum(r[cols.c1]); if (!Number.isFinite(f10) || !Number.isFinite(c1) || c1<=0) continue;
+			const ratio = f10 / c1; // certification check
+			if (Math.abs(ratio - 1.0) > 0.05) continue; // >5% excluded
+			const prevA1 = prevMap.get(sym);
+			const growth = (prevA1 && prevA1>0) ? (f10 / prevA1) : NaN; // F10_T / A1_(T-1)
+			rows.push({ sym, ratio, growth });
+		}
+		// sort by growth desc
+		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
+		}
+		// Render top 50
+		let certified=0;
+		for (const row of rows.slice(0,50)){
+			const tr = document.createElement('tr');
+			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent=row.sym; tr.appendChild(td0);
+			const tdName = document.createElement('td'); tdName.style.textAlign='left'; tdName.textContent=row.name||''; tr.appendChild(tdName);
+			const td1 = document.createElement('td'); td1.textContent=fmtPct(row.ratio); tr.appendChild(td1);
+			const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.f10)? row.f10.toFixed(2): 'N/A'); if (row.f10d) td2.title = `F10 date ${row.f10d}`; tr.appendChild(td2);
+			const td3 = document.createElement('td'); td3.textContent=(Number.isFinite(row.a1p)? row.a1p.toFixed(2): 'N/A'); if (row.a1pd) td3.title = `A1 prev ${row.a1pd}`; tr.appendChild(td3);
+			const td4 = document.createElement('td'); td4.textContent=(Number.isFinite(row.growth)? fmtPct(row.growth) : 'N/A'); tr.appendChild(td4);
+			const td5 = document.createElement('td'); td5.textContent='N/A'; tr.appendChild(td5); // tech placeholder
+			tbody.appendChild(tr); certified++;
+		}
+		document.getElementById('certCount').textContent = `${certified} shown (top 50)`;
+		enableSorting('actionTable');
+	}
+
+	async function main(){
+		statusLine.textContent = 'Discovering dates...';
+		const hasStaging = await loadStagingMeta();
+		let compDates = await discoverComparisonDates(60);
+		if (hasStaging && STAGING.analysis_T) {
+			compDates = [STAGING.analysis_T];
+		}
+		const certDates = await discoverCertifiedDates(30);
+		dateSelect.innerHTML = '';
+		for (const d of compDates){ const opt=document.createElement('option'); opt.value=d; opt.textContent = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`; dateSelect.appendChild(opt); }
+		const morningSelect = document.getElementById('morningSelect');
+		morningSelect.innerHTML = '';
+		for (const d of certDates){ const opt=document.createElement('option'); opt.value=d; opt.textContent = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`; morningSelect.appendChild(opt); }
+		if (!compDates.length){ statusLine.textContent = 'No comparison tables found.'; return; }
+		if (hasStaging && STAGING.analysis_T){ dateSelect.value = STAGING.analysis_T; dateSelect.disabled = true; } else { dateSelect.value = compDates[compDates.length-1]; }
+		if (hasStaging && STAGING.morning_Tp1){ morningSelect.value = STAGING.morning_Tp1; morningSelect.disabled = true; } else if (certDates.length) { morningSelect.value = certDates[certDates.length-1]; }
+		const binsFor = await loadBinsForDate(compDates, dateSelect.value);
+		renderBinsTable(binsFor);
+		// Last update sticker from meta
+		try {
+			const meta = await (await fetch(`${APP_DATA_DIR}/meta.json`)).json();
+			if (meta && meta.last_update) {
+				const sticker = document.createElement('span');
+				sticker.className = 'small';
+				sticker.textContent = `Last update: ${meta.last_update}${STAGING.active?' – STAGING':''}`;
+				document.querySelector('.controls').appendChild(sticker);
+			}
+		} catch(e) {}
+		statusLine.textContent = 'Ready.';
+	}
+
+	document.getElementById('applyBtn').addEventListener('click', async ()=>{
+		const dTop = dateSelect.value; if (!dTop){ return; }
+		const dMorning = document.getElementById('morningSelect').value || dTop;
+		statusLine.textContent = `Loading T=${dTop}, T+1=${dMorning}...`;
+		let url = STAGING.active ? `${STAGING_DIR}/comparison_table_${dTop}_5.csv` : `${APP_DATA_DIR}/comparison_table_${dTop}.csv`;
+		if (!(await headExists(url))) url = `${PRED_DIR}/comparison_table_${dTop}.csv`;
+		try{
+			const df = await loadCSV(url);
+			const cols = mapColumns(df);
+			if (!cols.f10 || !cols.c1 || !cols.a1){ statusLine.textContent = 'Required columns not found.'; return; }
+			const filter = symbolFilter.value.trim();
+			const filterSet = new Set((filter? filter.split(','):[]).map(s=>s.trim().toUpperCase()).filter(Boolean));
+			const series = computeScatter(df, cols, filterSet);
+			plotScatter(series);
+			if (STAGING.active) {
+				const tbody = document.querySelector('#actionTable tbody');
+				tbody.innerHTML='';
+				const urlCert = `${STAGING_DIR}/certified_candidates_${dMorning}_5.csv`;
+				const sdf = await loadCSV(urlCert);
+				let rows = [];
+				for (const r of sdf.data){
+					const sym = String(r.symbol||r.Symbol||'').toUpperCase();
+					const ratio = toNum(r.f10_over_c1_x);
+					const growth = toNum(r.f10_over_prev_a1_x);
+					if (!sym || !Number.isFinite(ratio)) continue;
+					rows.push({ sym, ratio, growth });
+				}
+				rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
+				let certified=0; for (const row of rows.slice(0,50)){
+					const tr = document.createElement('tr');
+					const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent=row.sym; tr.appendChild(td0);
+					const td1 = document.createElement('td'); td1.textContent=(row.ratio).toFixed(3); tr.appendChild(td1);
+					const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.growth)? row.growth.toFixed(3): 'N/A'); tr.appendChild(td2);
+					const td3 = document.createElement('td'); td3.textContent='N/A'; tr.appendChild(td3);
+					tbody.appendChild(tr); certified++; }
+				document.getElementById('certCount').textContent = `${certified} shown (top 50)`;
+			} else {
+				await renderActionTable(dMorning, df, cols);
+			}
+			const compDates = await discoverComparisonDates(60);
+			const binsFor = await loadBinsForDate(compDates, dTop);
+			renderBinsTable(binsFor);
+			statusLine.textContent = `Loaded T=${dTop} (${series.text.length} points), Actions T+1=${dMorning}.`;
+		}catch(e){
+			console.error(e); statusLine.textContent = 'Failed to load date.';
+		}
+	});
+
+	main().then(()=>{ document.getElementById('applyBtn').click(); });
+	</script>
+</body>
+</html>
