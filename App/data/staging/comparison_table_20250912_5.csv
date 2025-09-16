@@ -1,0 +1,6 @@
+symbol,name,actual1_T,consensus1_T,forecast1_T,forecast10_T,delta_f1_c1_pct,delta_f1_act_pct,delta_f10_c1_pct,delta_f10_act_pct
+ALK,Alaska Air Group Inc,63.37,63.89,64.08,65.74,0.3%,1.1%,2.9%,3.7%
+AHL,Aspen Insurance Holdings Limited,36.64,36.63,36.7,37.62,0.2%,0.2%,2.7%,2.7%
+AMTM,Amentum Holdings Inc.,23.85,24.25,24.24,24.25,-0.0%,1.6%,-0.0%,1.7%
+AAPL,Apple Inc.,234.07,239.67,240.54,238.65,0.4%,2.8%,-0.4%,2.0%
+ALAB,Astera Labs,229.5,191.14,191.88,187.24,0.4%,-16.4%,-2.0%,-18.4%
