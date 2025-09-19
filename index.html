@@ -194,7 +194,7 @@
 			th.addEventListener('click', ()=>{
 				const tbody = table.querySelector('tbody');
 				const rows = Array.from(tbody.querySelectorAll('tr'));
-				const dir = th.dataset.dir === 'asc' ? 'desc' : 'asc';
+            const dir = th.dataset.dir ? (th.dataset.dir === 'asc' ? 'desc' : 'asc') : 'asc';
 				ths.forEach(h=> delete h.dataset.dir); th.dataset.dir = dir;
 				rows.sort((a,b)=>{
 					const av = a.children[idx]?.textContent || '';
