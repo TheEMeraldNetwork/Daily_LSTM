@@ -1,0 +1,1583 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Morning Forecasts (Consensus1_T, Forecast1_T, Forecast10_T)</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif; padding: 16px; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #ddd; padding: 6px 8px; }
+th { cursor: pointer; background: #f7f7f7; position: sticky; top: 0; }
+/* Right-align numeric columns: from 3rd column onward */
+td:nth-child(n+3), th:nth-child(n+3) { text-align: right; }
+tr:nth-child(even) { background: #fafafa; }
+</style>
+<script>
+function sortTable(table, col, isNumeric) {
+  const tbody = table.tBodies[0];
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const dir = table.getAttribute('data-sort-dir') === 'asc' ? 'desc' : 'asc';
+  rows.sort((a, b) => {
+    const ta = a.children[col].innerText.replace('%','');
+    const tb = b.children[col].innerText.replace('%','');
+    const va = isNumeric ? parseFloat(ta) : ta.toLowerCase();
+    const vb = isNumeric ? parseFloat(tb) : tb.toLowerCase();
+    if (isNumeric) return (va - vb) * (dir === 'asc' ? 1 : -1);
+    return va.localeCompare(vb) * (dir === 'asc' ? 1 : -1);
+  });
+  rows.forEach(r => tbody.appendChild(r));
+  table.setAttribute('data-sort-dir', dir);
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const table = document.querySelector('table');
+  const headers = table.querySelectorAll('th');
+  headers.forEach((th, idx) => {
+    th.addEventListener('click', () => {
+      const isNumeric = idx >= 2; // columns from index 2 are numeric
+      sortTable(table, idx, isNumeric);
+    });
+  });
+});
+</script>
+</head>
+<body>
+<h2>Morning Forecasts (Consensus1_T, Forecast1_T, Forecast10_T)</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>symbol</th>
+      <th>name</th>
+      <th>consensus1_T</th>
+      <th>forecast1_T</th>
+      <th>forecast10_T</th>
+      <th>delta_f10_c1_pct</th>
+      <th>delta_f10_prev_act_pct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AAPL</td>
+      <td>Apple Inc.</td>
+      <td>239.67</td>
+      <td>240.54</td>
+      <td>238.65</td>
+      <td>-0.4%</td>
+      <td>-0.4%</td>
+    </tr>
+    <tr>
+      <td>ACCO</td>
+      <td>ACCO Brands Corporation</td>
+      <td>4.06</td>
+      <td>4.05</td>
+      <td>5.20</td>
+      <td>28.2%</td>
+      <td>28.8%</td>
+    </tr>
+    <tr>
+      <td>ADV</td>
+      <td>Advantage Solutions Inc.</td>
+      <td>1.78</td>
+      <td>1.78</td>
+      <td>2.04</td>
+      <td>14.6%</td>
+      <td>14.8%</td>
+    </tr>
+    <tr>
+      <td>AENT</td>
+      <td>Alliance Entertainment Holding Corporation</td>
+      <td>5.94</td>
+      <td>5.94</td>
+      <td>6.94</td>
+      <td>17.0%</td>
+      <td>17.3%</td>
+    </tr>
+    <tr>
+      <td>AHCO</td>
+      <td>AdaptHealth Corp</td>
+      <td>9.52</td>
+      <td>9.54</td>
+      <td>10.42</td>
+      <td>9.4%</td>
+      <td>9.5%</td>
+    </tr>
+    <tr>
+      <td>AHL</td>
+      <td>Aspen Insurance Holdings Limited</td>
+      <td>36.63</td>
+      <td>36.70</td>
+      <td>37.62</td>
+      <td>2.7%</td>
+      <td>2.7%</td>
+    </tr>
+    <tr>
+      <td>ALAB</td>
+      <td>Astera Labs</td>
+      <td>191.14</td>
+      <td>191.88</td>
+      <td>187.24</td>
+      <td>-2.0%</td>
+      <td>-2.1%</td>
+    </tr>
+    <tr>
+      <td>ALIT</td>
+      <td>Alight Inc.</td>
+      <td>3.60</td>
+      <td>3.59</td>
+      <td>4.74</td>
+      <td>31.8%</td>
+      <td>32.5%</td>
+    </tr>
+    <tr>
+      <td>ALK</td>
+      <td>Alaska Air Group Inc</td>
+      <td>63.40</td>
+      <td>63.59</td>
+      <td>65.38</td>
+      <td>3.1%</td>
+      <td>3.2%</td>
+    </tr>
+    <tr>
+      <td>AMRK</td>
+      <td>A-Mark Precious Metals Inc.</td>
+      <td>23.90</td>
+      <td>23.93</td>
+      <td>27.60</td>
+      <td>15.5%</td>
+      <td>15.8%</td>
+    </tr>
+    <tr>
+      <td>AMTM</td>
+      <td>Amentum Holdings Inc.</td>
+      <td>24.25</td>
+      <td>24.24</td>
+      <td>24.25</td>
+      <td>-0.0%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>AMZN</td>
+      <td>Amazon.com Inc.</td>
+      <td>232.45</td>
+      <td>233.16</td>
+      <td>240.07</td>
+      <td>3.3%</td>
+      <td>3.3%</td>
+    </tr>
+    <tr>
+      <td>ARCO</td>
+      <td>Arcos Dorados Holdings Inc.</td>
+      <td>7.01</td>
+      <td>7.02</td>
+      <td>7.85</td>
+      <td>12.0%</td>
+      <td>12.2%</td>
+    </tr>
+    <tr>
+      <td>ARDT</td>
+      <td>Ardent Health Inc.</td>
+      <td>13.18</td>
+      <td>13.21</td>
+      <td>14.69</td>
+      <td>11.4%</td>
+      <td>11.7%</td>
+    </tr>
+    <tr>
+      <td>ASIX</td>
+      <td>AdvanSix Inc.</td>
+      <td>20.67</td>
+      <td>20.71</td>
+      <td>22.49</td>
+      <td>8.8%</td>
+      <td>9.0%</td>
+    </tr>
+    <tr>
+      <td>ASML</td>
+      <td>ASML Holding N.V.</td>
+      <td>781.93</td>
+      <td>784.49</td>
+      <td>796.29</td>
+      <td>1.8%</td>
+      <td>1.9%</td>
+    </tr>
+    <tr>
+      <td>ATR</td>
+      <td>AptarGroup Inc.</td>
+      <td>136.41</td>
+      <td>136.25</td>
+      <td>136.37</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>AVGO</td>
+      <td>Broadcom Inc.</td>
+      <td>359.90</td>
+      <td>360.82</td>
+      <td>361.53</td>
+      <td>0.5%</td>
+      <td>0.5%</td>
+    </tr>
+    <tr>
+      <td>AVNW</td>
+      <td>Aviat Networks Inc.</td>
+      <td>22.40</td>
+      <td>22.43</td>
+      <td>25.38</td>
+      <td>13.3%</td>
+      <td>13.6%</td>
+    </tr>
+    <tr>
+      <td>AXON</td>
+      <td>Axon Enterprise Inc.</td>
+      <td>729.03</td>
+      <td>728.41</td>
+      <td>728.88</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>BHVN</td>
+      <td>Biohaven Pharmaceutical Holding Co Ltd.</td>
+      <td>16.00</td>
+      <td>15.91</td>
+      <td>24.16</td>
+      <td>51.0%</td>
+      <td>52.2%</td>
+    </tr>
+    <tr>
+      <td>BIIB</td>
+      <td>Biogen Inc.</td>
+      <td>140.79</td>
+      <td>141.14</td>
+      <td>148.52</td>
+      <td>5.5%</td>
+      <td>5.6%</td>
+    </tr>
+    <tr>
+      <td>BILL</td>
+      <td>BILL Holdings Inc.</td>
+      <td>51.56</td>
+      <td>51.68</td>
+      <td>52.99</td>
+      <td>2.8%</td>
+      <td>2.8%</td>
+    </tr>
+    <tr>
+      <td>BRZE</td>
+      <td>Braze Inc.</td>
+      <td>31.47</td>
+      <td>31.51</td>
+      <td>34.86</td>
+      <td>10.7%</td>
+      <td>10.9%</td>
+    </tr>
+    <tr>
+      <td>BTM</td>
+      <td>Bitcoin Depot Inc.</td>
+      <td>3.54</td>
+      <td>3.52</td>
+      <td>3.53</td>
+      <td>-0.1%</td>
+      <td>0.3%</td>
+    </tr>
+    <tr>
+      <td>BWMX</td>
+      <td>Betterware de México S.A.P.I. de C.V.</td>
+      <td>13.72</td>
+      <td>13.75</td>
+      <td>14.96</td>
+      <td>9.0%</td>
+      <td>9.2%</td>
+    </tr>
+    <tr>
+      <td>CAL</td>
+      <td>Caleres Inc.</td>
+      <td>15.71</td>
+      <td>15.74</td>
+      <td>16.53</td>
+      <td>5.2%</td>
+      <td>5.3%</td>
+    </tr>
+    <tr>
+      <td>CBZ</td>
+      <td>CBIZ Inc.</td>
+      <td>58.10</td>
+      <td>57.95</td>
+      <td>58.06</td>
+      <td>-0.1%</td>
+      <td>0.2%</td>
+    </tr>
+    <tr>
+      <td>CCJ</td>
+      <td>Cameco Corp</td>
+      <td>75.89</td>
+      <td>76.04</td>
+      <td>78.26</td>
+      <td>3.1%</td>
+      <td>3.2%</td>
+    </tr>
+    <tr>
+      <td>CDE</td>
+      <td>Coeur Mining Inc.</td>
+      <td>14.66</td>
+      <td>14.72</td>
+      <td>14.27</td>
+      <td>-2.7%</td>
+      <td>-2.7%</td>
+    </tr>
+    <tr>
+      <td>CG</td>
+      <td>Centerra Gold Inc.</td>
+      <td>63.77</td>
+      <td>63.98</td>
+      <td>64.84</td>
+      <td>1.7%</td>
+      <td>1.7%</td>
+    </tr>
+    <tr>
+      <td>CHE</td>
+      <td>Chemed Corporation</td>
+      <td>466.09</td>
+      <td>467.29</td>
+      <td>494.90</td>
+      <td>6.2%</td>
+      <td>6.3%</td>
+    </tr>
+    <tr>
+      <td>CHMI</td>
+      <td>Cherry Hill Mortgage Investment Corporation</td>
+      <td>2.90</td>
+      <td>2.91</td>
+      <td>3.18</td>
+      <td>9.4%</td>
+      <td>9.5%</td>
+    </tr>
+    <tr>
+      <td>CIVI</td>
+      <td>Civitas Resources Inc.</td>
+      <td>34.42</td>
+      <td>34.51</td>
+      <td>36.33</td>
+      <td>5.6%</td>
+      <td>5.6%</td>
+    </tr>
+    <tr>
+      <td>CLDX</td>
+      <td>Celldex Therapeutics Inc.</td>
+      <td>23.00</td>
+      <td>22.93</td>
+      <td>31.25</td>
+      <td>35.8%</td>
+      <td>36.6%</td>
+    </tr>
+    <tr>
+      <td>CLS</td>
+      <td>CELESTICA INC.</td>
+      <td>242.61</td>
+      <td>243.33</td>
+      <td>238.47</td>
+      <td>-1.7%</td>
+      <td>-1.7%</td>
+    </tr>
+    <tr>
+      <td>CMPS</td>
+      <td>COMPASS Pathways plc</td>
+      <td>5.18</td>
+      <td>5.16</td>
+      <td>7.59</td>
+      <td>46.6%</td>
+      <td>47.7%</td>
+    </tr>
+    <tr>
+      <td>COP</td>
+      <td>CONOCO PHILLIPS</td>
+      <td>93.04</td>
+      <td>93.28</td>
+      <td>98.89</td>
+      <td>6.3%</td>
+      <td>6.4%</td>
+    </tr>
+    <tr>
+      <td>COUR</td>
+      <td>Coursera Inc.</td>
+      <td>11.26</td>
+      <td>11.26</td>
+      <td>11.26</td>
+      <td>-0.0%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>CPRX</td>
+      <td>Catalyst Pharmaceuticals Inc.</td>
+      <td>20.35</td>
+      <td>20.36</td>
+      <td>23.80</td>
+      <td>17.0%</td>
+      <td>17.3%</td>
+    </tr>
+    <tr>
+      <td>CRM</td>
+      <td>Salesforce Inc.</td>
+      <td>256.80</td>
+      <td>257.36</td>
+      <td>278.59</td>
+      <td>8.5%</td>
+      <td>8.6%</td>
+    </tr>
+    <tr>
+      <td>CRNT</td>
+      <td>Ceragon Networks Ltd.</td>
+      <td>1.99</td>
+      <td>1.99</td>
+      <td>2.68</td>
+      <td>34.4%</td>
+      <td>35.1%</td>
+    </tr>
+    <tr>
+      <td>CRNX</td>
+      <td>CRINETICS PHARMACEUTICALS INC.</td>
+      <td>34.79</td>
+      <td>34.77</td>
+      <td>43.52</td>
+      <td>25.1%</td>
+      <td>25.6%</td>
+    </tr>
+    <tr>
+      <td>CRTO</td>
+      <td>Criteo S.A.</td>
+      <td>23.39</td>
+      <td>23.41</td>
+      <td>27.05</td>
+      <td>15.7%</td>
+      <td>16.0%</td>
+    </tr>
+    <tr>
+      <td>CSTM</td>
+      <td>Constellium SE</td>
+      <td>14.61</td>
+      <td>14.64</td>
+      <td>15.56</td>
+      <td>6.6%</td>
+      <td>6.7%</td>
+    </tr>
+    <tr>
+      <td>CTRA</td>
+      <td>Coterra Energy Inc.</td>
+      <td>24.02</td>
+      <td>24.07</td>
+      <td>26.34</td>
+      <td>9.7%</td>
+      <td>9.9%</td>
+    </tr>
+    <tr>
+      <td>CVE</td>
+      <td>Cenovus Energy Inc.</td>
+      <td>15.95</td>
+      <td>16.00</td>
+      <td>15.77</td>
+      <td>-1.1%</td>
+      <td>-1.1%</td>
+    </tr>
+    <tr>
+      <td>CVNA</td>
+      <td>Carvana Co.</td>
+      <td>369.06</td>
+      <td>370.20</td>
+      <td>380.26</td>
+      <td>3.0%</td>
+      <td>3.1%</td>
+    </tr>
+    <tr>
+      <td>CVS</td>
+      <td>CVS Health Corporation</td>
+      <td>73.81</td>
+      <td>74.04</td>
+      <td>75.86</td>
+      <td>2.8%</td>
+      <td>2.8%</td>
+    </tr>
+    <tr>
+      <td>DAR</td>
+      <td>DARLING INGREDIENTS INC.</td>
+      <td>32.10</td>
+      <td>32.12</td>
+      <td>35.59</td>
+      <td>10.9%</td>
+      <td>11.1%</td>
+    </tr>
+    <tr>
+      <td>DAVA</td>
+      <td>Endava plc</td>
+      <td>10.21</td>
+      <td>10.18</td>
+      <td>10.21</td>
+      <td>-0.1%</td>
+      <td>0.3%</td>
+    </tr>
+    <tr>
+      <td>DBRG</td>
+      <td>DIGITALBRIDGE GROUP INC.</td>
+      <td>11.24</td>
+      <td>11.26</td>
+      <td>12.55</td>
+      <td>11.6%</td>
+      <td>11.8%</td>
+    </tr>
+    <tr>
+      <td>DDI</td>
+      <td>DoubleDown Interactive Co. Ltd.</td>
+      <td>9.58</td>
+      <td>9.58</td>
+      <td>11.75</td>
+      <td>22.6%</td>
+      <td>23.1%</td>
+    </tr>
+    <tr>
+      <td>DDL</td>
+      <td>Dingdong (Cayman) Limited</td>
+      <td>2.17</td>
+      <td>2.18</td>
+      <td>2.29</td>
+      <td>5.7%</td>
+      <td>5.8%</td>
+    </tr>
+    <tr>
+      <td>DDOG</td>
+      <td>Datadog Inc.</td>
+      <td>136.18</td>
+      <td>136.08</td>
+      <td>136.15</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>DHR</td>
+      <td>Danaher Corporation</td>
+      <td>200.39</td>
+      <td>200.72</td>
+      <td>211.58</td>
+      <td>5.6%</td>
+      <td>5.7%</td>
+    </tr>
+    <tr>
+      <td>DOX</td>
+      <td>Amdocs Limited</td>
+      <td>85.40</td>
+      <td>85.33</td>
+      <td>85.39</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>DUOL</td>
+      <td>Duolingo Inc.</td>
+      <td>271.96</td>
+      <td>271.18</td>
+      <td>271.77</td>
+      <td>-0.1%</td>
+      <td>0.2%</td>
+    </tr>
+    <tr>
+      <td>DVN</td>
+      <td>Devon Energy Corporation</td>
+      <td>34.80</td>
+      <td>34.88</td>
+      <td>37.45</td>
+      <td>7.6%</td>
+      <td>7.7%</td>
+    </tr>
+    <tr>
+      <td>DXCM</td>
+      <td>DexCom Inc.</td>
+      <td>80.60</td>
+      <td>80.80</td>
+      <td>85.92</td>
+      <td>6.6%</td>
+      <td>6.7%</td>
+    </tr>
+    <tr>
+      <td>EEFT</td>
+      <td>Euronext Worldwide</td>
+      <td>91.31</td>
+      <td>91.16</td>
+      <td>91.27</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>EFX</td>
+      <td>Enerflex Ltd.</td>
+      <td>249.79</td>
+      <td>250.31</td>
+      <td>257.41</td>
+      <td>3.0%</td>
+      <td>3.1%</td>
+    </tr>
+    <tr>
+      <td>ENOV</td>
+      <td>enovix corporation</td>
+      <td>32.21</td>
+      <td>32.24</td>
+      <td>37.17</td>
+      <td>15.4%</td>
+      <td>15.7%</td>
+    </tr>
+    <tr>
+      <td>ERIE</td>
+      <td>Erie Indemnity Company</td>
+      <td>334.19</td>
+      <td>335.93</td>
+      <td>279.83</td>
+      <td>-16.3%</td>
+      <td>-16.5%</td>
+    </tr>
+    <tr>
+      <td>EVH</td>
+      <td>Evolent Health Inc.</td>
+      <td>9.63</td>
+      <td>9.63</td>
+      <td>11.08</td>
+      <td>15.0%</td>
+      <td>15.3%</td>
+    </tr>
+    <tr>
+      <td>FANG</td>
+      <td>DIAMONDBLACK ENERGY INC.</td>
+      <td>138.88</td>
+      <td>138.71</td>
+      <td>138.84</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>FINV</td>
+      <td>FinVolution Group</td>
+      <td>7.92</td>
+      <td>7.91</td>
+      <td>7.92</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>FLOC</td>
+      <td>Flowco</td>
+      <td>15.63</td>
+      <td>15.62</td>
+      <td>20.14</td>
+      <td>28.8%</td>
+      <td>29.4%</td>
+    </tr>
+    <tr>
+      <td>FSLR</td>
+      <td>First Solar Inc.</td>
+      <td>205.20</td>
+      <td>205.67</td>
+      <td>208.91</td>
+      <td>1.8%</td>
+      <td>1.8%</td>
+    </tr>
+    <tr>
+      <td>GDEV</td>
+      <td>GDEV Inc.</td>
+      <td>14.75</td>
+      <td>14.57</td>
+      <td>28.45</td>
+      <td>92.9%</td>
+      <td>95.8%</td>
+    </tr>
+    <tr>
+      <td>GDYN</td>
+      <td>Grid Dynamics Holdings Inc.</td>
+      <td>7.78</td>
+      <td>7.76</td>
+      <td>7.78</td>
+      <td>-0.1%</td>
+      <td>0.2%</td>
+    </tr>
+    <tr>
+      <td>GOOGL</td>
+      <td>Alphabet Inc.</td>
+      <td>234.98</td>
+      <td>235.64</td>
+      <td>233.61</td>
+      <td>-0.6%</td>
+      <td>-0.6%</td>
+    </tr>
+    <tr>
+      <td>GPCR</td>
+      <td>Structure Therapeutics Inc.</td>
+      <td>22.28</td>
+      <td>22.16</td>
+      <td>34.88</td>
+      <td>56.5%</td>
+      <td>58.0%</td>
+    </tr>
+    <tr>
+      <td>HAL</td>
+      <td>Halliburton Company</td>
+      <td>22.12</td>
+      <td>22.18</td>
+      <td>23.21</td>
+      <td>5.0%</td>
+      <td>5.0%</td>
+    </tr>
+    <tr>
+      <td>HBM</td>
+      <td>Hudbay Minerals Inc.</td>
+      <td>12.73</td>
+      <td>12.76</td>
+      <td>13.25</td>
+      <td>4.1%</td>
+      <td>4.2%</td>
+    </tr>
+    <tr>
+      <td>HLF</td>
+      <td>High Liner Foods Incorporated</td>
+      <td>9.86</td>
+      <td>9.89</td>
+      <td>9.73</td>
+      <td>-1.3%</td>
+      <td>-1.3%</td>
+    </tr>
+    <tr>
+      <td>HQY</td>
+      <td>HealthEquity Inc.</td>
+      <td>91.60</td>
+      <td>91.71</td>
+      <td>99.23</td>
+      <td>8.3%</td>
+      <td>8.5%</td>
+    </tr>
+    <tr>
+      <td>HRTG</td>
+      <td>Heritage Insurance Holdings Inc.</td>
+      <td>24.11</td>
+      <td>24.17</td>
+      <td>25.32</td>
+      <td>5.0%</td>
+      <td>5.1%</td>
+    </tr>
+    <tr>
+      <td>HTO</td>
+      <td>H2O America</td>
+      <td>49.83</td>
+      <td>49.79</td>
+      <td>49.82</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>IDYA</td>
+      <td>IDEAYA Biosciences Inc.</td>
+      <td>27.24</td>
+      <td>27.26</td>
+      <td>32.09</td>
+      <td>17.8%</td>
+      <td>18.2%</td>
+    </tr>
+    <tr>
+      <td>IMCR</td>
+      <td>Immunocore Holdings plc</td>
+      <td>37.30</td>
+      <td>37.33</td>
+      <td>43.48</td>
+      <td>16.6%</td>
+      <td>16.9%</td>
+    </tr>
+    <tr>
+      <td>IMVT</td>
+      <td>Immunovant Inc.</td>
+      <td>17.23</td>
+      <td>17.20</td>
+      <td>22.93</td>
+      <td>33.1%</td>
+      <td>33.8%</td>
+    </tr>
+    <tr>
+      <td>IMXI</td>
+      <td>International Money Express Inc.</td>
+      <td>14.49</td>
+      <td>14.52</td>
+      <td>14.86</td>
+      <td>2.6%</td>
+      <td>2.6%</td>
+    </tr>
+    <tr>
+      <td>INSW</td>
+      <td>International Seaways Inc.</td>
+      <td>46.82</td>
+      <td>46.96</td>
+      <td>48.47</td>
+      <td>3.5%</td>
+      <td>3.6%</td>
+    </tr>
+    <tr>
+      <td>ITGR</td>
+      <td>Integer Holding Corporation</td>
+      <td>107.08</td>
+      <td>107.32</td>
+      <td>115.46</td>
+      <td>7.8%</td>
+      <td>8.0%</td>
+    </tr>
+    <tr>
+      <td>JANX</td>
+      <td>Janux Therapeutics</td>
+      <td>24.21</td>
+      <td>24.07</td>
+      <td>38.47</td>
+      <td>58.9%</td>
+      <td>60.4%</td>
+    </tr>
+    <tr>
+      <td>KELYA</td>
+      <td>Kelly Services Inc.</td>
+      <td>13.92</td>
+      <td>13.91</td>
+      <td>16.91</td>
+      <td>21.5%</td>
+      <td>22.0%</td>
+    </tr>
+    <tr>
+      <td>KINS</td>
+      <td>Kingstone Companies Inc.</td>
+      <td>13.74</td>
+      <td>13.71</td>
+      <td>13.73</td>
+      <td>-0.1%</td>
+      <td>0.2%</td>
+    </tr>
+    <tr>
+      <td>KNF</td>
+      <td>Knife River Corporation</td>
+      <td>80.49</td>
+      <td>80.58</td>
+      <td>88.00</td>
+      <td>9.3%</td>
+      <td>9.5%</td>
+    </tr>
+    <tr>
+      <td>KOP</td>
+      <td>Koppers Holdings Inc.</td>
+      <td>28.96</td>
+      <td>28.94</td>
+      <td>34.80</td>
+      <td>20.2%</td>
+      <td>20.5%</td>
+    </tr>
+    <tr>
+      <td>KRO</td>
+      <td>Kronos Worldwide Inc.</td>
+      <td>6.21</td>
+      <td>6.22</td>
+      <td>6.65</td>
+      <td>7.2%</td>
+      <td>7.3%</td>
+    </tr>
+    <tr>
+      <td>LFST</td>
+      <td>LIFESTANCE HEALTH GROUP</td>
+      <td>5.38</td>
+      <td>5.39</td>
+      <td>6.14</td>
+      <td>14.0%</td>
+      <td>14.3%</td>
+    </tr>
+    <tr>
+      <td>LKQ</td>
+      <td>LKQ Corporation</td>
+      <td>32.42</td>
+      <td>32.48</td>
+      <td>35.15</td>
+      <td>8.4%</td>
+      <td>8.6%</td>
+    </tr>
+    <tr>
+      <td>LNTH</td>
+      <td>lantea holdings inc</td>
+      <td>54.88</td>
+      <td>54.75</td>
+      <td>54.85</td>
+      <td>-0.1%</td>
+      <td>0.2%</td>
+    </tr>
+    <tr>
+      <td>LVO</td>
+      <td>LiveOne Inc.</td>
+      <td>0.45</td>
+      <td>0.44</td>
+      <td>0.45</td>
+      <td>-0.3%</td>
+      <td>1.0%</td>
+    </tr>
+    <tr>
+      <td>LW</td>
+      <td>Lamb Weston Holdings Inc.</td>
+      <td>58.02</td>
+      <td>58.18</td>
+      <td>59.39</td>
+      <td>2.4%</td>
+      <td>2.4%</td>
+    </tr>
+    <tr>
+      <td>MA</td>
+      <td>Mastercard Incorporated</td>
+      <td>584.46</td>
+      <td>586.30</td>
+      <td>599.36</td>
+      <td>2.5%</td>
+      <td>2.6%</td>
+    </tr>
+    <tr>
+      <td>MANH</td>
+      <td>MANHATTAN ASSOCIATES INC.</td>
+      <td>215.36</td>
+      <td>216.08</td>
+      <td>218.47</td>
+      <td>1.4%</td>
+      <td>1.5%</td>
+    </tr>
+    <tr>
+      <td>MATV</td>
+      <td>Mativ Holdings Inc.</td>
+      <td>12.44</td>
+      <td>12.46</td>
+      <td>12.82</td>
+      <td>3.1%</td>
+      <td>3.2%</td>
+    </tr>
+    <tr>
+      <td>MAX</td>
+      <td>MediaAlpha Inc</td>
+      <td>12.41</td>
+      <td>12.43</td>
+      <td>13.25</td>
+      <td>6.7%</td>
+      <td>6.9%</td>
+    </tr>
+    <tr>
+      <td>MD</td>
+      <td>Pediatrix Medical Group Inc.</td>
+      <td>17.07</td>
+      <td>17.12</td>
+      <td>17.07</td>
+      <td>0.0%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>MDB</td>
+      <td>MongoDB</td>
+      <td>324.71</td>
+      <td>325.59</td>
+      <td>322.82</td>
+      <td>-0.6%</td>
+      <td>-0.6%</td>
+    </tr>
+    <tr>
+      <td>MDLZ</td>
+      <td>Mondelez International Inc.</td>
+      <td>61.79</td>
+      <td>61.74</td>
+      <td>61.78</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>MDXG</td>
+      <td>MiMedx Group Inc.</td>
+      <td>7.16</td>
+      <td>7.14</td>
+      <td>7.16</td>
+      <td>-0.1%</td>
+      <td>0.2%</td>
+    </tr>
+    <tr>
+      <td>META</td>
+      <td>Meta Platforms Inc.</td>
+      <td>752.89</td>
+      <td>752.45</td>
+      <td>752.78</td>
+      <td>-0.0%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>MNKD</td>
+      <td>MANNKIND CORPORATION</td>
+      <td>5.56</td>
+      <td>5.55</td>
+      <td>6.80</td>
+      <td>22.3%</td>
+      <td>22.8%</td>
+    </tr>
+    <tr>
+      <td>MNMD</td>
+      <td>Mind Medicine (MindMed) Inc.</td>
+      <td>9.28</td>
+      <td>9.22</td>
+      <td>9.27</td>
+      <td>-0.2%</td>
+      <td>0.5%</td>
+    </tr>
+    <tr>
+      <td>MPAA</td>
+      <td>Motorcar Parts of America Inc.</td>
+      <td>14.54</td>
+      <td>14.57</td>
+      <td>15.40</td>
+      <td>5.9%</td>
+      <td>6.0%</td>
+    </tr>
+    <tr>
+      <td>MRVL</td>
+      <td>Marvell Technology Inc.</td>
+      <td>63.42</td>
+      <td>63.49</td>
+      <td>69.05</td>
+      <td>8.9%</td>
+      <td>9.0%</td>
+    </tr>
+    <tr>
+      <td>MSFT</td>
+      <td>Microsoft Corporation</td>
+      <td>495.47</td>
+      <td>495.00</td>
+      <td>495.36</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>MTDR</td>
+      <td>MATADOR RESOURCES COMPANY</td>
+      <td>48.31</td>
+      <td>48.41</td>
+      <td>52.39</td>
+      <td>8.4%</td>
+      <td>8.6%</td>
+    </tr>
+    <tr>
+      <td>MU</td>
+      <td>Micron Technology Inc.</td>
+      <td>131.45</td>
+      <td>131.80</td>
+      <td>136.19</td>
+      <td>3.6%</td>
+      <td>3.7%</td>
+    </tr>
+    <tr>
+      <td>NESR</td>
+      <td>National Energy Services Reunited Corp.</td>
+      <td>9.54</td>
+      <td>9.56</td>
+      <td>10.28</td>
+      <td>7.7%</td>
+      <td>7.8%</td>
+    </tr>
+    <tr>
+      <td>NRDS</td>
+      <td>NerdWallet Inc.</td>
+      <td>10.70</td>
+      <td>10.71</td>
+      <td>11.64</td>
+      <td>8.8%</td>
+      <td>9.0%</td>
+    </tr>
+    <tr>
+      <td>NVDA</td>
+      <td>NVIDIA Corporation</td>
+      <td>167.18</td>
+      <td>167.02</td>
+      <td>167.14</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>NX</td>
+      <td>Quanex Building Products Corporation</td>
+      <td>18.24</td>
+      <td>18.18</td>
+      <td>18.23</td>
+      <td>-0.1%</td>
+      <td>0.3%</td>
+    </tr>
+    <tr>
+      <td>PACS</td>
+      <td>PACS Group Inc.</td>
+      <td>11.25</td>
+      <td>11.21</td>
+      <td>16.02</td>
+      <td>42.5%</td>
+      <td>43.4%</td>
+    </tr>
+    <tr>
+      <td>PAR</td>
+      <td>PAR Technology Corporation</td>
+      <td>48.41</td>
+      <td>48.30</td>
+      <td>48.38</td>
+      <td>-0.1%</td>
+      <td>0.2%</td>
+    </tr>
+    <tr>
+      <td>PEP</td>
+      <td>PepsiCo Inc.</td>
+      <td>146.42</td>
+      <td>146.87</td>
+      <td>148.36</td>
+      <td>1.3%</td>
+      <td>1.3%</td>
+    </tr>
+    <tr>
+      <td>PFE</td>
+      <td>Pfizer Inc.</td>
+      <td>24.90</td>
+      <td>24.97</td>
+      <td>25.88</td>
+      <td>3.9%</td>
+      <td>4.0%</td>
+    </tr>
+    <tr>
+      <td>PFGC</td>
+      <td>Performance Food Group Company</td>
+      <td>105.47</td>
+      <td>105.80</td>
+      <td>108.35</td>
+      <td>2.7%</td>
+      <td>2.8%</td>
+    </tr>
+    <tr>
+      <td>PMTS</td>
+      <td>CPI Card Group Inc.</td>
+      <td>14.38</td>
+      <td>14.34</td>
+      <td>19.24</td>
+      <td>33.8%</td>
+      <td>34.6%</td>
+    </tr>
+    <tr>
+      <td>PRCT</td>
+      <td>PROCEPT BioRobotics Corporation</td>
+      <td>40.78</td>
+      <td>40.83</td>
+      <td>46.94</td>
+      <td>15.1%</td>
+      <td>15.4%</td>
+    </tr>
+    <tr>
+      <td>PRU</td>
+      <td>Prudential Financial Inc.</td>
+      <td>105.75</td>
+      <td>106.09</td>
+      <td>108.22</td>
+      <td>2.3%</td>
+      <td>2.4%</td>
+    </tr>
+    <tr>
+      <td>QUAD</td>
+      <td>Quad/Graphics Inc.</td>
+      <td>6.62</td>
+      <td>6.63</td>
+      <td>7.29</td>
+      <td>10.0%</td>
+      <td>10.2%</td>
+    </tr>
+    <tr>
+      <td>RARE</td>
+      <td>ULTRAGENYX PHARMACEUTICAL INC.</td>
+      <td>32.04</td>
+      <td>31.93</td>
+      <td>45.64</td>
+      <td>42.5%</td>
+      <td>43.4%</td>
+    </tr>
+    <tr>
+      <td>RCI</td>
+      <td>Rogers Communications Inc.</td>
+      <td>35.90</td>
+      <td>36.02</td>
+      <td>36.52</td>
+      <td>1.7%</td>
+      <td>1.8%</td>
+    </tr>
+    <tr>
+      <td>RCKT</td>
+      <td>Rocket Pharmaceuticals Inc.</td>
+      <td>3.30</td>
+      <td>3.29</td>
+      <td>4.43</td>
+      <td>34.3%</td>
+      <td>35.0%</td>
+    </tr>
+    <tr>
+      <td>SHOP</td>
+      <td>Shopify Inc.</td>
+      <td>146.88</td>
+      <td>146.82</td>
+      <td>146.86</td>
+      <td>-0.0%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>SLB</td>
+      <td>Schlumberger Limited</td>
+      <td>35.86</td>
+      <td>35.95</td>
+      <td>38.23</td>
+      <td>6.6%</td>
+      <td>6.7%</td>
+    </tr>
+    <tr>
+      <td>SLGN</td>
+      <td>Silgan Holdings Inc.</td>
+      <td>45.23</td>
+      <td>45.17</td>
+      <td>45.21</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>SLP</td>
+      <td>Simulations Plus Inc.</td>
+      <td>13.89</td>
+      <td>13.84</td>
+      <td>13.87</td>
+      <td>-0.1%</td>
+      <td>0.2%</td>
+    </tr>
+    <tr>
+      <td>SLVM</td>
+      <td>Sylvamo Corporation</td>
+      <td>45.41</td>
+      <td>45.50</td>
+      <td>47.46</td>
+      <td>4.5%</td>
+      <td>4.6%</td>
+    </tr>
+    <tr>
+      <td>SMCI</td>
+      <td>Super Micro Computer Inc.</td>
+      <td>40.45</td>
+      <td>40.41</td>
+      <td>40.44</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>SMP</td>
+      <td>Standard Motor Products Inc.</td>
+      <td>40.02</td>
+      <td>40.13</td>
+      <td>41.58</td>
+      <td>3.9%</td>
+      <td>4.0%</td>
+    </tr>
+    <tr>
+      <td>SNDX</td>
+      <td>Syndax Pharmaceuticals Inc.</td>
+      <td>17.12</td>
+      <td>17.10</td>
+      <td>22.03</td>
+      <td>28.7%</td>
+      <td>29.3%</td>
+    </tr>
+    <tr>
+      <td>SNPS</td>
+      <td>SYNOPSYS INC.</td>
+      <td>598.34</td>
+      <td>598.14</td>
+      <td>598.29</td>
+      <td>-0.0%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>SPB</td>
+      <td>Superior Plus Corp.</td>
+      <td>56.97</td>
+      <td>57.03</td>
+      <td>62.36</td>
+      <td>9.5%</td>
+      <td>9.6%</td>
+    </tr>
+    <tr>
+      <td>SPGI</td>
+      <td>S&P Global Inc.</td>
+      <td>538.39</td>
+      <td>538.06</td>
+      <td>538.31</td>
+      <td>-0.0%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>SPNT</td>
+      <td>SiriusPoint Ltd.</td>
+      <td>18.80</td>
+      <td>18.84</td>
+      <td>20.42</td>
+      <td>8.6%</td>
+      <td>8.8%</td>
+    </tr>
+    <tr>
+      <td>SPRY</td>
+      <td>ARS Pharmaceuticals Inc.</td>
+      <td>10.24</td>
+      <td>10.15</td>
+      <td>10.22</td>
+      <td>-0.2%</td>
+      <td>0.7%</td>
+    </tr>
+    <tr>
+      <td>SSTK</td>
+      <td>Shutterstock Inc.</td>
+      <td>20.14</td>
+      <td>20.11</td>
+      <td>20.13</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>STZ</td>
+      <td>Constellation Brands Inc.</td>
+      <td>148.57</td>
+      <td>148.43</td>
+      <td>148.54</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>TBLA</td>
+      <td>Taboola.com Ltd.</td>
+      <td>3.37</td>
+      <td>3.38</td>
+      <td>3.57</td>
+      <td>5.8%</td>
+      <td>5.9%</td>
+    </tr>
+    <tr>
+      <td>TCOM</td>
+      <td>Trip.com Group Limited</td>
+      <td>72.83</td>
+      <td>72.98</td>
+      <td>75.27</td>
+      <td>3.4%</td>
+      <td>3.4%</td>
+    </tr>
+    <tr>
+      <td>TEAD</td>
+      <td>Teads Holding Co.</td>
+      <td>1.64</td>
+      <td>1.63</td>
+      <td>1.98</td>
+      <td>21.0%</td>
+      <td>21.4%</td>
+    </tr>
+    <tr>
+      <td>TNC</td>
+      <td>Tennant Company</td>
+      <td>83.04</td>
+      <td>83.19</td>
+      <td>89.48</td>
+      <td>7.8%</td>
+      <td>7.9%</td>
+    </tr>
+    <tr>
+      <td>TRVG</td>
+      <td>trivago N.V.</td>
+      <td>3.34</td>
+      <td>3.34</td>
+      <td>3.34</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>TSLA</td>
+      <td>Tesla Inc.</td>
+      <td>350.68</td>
+      <td>352.09</td>
+      <td>340.72</td>
+      <td>-2.8%</td>
+      <td>-2.9%</td>
+    </tr>
+    <tr>
+      <td>TWLO</td>
+      <td>Twilio Inc.</td>
+      <td>108.76</td>
+      <td>108.95</td>
+      <td>114.33</td>
+      <td>5.1%</td>
+      <td>5.2%</td>
+    </tr>
+    <tr>
+      <td>TX</td>
+      <td>Ternium S.A.</td>
+      <td>34.58</td>
+      <td>34.70</td>
+      <td>34.61</td>
+      <td>0.1%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>TXG</td>
+      <td>Torex Gold Resources Inc.</td>
+      <td>13.96</td>
+      <td>14.01</td>
+      <td>14.24</td>
+      <td>2.0%</td>
+      <td>2.0%</td>
+    </tr>
+    <tr>
+      <td>TXO</td>
+      <td>TXO Partners L.P.</td>
+      <td>13.89</td>
+      <td>13.86</td>
+      <td>13.88</td>
+      <td>-0.1%</td>
+      <td>0.2%</td>
+    </tr>
+    <tr>
+      <td>UAL</td>
+      <td>United Airlines Holdings Inc.</td>
+      <td>106.60</td>
+      <td>106.96</td>
+      <td>107.11</td>
+      <td>0.5%</td>
+      <td>0.5%</td>
+    </tr>
+    <tr>
+      <td>UBER</td>
+      <td>Uber Technologies Inc.</td>
+      <td>91.05</td>
+      <td>90.99</td>
+      <td>91.04</td>
+      <td>-0.0%</td>
+      <td>0.1%</td>
+    </tr>
+    <tr>
+      <td>UHS</td>
+      <td>Universal Health Services Inc.</td>
+      <td>190.23</td>
+      <td>190.80</td>
+      <td>197.20</td>
+      <td>3.7%</td>
+      <td>3.7%</td>
+    </tr>
+    <tr>
+      <td>UIS</td>
+      <td>Unisys Corporation</td>
+      <td>3.90</td>
+      <td>3.88</td>
+      <td>3.89</td>
+      <td>-0.1%</td>
+      <td>0.3%</td>
+    </tr>
+    <tr>
+      <td>UPWK</td>
+      <td>Upwork Inc.</td>
+      <td>16.20</td>
+      <td>16.25</td>
+      <td>16.82</td>
+      <td>3.8%</td>
+      <td>3.9%</td>
+    </tr>
+    <tr>
+      <td>UTL</td>
+      <td>Unitil Corporation</td>
+      <td>46.54</td>
+      <td>46.61</td>
+      <td>49.63</td>
+      <td>6.6%</td>
+      <td>6.8%</td>
+    </tr>
+    <tr>
+      <td>UTZ</td>
+      <td>Utz Brands Inc.</td>
+      <td>13.86</td>
+      <td>13.90</td>
+      <td>14.67</td>
+      <td>5.8%</td>
+      <td>5.9%</td>
+    </tr>
+    <tr>
+      <td>VCEL</td>
+      <td>Vericel Corporation</td>
+      <td>34.13</td>
+      <td>34.05</td>
+      <td>34.11</td>
+      <td>-0.1%</td>
+      <td>0.2%</td>
+    </tr>
+    <tr>
+      <td>VERA</td>
+      <td>Vera Therapeutics Inc.</td>
+      <td>24.34</td>
+      <td>24.28</td>
+      <td>33.86</td>
+      <td>39.1%</td>
+      <td>40.0%</td>
+    </tr>
+    <tr>
+      <td>W</td>
+      <td>Wayfair Inc.</td>
+      <td>89.58</td>
+      <td>89.93</td>
+      <td>87.50</td>
+      <td>-2.3%</td>
+      <td>-2.4%</td>
+    </tr>
+    <tr>
+      <td>WDAY</td>
+      <td>Workday Inc.</td>
+      <td>231.27</td>
+      <td>231.90</td>
+      <td>243.26</td>
+      <td>5.2%</td>
+      <td>5.3%</td>
+    </tr>
+    <tr>
+      <td>WELL</td>
+      <td>WELL Health Technologies Corp.</td>
+      <td>167.86</td>
+      <td>167.82</td>
+      <td>167.85</td>
+      <td>-0.0%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>XPO</td>
+      <td>XPO Inc.</td>
+      <td>130.94</td>
+      <td>131.33</td>
+      <td>132.78</td>
+      <td>1.4%</td>
+      <td>1.4%</td>
+    </tr>
+    <tr>
+      <td>ZBH</td>
+      <td>Zimmer Biomet Holdings Inc.</td>
+      <td>105.75</td>
+      <td>106.11</td>
+      <td>107.03</td>
+      <td>1.2%</td>
+      <td>1.2%</td>
+    </tr>
+    <tr>
+      <td>ZM</td>
+      <td>Zoom Video Communications Inc.</td>
+      <td>83.71</td>
+      <td>83.93</td>
+      <td>85.68</td>
+      <td>2.3%</td>
+      <td>2.4%</td>
+    </tr>
+    <tr>
+      <td>ZTS</td>
+      <td>Zoetis Inc.</td>
+      <td>153.47</td>
+      <td>153.87</td>
+      <td>162.60</td>
+      <td>6.0%</td>
+      <td>6.1%</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
