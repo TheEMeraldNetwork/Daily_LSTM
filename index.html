@@ -224,10 +224,19 @@
 	}
 
 	function plotScatter(series){
-		const minX = Math.min(...series.x, 0);
-		const maxX = Math.max(...series.x, 0);
-		const minY = Math.min(...series.y, 0);
-		const maxY = Math.max(...series.y, 0);
+    const minX = Math.min(...series.x, 0);
+    const maxX = Math.max(...series.x, 0);
+    const minY = Math.min(...series.y, 0);
+    const maxY = Math.max(...series.y, 0);
+    // Quadrant counts relative to axes (0,0)
+    let q1=0,q2=0,q3=0,q4=0, onAxes=0;
+    for (let i=0;i<series.x.length;i++){
+        const xx = series.x[i]; const yy = series.y[i];
+        if (xx===0 || yy===0) { onAxes++; continue; }
+        if (xx>0 && yy>0) q1++; else if (xx<0 && yy>0) q2++; else if (xx<0 && yy<0) q3++; else if (xx>0 && yy<0) q4++;
+    }
+    const qc = document.getElementById('quadCounts');
+    if (qc){ qc.textContent = `Q1(+/+)=${q1} · Q2(-/+)=${q2} · Q3(-/-)=${q3} · Q4(+/-)=${q4}${onAxes?` · on-axes=${onAxes}`:''}`; }
 		const pad = 0.05;
 		const layout = {
 			margin:{l:40,r:10,t:10,b:40}, paper_bgcolor:'transparent', plot_bgcolor:'transparent',
@@ -346,11 +355,15 @@
 			rows.push({ sym, ratio, growth });
 		}
 		// sort by growth desc
-		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
+        rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
 		}
+    // Deduplicate by symbol to enforce primary key uniqueness
+    const seen = new Set();
+    const deduped = [];
+    for (const r of rows){ if (r && r.sym && !seen.has(r.sym)){ seen.add(r.sym); deduped.push(r); } }
 		// Render top 50
 		let certified=0;
-		for (const row of rows.slice(0,50)){
+    for (const row of deduped.slice(0,50)){
 			const tr = document.createElement('tr');
 			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent=row.sym; tr.appendChild(td0);
 			const tdName = document.createElement('td'); tdName.style.textAlign='left'; tdName.textContent=row.name||''; tr.appendChild(tdName);
