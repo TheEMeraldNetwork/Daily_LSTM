@@ -1,8 +1,9 @@
-App/data/
 __pycache__/
 *.pyc
 .env
 *.log
+# Allow data files under App/data for GitHub Pages
 *.csv
 *.json
+!App/data/**
 models/
