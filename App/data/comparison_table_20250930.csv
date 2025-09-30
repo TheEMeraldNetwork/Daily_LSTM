@@ -1,0 +1,195 @@
+symbol,name,actual1_T,consensus1_T,forecast1_T,forecast10_T,delta_f1_c1_pct,delta_f1_act_pct,delta_f10_c1_pct,delta_f10_act_pct
+LVO,LiveOne Inc.,4.13,4.87,4.85,8.00,-0.5%,17.4%,64.3%,93.8%
+JANX,Janux Therapeutics,24.44,23.45,23.36,37.13,-0.4%,-4.4%,58.3%,51.9%
+SPRY,ARS Pharmaceuticals Inc.,10.05,9.89,9.86,15.20,-0.3%,-1.9%,53.8%,51.3%
+GPCR,Structure Therapeutics Inc.,28.00,25.19,25.03,37.10,-0.7%,-10.6%,47.3%,32.5%
+GDEV,GDEV Inc.,27.35,26.18,26.08,37.04,-0.4%,-4.7%,41.5%,35.4%
+CMPS,COMPASS Pathways plc,5.87,5.84,5.81,8.08,-0.5%,-1.1%,38.5%,37.7%
+ALIT,Alight Inc.,3.32,3.27,3.27,4.44,0.0%,-1.5%,35.9%,33.8%
+RCKT,Rocket Pharmaceuticals Inc.,3.28,3.28,3.28,4.41,0.0%,-0.0%,34.6%,34.5%
+VERA,Vera Therapeutics Inc.,29.06,28.34,28.23,36.87,-0.4%,-2.9%,30.1%,26.9%
+PMTS,CPI Card Group Inc.,,15.51,15.49,20.10,-0.1%,,29.6%,
+CLDX,Celldex Therapeutics Inc.,26.19,26.26,26.17,33.70,-0.3%,-0.1%,28.3%,28.7%
+ACCO,ACCO Brands Corporation,4.00,4.08,4.06,5.22,-0.3%,1.7%,27.9%,30.6%
+FLOC,Flowco,14.85,16.08,16.03,20.48,-0.3%,8.0%,27.3%,37.9%
+BTM,Bitcoin Depot Inc.,3.36,3.56,3.54,4.50,-0.3%,5.5%,26.7%,34.0%
+DDI,DoubleDown Interactive Co. Ltd.,9.34,9.36,9.33,11.81,-0.3%,-0.1%,26.2%,26.5%
+CRNT,Ceragon Networks Ltd.,2.33,2.38,2.37,2.97,-0.3%,1.8%,24.7%,27.4%
+KELYA,Kelly Services Inc.,13.12,13.19,13.22,16.37,0.2%,0.7%,24.1%,24.8%
+PAR,PAR Technology Corporation,,40.02,40.12,48.95,0.2%,,22.3%,
+KOP,Koppers Holdings Inc.,27.98,28.51,28.58,34.46,0.3%,2.2%,20.9%,23.2%
+IMCR,Immunocore Holdings plc,34.34,34.13,34.12,41.09,-0.0%,-0.6%,20.4%,19.7%
+VCEL,Vericel Corporation,31.47,30.33,30.41,36.48,0.3%,-3.4%,20.3%,15.9%
+PRCT,PROCEPT BioRobotics Corporation,,36.78,36.88,43.92,0.3%,,19.4%,
+TEAD,Teads Holding Co.,1.65,1.70,1.70,2.02,0.3%,3.0%,19.4%,22.7%
+MDXG,MiMedx Group Inc.,6.93,6.96,6.98,8.26,0.3%,0.7%,18.7%,19.2%
+IDYA,IDEAYA Biosciences Inc.,27.21,26.91,26.96,31.91,0.2%,-0.9%,18.6%,17.3%
+EVH,Evolent Health Inc.,8.45,8.98,9.00,10.58,0.3%,6.6%,17.9%,25.3%
+CRNX,CRINETICS PHARMACEUTICALS INC.,41.65,46.04,45.96,53.88,-0.2%,10.3%,17.0%,29.4%
+CWAN,CLEARWATER ANALYTICS INC.,18.02,18.14,18.20,21.22,0.3%,1.0%,17.0%,17.7%
+CRTO,Criteo S.A.,22.60,22.31,22.38,25.95,0.3%,-1.0%,16.3%,14.8%
+GDYN,Grid Dynamics Holdings Inc.,7.71,8.01,8.04,9.30,0.3%,4.2%,16.1%,20.6%
+CHMI,Cherry Hill Mortgage Investment Corporation,2.40,2.53,2.53,2.89,0.4%,5.4%,14.5%,20.2%
+LFST,LIFESTANCE HEALTH GROUP,5.42,5.43,5.43,6.18,0.0%,0.2%,13.7%,13.9%
+TXO,TXO Partners L.P.,14.30,14.35,14.34,16.16,-0.1%,0.3%,12.7%,13.0%
+FINV,FinVolution Group,7.53,7.57,7.59,8.51,0.4%,0.9%,12.5%,13.0%
+KNF,Knife River Corporation,76.81,73.73,74.01,82.92,0.4%,-3.6%,12.5%,8.0%
+ARCO,Arcos Dorados Holdings Inc.,6.84,6.93,6.96,7.77,0.4%,1.7%,12.0%,13.6%
+AENT,Alliance Entertainment Holding Corporation,7.14,6.74,6.77,7.55,0.4%,-5.2%,12.0%,5.8%
+AHCO,AdaptHealth Corp,8.68,8.91,8.94,9.95,0.4%,3.0%,11.7%,14.7%
+KINS,Kingstone Companies Inc.,14.53,14.94,14.97,16.69,0.2%,3.0%,11.7%,14.9%
+AMRK,A-Mark Precious Metals Inc.,26.78,26.70,26.68,29.80,-0.1%,-0.4%,11.6%,11.3%
+SPB,Superior Plus Corp.,52.49,53.70,53.92,59.72,0.4%,2.7%,11.2%,13.8%
+ARDT,Ardent Health Inc.,13.26,13.28,13.27,14.72,-0.1%,0.1%,10.8%,11.1%
+ASIX,AdvanSix Inc.,19.36,19.49,19.57,21.60,0.4%,1.1%,10.8%,11.6%
+DAR,DARLING INGREDIENTS INC.,30.87,32.17,32.30,35.60,0.4%,4.6%,10.7%,15.3%
+QUAD,Quad/Graphics Inc.,6.39,6.56,6.56,7.24,-0.1%,2.6%,10.4%,13.3%
+UTZ,Utz Brands Inc.,11.85,12.14,12.19,13.37,0.4%,2.9%,10.1%,12.8%
+SLGN,Silgan Holdings Inc.,42.75,42.57,42.75,46.75,0.4%,0.0%,9.8%,9.4%
+LKQ,LKQ Corporation,30.54,30.35,30.48,33.26,0.4%,-0.2%,9.6%,8.9%
+TNC,Tennant Company,80.89,80.69,81.05,88.21,0.4%,0.2%,9.3%,9.0%
+CRM,Salesforce Inc.,236.91,243.79,244.87,266.38,0.4%,3.4%,9.3%,12.4%
+MATV,Mativ Holdings Inc.,11.24,11.43,11.48,12.44,0.4%,2.1%,8.8%,10.6%
+CON,CONCENTRA GROUP HOLDING,20.94,20.85,20.94,22.65,0.5%,0.0%,8.6%,8.2%
+ATR,AptarGroup Inc.,133.61,132.47,133.07,143.48,0.5%,-0.4%,8.3%,7.4%
+NRDS,NerdWallet Inc.,11.00,11.02,11.02,11.89,-0.0%,0.2%,7.8%,8.1%
+DDL,Dingdong (Cayman) Limited,,2.03,2.03,2.19,-0.0%,,7.7%,
+MAX,MediaAlpha Inc,11.49,12.05,12.05,12.98,-0.0%,4.9%,7.7%,13.0%
+TXG,Torex Gold Resources Inc.,11.69,11.73,11.79,12.56,0.5%,0.8%,7.1%,7.4%
+TWLO,Twilio Inc.,100.11,102.46,102.45,109.62,-0.0%,2.3%,7.0%,9.5%
+SSTK,Shutterstock Inc.,20.86,21.07,21.12,22.53,0.2%,1.2%,6.9%,8.0%
+SPGI,S&P Global Inc.,486.63,487.72,490.06,521.13,0.5%,0.7%,6.9%,7.1%
+TRVG,trivago N.V.,3.33,3.45,3.45,3.68,0.0%,3.6%,6.7%,10.5%
+ADBE,ADOBE INC.,,360.74,360.77,383.92,0.0%,,6.4%,
+HTO,H2O America,48.70,48.46,48.70,51.57,0.5%,-0.0%,6.4%,5.9%
+CIVI,Civitas Resources Inc.,32.56,33.32,33.49,35.43,0.5%,2.8%,6.3%,8.8%
+NESR,National Energy Services Reunited Corp.,10.50,10.54,10.54,11.20,0.0%,0.4%,6.3%,6.7%
+CHE,Chemed Corporation,452.13,462.69,462.74,491.41,0.0%,2.3%,6.2%,8.7%
+AMTM,Amentum Holdings Inc.,22.82,22.59,22.70,23.99,0.5%,-0.5%,6.2%,5.1%
+SLVM,Sylvamo Corporation,43.30,43.10,43.31,45.72,0.5%,0.0%,6.1%,5.6%
+PFE,Pfizer Inc.,,23.78,23.90,25.05,0.5%,,5.3%,
+TBLA,Taboola.com Ltd.,3.41,3.51,3.51,3.70,0.0%,3.0%,5.2%,8.4%
+AMZN,Amazon.com Inc.,222.17,219.96,221.08,231.21,0.5%,-0.5%,5.1%,4.1%
+MSFT,Microsoft Corporation,514.60,511.88,512.41,538.03,0.1%,-0.4%,5.1%,4.6%
+NVDA,NVIDIA Corporation,,178.33,179.24,187.04,0.5%,,4.9%,
+WSR,WISDOMTREE INC.,12.27,12.51,12.57,13.11,0.5%,2.5%,4.8%,6.8%
+KO,COCA-COLA CO,66.04,65.72,66.06,68.79,0.5%,0.0%,4.7%,4.2%
+SBUX,STARBUCKS CORPORATION,85.64,83.45,83.42,87.18,-0.0%,-2.6%,4.5%,1.8%
+MU,Micron Technology Inc.,163.90,157.38,157.44,164.23,0.0%,-3.9%,4.4%,0.2%
+MDLZ,Mondelez International Inc.,62.63,63.40,63.44,66.06,0.1%,1.3%,4.2%,5.5%
+META,Meta Platforms Inc.,743.40,744.24,744.57,774.49,0.0%,0.2%,4.1%,4.2%
+DDOG,Datadog Inc.,,139.16,139.22,144.64,0.0%,,3.9%,
+SHOP,Shopify Inc.,149.00,140.34,140.40,145.71,0.0%,-5.8%,3.8%,-2.2%
+INSW,International Seaways Inc.,46.08,47.25,47.27,49.05,0.0%,2.6%,3.8%,6.4%
+SNPS,SYNOPSYS INC.,481.61,488.06,490.40,506.49,0.5%,1.8%,3.8%,5.2%
+NKE,NIKE INC.,69.55,69.35,69.72,71.89,0.5%,0.2%,3.7%,3.4%
+BA,BOEING CO,217.08,221.39,222.57,229.39,0.5%,2.5%,3.6%,5.7%
+MA,Mastercard Incorporated,568.14,565.46,568.47,585.67,0.5%,0.1%,3.6%,3.1%
+WDAY,Workday Inc.,247.69,246.81,246.86,255.57,0.0%,-0.3%,3.5%,3.2%
+CVNA,Carvana Co.,377.47,369.48,369.70,381.38,0.1%,-2.1%,3.2%,1.0%
+SMP,Standard Motor Products Inc.,40.80,41.14,41.17,42.43,0.1%,0.9%,3.1%,4.0%
+IMXI,International Money Express Inc.,13.97,14.22,14.23,14.66,0.1%,1.8%,3.1%,4.9%
+NFLX,NETFLIX INC.,1206.41,1211.19,1211.94,1246.93,0.1%,0.5%,3.0%,3.4%
+RCI,Rogers Communications Inc.,35.61,35.68,35.70,36.66,0.1%,0.3%,2.8%,3.0%
+AHL,Aspen Insurance Holdings Limited,36.70,36.67,36.69,37.65,0.1%,-0.0%,2.7%,2.6%
+XPO,XPO Inc.,129.31,126.10,126.79,129.41,0.5%,-1.9%,2.6%,0.1%
+AVGO,Broadcom Inc.,329.91,334.67,336.31,343.40,0.5%,1.9%,2.6%,4.1%
+MDB,MongoDB,317.00,318.53,318.76,325.99,0.1%,0.6%,2.3%,2.8%
+TCOM,Trip.com Group Limited,75.20,75.95,76.00,77.71,0.1%,1.1%,2.3%,3.3%
+WMT,WAL-MART STORES INC.,103.04,103.20,103.27,105.58,0.1%,0.2%,2.3%,2.5%
+ZM,Zoom Video Communications Inc.,82.50,84.54,84.60,86.47,0.1%,2.5%,2.3%,4.8%
+PEP,PepsiCo Inc.,,140.49,141.19,143.48,0.5%,,2.1%,
+UHS,Universal Health Services Inc.,204.41,200.92,201.07,205.09,0.1%,-1.6%,2.1%,0.3%
+MPAA,Motorcar Parts of America Inc.,16.24,16.62,16.67,16.96,0.4%,2.7%,2.1%,4.4%
+UBER,Uber Technologies Inc.,97.93,98.48,98.64,100.50,0.2%,0.7%,2.1%,2.6%
+XOM,EXXON MOBIL CORP.,112.73,117.25,117.51,119.14,0.2%,4.2%,1.6%,5.7%
+HAL,Halliburton Company,24.60,25.12,25.14,25.50,0.1%,2.2%,1.5%,3.6%
+CVX,CHEVRON CORP.,156.10,160.20,161.03,162.51,0.5%,3.2%,1.4%,4.1%
+WELL,WELL Health Technologies Corp.,178.02,174.94,175.06,177.33,0.1%,-1.7%,1.4%,-0.4%
+QCOM,QUALCOMM INC.,,169.24,169.39,171.44,0.1%,,1.3%,
+HLF,High Liner Foods Incorporated,8.45,8.87,8.92,8.99,0.6%,5.7%,1.3%,6.4%
+BABA,ALIBABA GROUP HOLDING LTD.,179.90,171.94,172.35,173.90,0.2%,-4.2%,1.1%,-3.3%
+UPWK,Upwork Inc.,18.57,19.15,19.17,19.34,0.1%,3.2%,1.0%,4.1%
+GE,GENERAL ELECTRIC CO,300.77,295.02,295.30,297.67,0.1%,-1.8%,0.9%,-1.0%
+FSLR,First Solar Inc.,223.53,220.03,220.26,220.40,0.1%,-1.5%,0.2%,-1.4%
+TX,Ternium S.A.,34.82,34.48,34.52,34.53,0.1%,-0.9%,0.2%,-0.8%
+ALAB,Astera Labs,198.80,197.72,197.01,197.73,-0.4%,-0.9%,0.0%,-0.5%
+CLS,CELESTICA INC.,245.95,243.76,243.38,243.77,-0.2%,-1.0%,0.0%,-0.9%
+MD,Pediatrix Medical Group Inc.,16.22,16.30,16.25,16.30,-0.3%,0.2%,-0.0%,0.5%
+CCJ,Cameco Corp,83.87,85.59,85.30,85.58,-0.3%,1.7%,-0.0%,2.0%
+COUR,Coursera Inc.,11.71,11.72,11.70,11.72,-0.2%,-0.1%,-0.0%,0.1%
+MRVL,Marvell Technology Inc.,82.39,83.18,82.94,83.18,-0.3%,0.7%,-0.0%,1.0%
+CG,Centerra Gold Inc.,62.70,64.01,63.80,64.00,-0.3%,1.7%,-0.0%,2.1%
+MANH,MANHATTAN ASSOCIATES INC.,207.67,211.63,210.95,211.61,-0.3%,1.6%,-0.0%,1.9%
+SMCI,Super Micro Computer Inc.,46.36,45.84,45.76,45.83,-0.2%,-1.3%,-0.0%,-1.1%
+CVS,CVS Health Corporation,75.57,75.80,75.72,75.79,-0.1%,0.2%,-0.0%,0.3%
+MCD,MCDONALDS CORP.,302.99,305.35,304.35,305.32,-0.3%,0.4%,-0.0%,0.8%
+BILL,BILL Holdings Inc.,52.97,54.20,54.12,54.19,-0.1%,2.2%,-0.0%,2.3%
+EFX,Enerflex Ltd.,256.58,254.38,253.72,254.35,-0.3%,-1.1%,-0.0%,-0.9%
+PRU,Prudential Financial Inc.,,104.46,104.10,104.44,-0.3%,,-0.0%,
+TXN,TEXAS INSTRUMENTS INC.,183.73,184.63,183.86,184.61,-0.4%,0.1%,-0.0%,0.5%
+PG,PROCTER & GAMBLE CO,,152.57,151.97,152.55,-0.4%,,-0.0%,
+ZBH,Zimmer Biomet Holdings Inc.,98.45,98.29,97.95,98.28,-0.3%,-0.5%,-0.0%,-0.2%
+PFGC,Performance Food Group Company,,104.36,104.12,104.35,-0.2%,,-0.0%,
+TMUS,T-MOBILE US INC.,239.38,237.61,236.60,237.57,-0.4%,-1.2%,-0.0%,-0.8%
+UAL,United Airlines Holdings Inc.,96.50,97.97,97.66,97.95,-0.3%,1.2%,-0.0%,1.5%
+LW,Lamb Weston Holdings Inc.,55.67,55.25,55.02,55.25,-0.4%,-1.2%,-0.0%,-0.8%
+DIS,WALT DISNEY CO,114.48,113.55,113.13,113.53,-0.4%,-1.2%,-0.0%,-0.8%
+COP,CONOCO PHILLIPS,94.57,98.55,98.12,98.53,-0.4%,3.8%,-0.0%,4.2%
+CSTM,Constellium SE,15.03,15.34,15.30,15.34,-0.3%,1.8%,-0.0%,2.1%
+CWT,CALIFORNIA WATER SERVICE GROUP INC.,45.91,45.71,45.54,45.70,-0.4%,-0.8%,-0.0%,-0.5%
+FANG,DIAMONDBLACK ENERGY INC.,143.10,148.38,147.81,148.35,-0.4%,3.3%,-0.0%,3.7%
+DVN,Devon Energy Corporation,35.06,37.02,36.94,37.02,-0.2%,5.4%,-0.0%,5.6%
+BIIB,Biogen Inc.,140.08,137.50,136.94,137.47,-0.4%,-2.2%,-0.0%,-1.9%
+AXON,Axon Enterprise Inc.,717.64,709.56,706.35,709.38,-0.5%,-1.6%,-0.0%,-1.2%
+UTL,Unitil Corporation,47.40,47.02,46.83,47.01,-0.4%,-1.2%,-0.0%,-0.8%
+HRTG,Heritage Insurance Holdings Inc.,24.36,24.89,24.81,24.88,-0.3%,1.8%,-0.0%,2.1%
+HQY,HealthEquity Inc.,94.77,96.63,96.48,96.61,-0.2%,1.8%,-0.0%,1.9%
+DOX,Amdocs Limited,,81.72,81.39,81.70,-0.4%,,-0.0%,
+SLB,Schlumberger Limited,35.11,35.56,35.40,35.55,-0.5%,0.8%,-0.0%,1.3%
+MTDR,MATADOR RESOURCES COMPANY,45.63,49.07,48.87,49.06,-0.4%,7.1%,-0.0%,7.5%
+DHR,Danaher Corporation,,185.07,184.24,185.02,-0.5%,,-0.0%,
+ZTS,Zoetis Inc.,146.29,143.69,142.98,143.64,-0.5%,-2.3%,-0.0%,-1.8%
+STZ,Constellation Brands Inc.,134.65,132.68,132.08,132.63,-0.5%,-1.9%,-0.0%,-1.5%
+SPNT,SiriusPoint Ltd.,18.09,18.35,18.27,18.34,-0.4%,1.0%,-0.0%,1.4%
+ITGR,Integer Holding Corporation,103.39,101.66,101.16,101.62,-0.5%,-2.2%,-0.0%,-1.7%
+CTRA,Coterra Energy Inc.,23.64,23.87,23.83,23.86,-0.2%,0.8%,-0.0%,0.9%
+CAL,Caleres Inc.,13.03,13.67,13.61,13.67,-0.4%,4.5%,-0.0%,4.9%
+DUOL,Duolingo Inc.,321.84,326.90,325.19,326.78,-0.5%,1.0%,-0.0%,1.5%
+KRO,Kronos Worldwide Inc.,5.75,5.74,5.71,5.74,-0.5%,-0.7%,-0.0%,-0.2%
+DBRG,DIGITALBRIDGE GROUP INC.,11.71,11.82,11.78,11.81,-0.3%,0.6%,-0.0%,0.9%
+ALK,Alaska Air Group Inc,49.78,50.96,50.73,50.94,-0.5%,1.9%,-0.0%,2.3%
+FI,FISERV,128.92,129.78,129.17,129.72,-0.5%,0.2%,-0.0%,0.6%
+EEFT,Euronext Worldwide,,89.60,89.45,89.56,-0.2%,,-0.0%,
+BRZE,Braze Inc.,32.22,31.63,31.58,31.62,-0.2%,-2.0%,-0.0%,-1.9%
+BWMX,Betterware de México S.A.P.I. de C.V.,13.48,12.84,12.82,12.84,-0.2%,-4.9%,-0.0%,-4.8%
+DXCM,DexCom Inc.,67.29,67.24,66.88,67.20,-0.5%,-0.6%,-0.1%,-0.1%
+AVNW,Aviat Networks Inc.,22.93,22.59,22.47,22.58,-0.5%,-2.0%,-0.1%,-1.5%
+ENOV,enovix corporation,30.34,30.07,29.90,30.05,-0.6%,-1.5%,-0.1%,-1.0%
+UIS,Unisys Corporation,3.90,3.99,3.98,3.99,-0.3%,2.1%,-0.1%,2.4%
+SLP,Simulations Plus Inc.,14.90,14.93,14.89,14.92,-0.3%,-0.1%,-0.1%,0.1%
+LNTH,lantea holdings inc,51.29,50.75,50.43,50.72,-0.6%,-1.7%,-0.1%,-1.1%
+CPRX,Catalyst Pharmaceuticals Inc.,19.70,19.58,19.46,19.56,-0.6%,-1.2%,-0.1%,-0.7%
+BMRN,Biomarin Pharmaceutical Inc.,54.16,54.02,53.69,53.98,-0.6%,-0.9%,-0.1%,-0.3%
+CBZ,CBIZ Inc.,53.81,52.76,52.43,52.72,-0.6%,-2.6%,-0.1%,-2.0%
+ADV,Advantage Solutions Inc.,,1.57,1.56,1.56,-0.3%,,-0.1%,
+MNKD,MANNKIND CORPORATION,5.39,5.55,5.52,5.55,-0.5%,2.5%,-0.1%,2.9%
+DAVA,Endava plc,9.13,8.92,8.89,8.92,-0.4%,-2.6%,-0.1%,-2.3%
+NX,Quanex Building Products Corporation,,13.86,13.75,13.84,-0.8%,,-0.1%,
+UNH,UNITEDHEALTH GROUP INC.,345.18,344.07,344.46,343.70,0.1%,-0.2%,-0.1%,-0.4%
+HBM,Hudbay Minerals Inc.,15.21,14.16,14.18,14.14,0.1%,-6.8%,-0.1%,-7.0%
+SNDX,Syndax Pharmaceuticals Inc.,15.38,15.77,15.63,15.75,-0.8%,1.6%,-0.1%,2.3%
+IMVT,Immunovant Inc.,16.12,16.33,16.21,16.30,-0.7%,0.5%,-0.1%,1.1%
+PACS,PACS Group Inc.,,14.06,13.96,14.04,-0.7%,,-0.1%,
+RARE,ULTRAGENYX PHARMACEUTICAL INC.,30.36,29.31,28.99,29.25,-1.1%,-4.5%,-0.2%,-3.6%
+BHVN,Biohaven Pharmaceutical Holding Co Ltd.,14.66,15.13,14.96,15.10,-1.1%,2.0%,-0.2%,3.0%
+IBM,INTERNATIONAL BUSINESS MACHINES CORP.,282.07,284.30,284.62,283.54,0.1%,0.9%,-0.3%,0.5%
+GOOGL,Alphabet Inc.,243.10,246.50,246.81,244.10,0.1%,1.5%,-1.0%,0.4%
+AAPL,Apple Inc.,254.63,255.41,256.24,252.38,0.3%,0.6%,-1.2%,-0.9%
+W,Wayfair Inc.,89.34,86.80,86.92,85.77,0.1%,-2.7%,-1.2%,-4.0%
+ASML,ASML Holding N.V.,962.61,951.14,951.95,927.32,0.1%,-1.1%,-2.5%,-3.7%
+CVE,Cenovus Energy Inc.,16.99,17.76,17.77,17.13,0.1%,4.6%,-3.5%,0.8%
+CDE,Coeur Mining Inc.,18.75,18.42,18.46,17.40,0.2%,-1.5%,-5.5%,-7.2%
+TSLA,Tesla Inc.,444.72,440.00,440.88,415.50,0.2%,-0.9%,-5.6%,-6.6%
+INTC,INTEL CORP.,34.48,35.46,35.58,32.90,0.3%,3.2%,-7.2%,-4.6%
+ERIE,Erie Indemnity Company,318.16,315.19,317.86,265.54,0.8%,-0.1%,-15.8%,-16.5%
