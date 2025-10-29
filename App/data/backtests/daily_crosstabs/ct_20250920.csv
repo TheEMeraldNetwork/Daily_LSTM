@@ -1,0 +1,5 @@
+row,count,win,loss,usd_win,usd_loss,usd_total
+total,5,0,0,0,0,0
+sent_ge_0.1,1,0,0,0,0,0
+sent_lt_0.1,0,0,0,0,0,0
+no_sent,4,0,0,0,0,0
