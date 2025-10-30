@@ -1,0 +1,111 @@
+{
+  "date": "20251021",
+  "matrix": {
+    "<0": {
+      "Missing": {
+        "win": 0,
+        "loss": 0
+      },
+      "<0.1": {
+        "win": 0,
+        "loss": 0
+      },
+      ">=0.1": {
+        "win": 1,
+        "loss": 3
+      }
+    },
+    "0-2": {
+      "Missing": {
+        "win": 0,
+        "loss": 0
+      },
+      "<0.1": {
+        "win": 0,
+        "loss": 0
+      },
+      ">=0.1": {
+        "win": 0,
+        "loss": 0
+      }
+    },
+    ">2": {
+      "Missing": {
+        "win": 0,
+        "loss": 0
+      },
+      "<0.1": {
+        "win": 8,
+        "loss": 4
+      },
+      ">=0.1": {
+        "win": 8,
+        "loss": 1
+      }
+    }
+  },
+  "totals": {
+    "missing": {
+      "win": 0,
+      "loss": 0
+    },
+    "lt_0_1": {
+      "win": 8,
+      "loss": 4
+    },
+    ">_eq_0_1": {
+      "win": 9,
+      "loss": 4
+    }
+  },
+  "invest_block": {
+    "stocks": 0,
+    "pnl_win": 0.0,
+    "pnl_loss": 0.0
+  },
+  "candidates": {
+    "f10c1_0_2_and_sent_ge_0_1": [],
+    "f10c1_lt_0_and_sent_ge_0_1": [
+      {
+        "symbol": "AAPL",
+        "win": true,
+        "a1_prev": 262.24,
+        "a1_T": 262.77,
+        "ret_pct": 0.20210494203782847,
+        "f10_over_c1": 0.9806453107394196,
+        "f10_over_c1_pct": -1.935468926058037,
+        "sentiment_7d": 0.32
+      },
+      {
+        "symbol": "ASML",
+        "win": false,
+        "a1_prev": 1042.15,
+        "a1_T": 1025.02,
+        "ret_pct": -1.6437173151657714,
+        "f10_over_c1": 0.9547255981961912,
+        "f10_over_c1_pct": -4.527440180380882,
+        "sentiment_7d": 0.16
+      },
+      {
+        "symbol": "MU",
+        "win": false,
+        "a1_prev": 206.77,
+        "a1_T": 202.29,
+        "ret_pct": -2.1666586061807935,
+        "f10_over_c1": 0.9691511017928213,
+        "f10_over_c1_pct": -3.084889820717873,
+        "sentiment_7d": 0.27
+      },
+      {
+        "symbol": "PEP",
+        "win": false,
+        "a1_prev": 153.64,
+        "a1_T": 153.18,
+        "ret_pct": -0.2994011976047761,
+        "f10_over_c1": 0.9946993660560871,
+        "f10_over_c1_pct": -0.5300633943912891,
+        "sentiment_7d": 0.19
+      }
+    ]
+  }
+}
