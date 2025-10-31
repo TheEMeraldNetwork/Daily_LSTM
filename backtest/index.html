@@ -110,7 +110,7 @@
     }
 
     async function loadMeta(){
-      const res = await fetch('../App/data/meta.json');
+      const res = await fetch(`../App/data/meta.json?v=${Date.now()}`);
       const meta = await res.json();
       const latest = meta.latest_date;
       const prev = businessPrev(latest);
@@ -163,7 +163,7 @@
     }
 
     async function loadDate(date){
-      const res = await fetch(`../App/data/backtest_${date}.json`);
+      const res = await fetch(`../App/data/backtest_${date}.json?v=${Date.now()}`);
       if (!res.ok){
         alert(`No backtest JSON for ${date}. Generate it first.`);
         return;
