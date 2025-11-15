@@ -102,7 +102,13 @@
 	function ymd(date){ const y=date.getFullYear(); const m=String(date.getMonth()+1).padStart(2,'0'); const d=String(date.getDate()).padStart(2,'0'); return `${y}${m}${d}`; }
 	function addDays(date, delta){ const d=new Date(date); d.setDate(d.getDate()+delta); return d; }
 
-	async function headExists(url){ try { const res = await fetch(url, {method:'GET'}); return res.ok; } catch(e){ return false; } }
+	async function headExists(url){
+		try {
+			const sep = url.includes('?') ? '&' : '?';
+			const res = await fetch(`${url}${sep}v=${Date.now()}`, {method:'GET'});
+			return res.ok;
+		} catch(e){ return false; }
+	}
 
     async function loadStagingMeta(){
         try {
@@ -174,7 +180,8 @@
 	}
 
 	async function loadCSV(url){
-		const txt = await (await fetch(url)).text();
+		const sep = url.includes('?') ? '&' : '?';
+		const txt = await (await fetch(`${url}${sep}v=${Date.now()}`)).text();
 		return await new Promise((resolve)=>{
 			Papa.parse(txt, { header:true, dynamicTyping:true, skipEmptyLines:true, complete: (res)=> resolve(res) });
 		});
