@@ -70,7 +70,8 @@
 						<th>F10_T</th>
 						<th>A1_(T-1)</th>
 						<th>F10 / A1(T-1) (%)</th>
-						<th>Tech signal</th>
+						<th>A1_T</th>
+						<th>F10 / A1_T (%)</th>
 					</tr></thead>
 					<tbody></tbody>
 				</table>
@@ -338,6 +339,8 @@
 			const ratio = toNum(r.f10_over_c1_x);
 			const f10 = toNum(r.f10_T);
 			const a1p = toNum(r.a1_prev);
+			const a1t = toNum(r.a1_T);
+			const growth_t = toNum(r.f10_over_a1_T_x);
 			const f10d = r.f10_date || '';
 			const a1pd = r.a1_prev_date || '';
 			if (!sym || !Number.isFinite(ratio)) continue;
@@ -345,7 +348,8 @@
 			if (!Number.isFinite(ratio) || Math.abs(ratio - 1.0) > 0.02) continue;
 			// Compute growth from numeric F10 and A1_(T-1) to avoid misinterpreting percent vs ratio
 			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
-			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd });
+			const growthNight = Number.isFinite(growth_t) ? growth_t : ((Number.isFinite(f10) && Number.isFinite(a1t) && a1t>0) ? (f10 / a1t) : NaN);
+			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd, a1t, growth_t: growthNight });
 		}
 		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
 		return rows;
@@ -368,7 +372,13 @@
 			if (Math.abs(ratio - 1.0) > 0.02) continue; // <=2% only
 			const prevA1 = prevMap.get(sym);
 			const growth = (prevA1 && prevA1>0) ? (f10 / prevA1) : NaN; // F10_T / A1_(T-1)
-			rows.push({ sym, ratio, growth, f10, a1p: prevA1 });
+			// Get A1_T from the same comparison file row if present
+			let a1t = NaN;
+			try {
+				const rowMatch = df.data.find(x => (String(x.Symbol||x.symbol||'').toUpperCase()) === sym);
+				// If df == comparison df, mapColumns will map a1; but in this branch df is comparison df
+			} catch(e){}
+			rows.push({ sym, ratio, growth, f10, a1p: prevA1, a1t: NaN, growth_t: NaN });
 		}
 		// sort by growth desc
         rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
@@ -387,7 +397,8 @@
 			const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.f10)? row.f10.toFixed(2): 'N/A'); if (row.f10d) td2.title = `F10 date ${row.f10d}`; tr.appendChild(td2);
 			const td3 = document.createElement('td'); td3.textContent=(Number.isFinite(row.a1p)? row.a1p.toFixed(2): 'N/A'); if (row.a1pd) td3.title = `A1 prev ${row.a1pd}`; tr.appendChild(td3);
 			const td4 = document.createElement('td'); td4.textContent=(Number.isFinite(row.growth)? fmtPct(row.growth) : 'N/A'); tr.appendChild(td4);
-			const td5 = document.createElement('td'); td5.textContent='N/A'; tr.appendChild(td5); // tech placeholder
+			const td5 = document.createElement('td'); td5.textContent=(Number.isFinite(row.a1t)? row.a1t.toFixed(2): 'N/A'); tr.appendChild(td5);
+			const td6 = document.createElement('td'); td6.textContent=(Number.isFinite(row.growth_t)? fmtPct(row.growth_t): 'N/A'); tr.appendChild(td6);
 			tbody.appendChild(tr); certified++;
 		}
 		document.getElementById('certCount').textContent = `${certified} shown`;
