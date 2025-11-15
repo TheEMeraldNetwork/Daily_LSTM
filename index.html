@@ -61,7 +61,7 @@
 				</table>
 			</div>
 			<div class="card" style="grid-column:1/3;">
-				<div class="flex"><h2>Certified candidates (|F10/C1| ≤ 5%)</h2><div class="small">T+1 <select id="actionsDate"></select> · uses A1_(T-1)=<span id="actionsPrevLabel"></span> · <span id="certCount"></span></div></div>
+				<div class="flex"><h2>Certified candidates (|F10/C1| ≤ 2%)</h2><div class="small">T+1 <select id="actionsDate"></select> · uses A1_(T-1)=<span id="actionsPrevLabel"></span> · <span id="certCount"></span></div></div>
 				<table class="table" id="actionTable">
 					<thead><tr>
 						<th style="text-align:left">Symbol</th>
@@ -101,6 +101,12 @@
 
 	function ymd(date){ const y=date.getFullYear(); const m=String(date.getMonth()+1).padStart(2,'0'); const d=String(date.getDate()).padStart(2,'0'); return `${y}${m}${d}`; }
 	function addDays(date, delta){ const d=new Date(date); d.setDate(d.getDate()+delta); return d; }
+	function businessPrevYmd(yyyymmdd){
+		const y = Number(yyyymmdd.slice(0,4)), m = Number(yyyymmdd.slice(4,6))-1, d = Number(yyyymmdd.slice(6,8));
+		const dt = new Date(y,m,d);
+		do { dt.setDate(dt.getDate()-1); } while (dt.getDay()===0 || dt.getDay()===6);
+		return ymd(dt);
+	}
 
 	async function headExists(url){
 		try {
@@ -330,12 +336,15 @@
 		for (const r of df.data){
 			const sym = String(r.symbol||r.Symbol||'').toUpperCase();
 			const ratio = toNum(r.f10_over_c1_x);
-			const growth = toNum(r.f10_over_prev_a1_x);
 			const f10 = toNum(r.f10_T);
 			const a1p = toNum(r.a1_prev);
 			const f10d = r.f10_date || '';
 			const a1pd = r.a1_prev_date || '';
 			if (!sym || !Number.isFinite(ratio)) continue;
+			// Enforce |F10/C1| ≤ 2% in viewer to match spec
+			if (!Number.isFinite(ratio) || Math.abs(ratio - 1.0) > 0.02) continue;
+			// Compute growth from numeric F10 and A1_(T-1) to avoid misinterpreting percent vs ratio
+			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
 			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd });
 		}
 		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
@@ -349,17 +358,17 @@
 		let rows = await loadCertifiedIfAvailable(selectedDate);
 		if (!rows){
 			// Build previous date from comparison tables
-		const ymdPrev = (()=>{ const y=Number(selectedDate.slice(0,4)), m=Number(selectedDate.slice(4,6))-1, d=Number(selectedDate.slice(6,8)); const dt=new Date(y,m,d); dt.setDate(dt.getDate()-1); return ymd(dt); })();
+		const ymdPrev = businessPrevYmd(selectedDate);
 		const prevMap = await loadPrevActualMap(ymdPrev);
 		for (const r of df.data){
 			const sym = String(r.Symbol||r.symbol||r.SYMBOL||r.ticker||r.Ticker||'').toUpperCase();
 			if (!sym) continue;
 			const f10 = toNum(r[cols.f10]); const c1 = toNum(r[cols.c1]); if (!Number.isFinite(f10) || !Number.isFinite(c1) || c1<=0) continue;
 			const ratio = f10 / c1; // certification check
-			if (Math.abs(ratio - 1.0) > 0.05) continue; // >5% excluded
+			if (Math.abs(ratio - 1.0) > 0.02) continue; // <=2% only
 			const prevA1 = prevMap.get(sym);
 			const growth = (prevA1 && prevA1>0) ? (f10 / prevA1) : NaN; // F10_T / A1_(T-1)
-			rows.push({ sym, ratio, growth });
+			rows.push({ sym, ratio, growth, f10, a1p: prevA1 });
 		}
 		// sort by growth desc
         rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
@@ -368,9 +377,9 @@
     const seen = new Set();
     const deduped = [];
     for (const r of rows){ if (r && r.sym && !seen.has(r.sym)){ seen.add(r.sym); deduped.push(r); } }
-		// Render top 50
+		// Render ALL certified (viewer can sort)
 		let certified=0;
-    for (const row of deduped.slice(0,50)){
+    for (const row of deduped){
 			const tr = document.createElement('tr');
 			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent=row.sym; tr.appendChild(td0);
 			const tdName = document.createElement('td'); tdName.style.textAlign='left'; tdName.textContent=row.name||''; tr.appendChild(tdName);
@@ -381,7 +390,7 @@
 			const td5 = document.createElement('td'); td5.textContent='N/A'; tr.appendChild(td5); // tech placeholder
 			tbody.appendChild(tr); certified++;
 		}
-		document.getElementById('certCount').textContent = `${certified} shown (top 50)`;
+		document.getElementById('certCount').textContent = `${certified} shown`;
 		enableSorting('actionTable');
 	}
 
