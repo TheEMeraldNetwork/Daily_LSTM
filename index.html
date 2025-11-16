@@ -70,6 +70,8 @@
 						<th>F10_T</th>
 						<th>A1_(T-1)</th>
 						<th>F10 / A1(T-1) (%)</th>
+						<th>Sent7d</th>
+						<th>Sent>0.2</th>
 						<th>A1_T</th>
 						<th>F10 / A1_T (%)</th>
 					</tr></thead>
@@ -341,6 +343,9 @@
 			const a1p = toNum(r.a1_prev);
 			const a1t = toNum(r.a1_T);
 			const growth_t = toNum(r.f10_over_a1_T_x);
+			const s7 = toNum(r.sentiment_7d);
+			const sflag = String(r.sentiment7d_gt_0_2||'').toLowerCase();
+			const sgt = (sflag==='true' || sflag==='1') ? 'Yes' : (sflag===''? '': 'No');
 			const f10d = r.f10_date || '';
 			const a1pd = r.a1_prev_date || '';
 			if (!sym || !Number.isFinite(ratio)) continue;
@@ -349,7 +354,7 @@
 			// Compute growth from numeric F10 and A1_(T-1) to avoid misinterpreting percent vs ratio
 			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
 			const growthNight = Number.isFinite(growth_t) ? growth_t : ((Number.isFinite(f10) && Number.isFinite(a1t) && a1t>0) ? (f10 / a1t) : NaN);
-			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd, a1t, growth_t: growthNight });
+			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd, s7, sgt, a1t, growth_t: growthNight });
 		}
 		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
 		return rows;
@@ -397,6 +402,8 @@
 			const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.f10)? row.f10.toFixed(2): 'N/A'); if (row.f10d) td2.title = `F10 date ${row.f10d}`; tr.appendChild(td2);
 			const td3 = document.createElement('td'); td3.textContent=(Number.isFinite(row.a1p)? row.a1p.toFixed(2): 'N/A'); if (row.a1pd) td3.title = `A1 prev ${row.a1pd}`; tr.appendChild(td3);
 			const td4 = document.createElement('td'); td4.textContent=(Number.isFinite(row.growth)? fmtPct(row.growth) : 'N/A'); tr.appendChild(td4);
+			const tdS = document.createElement('td'); tdS.textContent=(Number.isFinite(row.s7)? row.s7.toFixed(2): (row.s7===''? '': 'N/A')); tr.appendChild(tdS);
+			const tdSf = document.createElement('td'); tdSf.textContent=(row.sgt||''); tr.appendChild(tdSf);
 			const td5 = document.createElement('td'); td5.textContent=(Number.isFinite(row.a1t)? row.a1t.toFixed(2): 'N/A'); tr.appendChild(td5);
 			const td6 = document.createElement('td'); td6.textContent=(Number.isFinite(row.growth_t)? fmtPct(row.growth_t): 'N/A'); tr.appendChild(td6);
 			tbody.appendChild(tr); certified++;
