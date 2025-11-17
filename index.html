@@ -307,11 +307,18 @@
 	}
 
 	async function loadPrevActualMap(prevDate){
-		const url = `${PRED_DIR}/comparison_table_${prevDate}.csv`;
-		if (!(await headExists(url))) return new Map();
-		const df = await loadCSV(url);
+		// Prefer dedicated prev-actuals map written by the morning exporter; fallback to historical comparison if needed
+		const appPrev = `${APP_DATA_DIR}/prev_actuals_${prevDate}.csv`;
+		let df = null;
+		if (await headExists(appPrev)) {
+			df = await loadCSV(appPrev);
+		} else {
+			const url = `${APP_DATA_DIR}/comparison_table_${prevDate}.csv`;
+			if (!(await headExists(url))) return new Map();
+			df = await loadCSV(url);
+		}
 		const cols = {}; const lc={}; for (const c of df.meta.fields){ lc[c.toLowerCase()] = c; }
-		const a1 = (Object.keys(lc).find(k=>k.includes('actual_t'))||Object.keys(lc).find(k=>k==='actual'));
+		const a1 = (Object.keys(lc).find(k=>k.includes('actual_t'))||Object.keys(lc).find(k==='actual'));
 		const a1c = lc[a1];
 		const symKey = (Object.keys(df.data[0]||{}).find(k=>k.toLowerCase()==='symbol')||'Symbol');
 		const m = new Map();
@@ -454,7 +461,11 @@
 		try{
 			const df = await loadCSV(url);
 			const cols = mapColumns(df);
-			if (!cols.f10 || !cols.c1 || !cols.a1){ statusLine.textContent = 'Required columns not found.'; return; }
+			if (!cols.f10 || !cols.c1 || !cols.a1){ 
+				statusLine.textContent = 'Comparison incomplete for scatter; rendering certified table only.'; 
+				await renderActionTable(dMorning, { data:[] }, {});
+				return; 
+			}
 			const filter = symbolFilter.value.trim();
 			const filterSet = new Set((filter? filter.split(','):[]).map(s=>s.trim().toUpperCase()).filter(Boolean));
 			const series = computeScatter(df, cols, filterSet);
