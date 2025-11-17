@@ -1,0 +1,1 @@
+{'master': 195, 'have_sent': 0, 'have_tech': 0, 'have_prices': 0, 'have_seq20': 0, 'have_pstar': 183}
