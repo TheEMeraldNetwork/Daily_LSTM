@@ -163,7 +163,13 @@
 		});
 	}
 
-	function toNum(v){ const x = Number(v); return Number.isFinite(x) ? x : NaN; }
+	function toNum(v){
+		if (v === null || v === undefined) return NaN;
+		const s = String(v).trim();
+		if (!s) return NaN;
+		const x = Number(s);
+		return Number.isFinite(x) ? x : NaN;
+	}
 	function ratioToPct(r){ return Number.isFinite(r) ? (r-1)*100 : NaN; }
 	function fmtPct(r, digits=1){ const v = ratioToPct(r); return Number.isFinite(v) ? `${v.toFixed(digits)}%` : 'N/A'; }
 
