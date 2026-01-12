@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>E_LSTM_Forecasting – Daily Dashboard</title>
+	<title>E_LSTM_Forecasting – Daily Dashboard (Preview)</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -35,7 +35,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Forecast10 Dashboard</h1>
+		<h1>Forecast10 Dashboard (Preview)</h1>
 		<div class="controls">
 			<label>
 				<span class="small">Filter symbol</span><br/>
@@ -61,7 +61,7 @@
 				</table>
 			</div>
 			<div class="card" style="grid-column:1/3;">
-				<div class="flex"><h2>Certified candidates (F10/C1 ≤ 1.03)</h2><div class="small">T+1 <select id="actionsDate"></select> · uses A1_(T-1)=<span id="actionsPrevLabel"></span> · <span id="certCount"></span></div></div>
+				<div class="flex"><h2>Certified candidates (Preview: F10/C1 ≤ 1.03)</h2><div class="small">T+1 <select id="actionsDate"></select> · uses A1_(T-1)=<span id="actionsPrevLabel"></span> · <span id="certCount"></span></div></div>
 				<table class="table" id="actionTable">
 					<thead><tr>
 						<th style="text-align:left">Symbol</th>
@@ -74,7 +74,6 @@
 						<th>Sent>0.2</th>
 						<th>BB %b</th>
 						<th>Pct>200d</th>
-						<th>Rule</th>
 						<th>A1_T</th>
 						<th>F10 / A1_T (%)</th>
 					</tr></thead>
@@ -83,27 +82,24 @@
 			</div>
 		</div>
 
-		<div class="footer">Data sources: comparison tables and bins under ../data/processed/predictions/. Degrades gracefully when files are not present.</div>
+		<div class="footer">Preview uses the same CSVs under App/data, with tightened F10/C1 ≤ 1.03 and momentum columns when available.</div>
 	</div>
 
 	<script>
 	// Configuration
 	const PRED_DIR = './data/processed/predictions';
-	const APP_DATA_DIR = './App/data'; // preferred local cache for dashboard
-	const TECH_DIR = '../w_datalake/data/raw/technical'; // optional, may be missing
+	const APP_DATA_DIR = './App/data';
 	const BINS = [0,2,5,10,20];
 	const BIN_LABELS = ['<0%','0-2%','2-5%','5-10%','10-20%','>20%'];
-    const STAGING_DIR = './data/staging'; // optional 5-stock staging
-    const STAGING = { active:false, analysis_T:null, morning_Tp1:null, symbols:[] };
-    let CURRENT = { scatterT:null, binsT:null, actionsTp1:null };
+	let CURRENT = { scatterT:null, binsT:null, actionsTp1:null };
 
-    const scatterDate = document.getElementById('scatterDate');
-    const binsDateSelect = document.getElementById('binsDateSelect');
-    const actionsDate = document.getElementById('actionsDate');
-    const symbolFilter = document.getElementById('symbolFilter');
-    const statusLine = document.getElementById('statusLine');
-    const binsDate = document.getElementById('binsDate');
-    const actionsPrevLabel = document.getElementById('actionsPrevLabel');
+	const scatterDate = document.getElementById('scatterDate');
+	const binsDateSelect = document.getElementById('binsDateSelect');
+	const actionsDate = document.getElementById('actionsDate');
+	const symbolFilter = document.getElementById('symbolFilter');
+	const statusLine = document.getElementById('statusLine');
+	const binsDate = document.getElementById('binsDate');
+	const actionsPrevLabel = document.getElementById('actionsPrevLabel');
 
 	function ymd(date){ const y=date.getFullYear(); const m=String(date.getMonth()+1).padStart(2,'0'); const d=String(date.getDate()).padStart(2,'0'); return `${y}${m}${d}`; }
 	function addDays(date, delta){ const d=new Date(date); d.setDate(d.getDate()+delta); return d; }
@@ -122,45 +118,13 @@
 		} catch(e){ return false; }
 	}
 
-    async function loadStagingMeta(){
-        try {
-            const res = await fetch(`${STAGING_DIR}/meta.json`);
-            if (!res.ok) return false;
-            const meta = await res.json();
-            STAGING.active = true;
-            STAGING.analysis_T = String(meta.analysis_T || '');
-            STAGING.morning_Tp1 = String(meta.morning_T || meta.morning_T_plus_1 || '');
-            STAGING.symbols = meta.symbols || [];
-            return true;
-        } catch(e){ return false; }
-    }
-
-	async function discoverDates(maxBack=60){
-		// Build a union of dates from: meta.latest_date, comparison tables, certified files
-		const set = new Set();
-		try { const meta = await (await fetch(`${APP_DATA_DIR}/meta.json`)).json(); if (meta && meta.latest_date) set.add(String(meta.latest_date)); } catch(e) {}
-		// scan back for comparison tables
-		const today = new Date();
-		for (let i=0;i<maxBack;i++){
-			const d = ymd(addDays(today, -i));
-			if (await headExists(`${PRED_DIR}/comparison_table_${d}.csv`)) set.add(d);
-		}
-		// probe for certified files (morning output)
-		for (let i=0;i<7;i++){
-			const d = ymd(addDays(today, -i));
-			if (await headExists(`${APP_DATA_DIR}/certified_candidates_${d}.csv`)) set.add(d);
-		}
-		return Array.from(set).sort();
-	}
-
 	async function discoverComparisonDates(maxBack=60){
 		const found = [];
 		const today = new Date();
 		for (let i=0;i<maxBack;i++){
 			const d = ymd(addDays(today, -i));
-			// Prefer App/data if present, fallback to backend predictions dir
-			if (await headExists(`${APP_DATA_DIR}/comparison_table_${d}.csv`)) { found.push(d); continue; }
-			if (await headExists(`${PRED_DIR}/comparison_table_${d}.csv`)) found.push(d);
+			if (await headExists(`${APP_DATA_DIR}/comparison_table_${d}.csv`)) found.push(d);
+			else if (await headExists(`${PRED_DIR}/comparison_table_${d}.csv`)) found.push(d);
 		}
 		return found.reverse();
 	}
@@ -202,7 +166,6 @@
 	function toNum(v){ const x = Number(v); return Number.isFinite(x) ? x : NaN; }
 	function ratioToPct(r){ return Number.isFinite(r) ? (r-1)*100 : NaN; }
 	function fmtPct(r, digits=1){ const v = ratioToPct(r); return Number.isFinite(v) ? `${v.toFixed(digits)}%` : 'N/A'; }
-	function parseCellNumber(txt){ if (txt==null) return NaN; const s = String(txt).replace(/[%,$\s]/g,''); const n = Number(s); return Number.isFinite(n)? n : NaN; }
 
 	function enableSorting(tableId){
 		const table = document.getElementById(tableId);
@@ -213,12 +176,12 @@
 			th.addEventListener('click', ()=>{
 				const tbody = table.querySelector('tbody');
 				const rows = Array.from(tbody.querySelectorAll('tr'));
-            const dir = th.dataset.dir ? (th.dataset.dir === 'asc' ? 'desc' : 'asc') : 'asc';
+				const dir = th.dataset.dir ? (th.dataset.dir === 'asc' ? 'desc' : 'asc') : 'asc';
 				ths.forEach(h=> delete h.dataset.dir); th.dataset.dir = dir;
 				rows.sort((a,b)=>{
 					const av = a.children[idx]?.textContent || '';
 					const bv = b.children[idx]?.textContent || '';
-					const an = parseCellNumber(av), bn = parseCellNumber(bv);
+					const an = Number(av.replace(/[%,$\s]/g,'')), bn = Number(bv.replace(/[%,$\s]/g,''));
 					let cmp;
 					if (Number.isFinite(an) && Number.isFinite(bn)) cmp = an - bn; else cmp = String(av).localeCompare(String(bv));
 					return dir==='asc' ? cmp : -cmp;
@@ -228,51 +191,109 @@
 		});
 	}
 
-	function computeScatter(df, cols, filterSymbols){
-		const x=[], y=[], text=[];
-		for (const row of df.data){
-			const sym = row.Symbol || row.symbol || row.SYMBOL || row.ticker || row.Ticker;
-			if (filterSymbols && filterSymbols.size && (!sym || !filterSymbols.has(String(sym).toUpperCase()))) continue;
-			const f10 = toNum(row[cols.f10]); const c1 = toNum(row[cols.c1]); const a1 = toNum(row[cols.a1]);
-			if (!Number.isFinite(f10) || !Number.isFinite(c1) || !Number.isFinite(a1) || c1<=0 || a1<=0) continue;
-			x.push(ratioToPct(f10 / c1));
-			y.push(ratioToPct(f10 / a1));
-			text.push(sym);
+	async function loadPrevActualMap(prevDate){
+		const appPrev = `${APP_DATA_DIR}/prev_actuals_${prevDate}.csv`;
+		let df = null;
+		if (await headExists(appPrev)) {
+			df = await loadCSV(appPrev);
+		} else {
+			const url = `${APP_DATA_DIR}/comparison_table_${prevDate}.csv`;
+			if (!(await headExists(url))) return new Map();
+			df = await loadCSV(url);
 		}
-		return {x,y,text};
+		const cols = {}; const lc={}; for (const c of df.meta.fields){ lc[c.toLowerCase()] = c; }
+		const a1 = (Object.keys(lc).find(k=>k.includes('actual_t'))||Object.keys(lc).find(k==='actual'));
+		const a1c = lc[a1];
+		const symKey = (Object.keys(df.data[0]||{}).find(k=>k.toLowerCase()==='symbol')||'Symbol');
+		const m = new Map();
+		for (const row of df.data){ const sym = String(row[symKey]||'').toUpperCase(); const v = Number(row[a1c]); if (sym && Number.isFinite(v)) m.set(sym, v); }
+		return m;
 	}
 
-	function plotScatter(series){
-    const minX = Math.min(...series.x, 0);
-    const maxX = Math.max(...series.x, 0);
-    const minY = Math.min(...series.y, 0);
-    const maxY = Math.max(...series.y, 0);
-    // Quadrant counts relative to axes (0,0)
-    let q1=0,q2=0,q3=0,q4=0, onAxes=0;
-    for (let i=0;i<series.x.length;i++){
-        const xx = series.x[i]; const yy = series.y[i];
-        if (xx===0 || yy===0) { onAxes++; continue; }
-        if (xx>0 && yy>0) q1++; else if (xx<0 && yy>0) q2++; else if (xx<0 && yy<0) q3++; else if (xx>0 && yy<0) q4++;
-    }
-    const qc = document.getElementById('quadCounts');
-    if (qc){ qc.textContent = `Q1(+/+)=${q1} · Q2(-/+)=${q2} · Q3(-/-)=${q3} · Q4(+/-)=${q4}${onAxes?` · on-axes=${onAxes}`:''}`; }
-		const pad = 0.05;
-		const layout = {
-			margin:{l:40,r:10,t:10,b:40}, paper_bgcolor:'transparent', plot_bgcolor:'transparent',
-			xaxis:{title:'F10_T / C1_T (%)', gridcolor:'#1f2430', zerolinecolor:'#2a3240', ticksuffix:'%', range:[minX*(1-pad), maxX*(1+pad)]},
-			yaxis:{title:'F10_T / A1_T (%)', gridcolor:'#1f2430', zerolinecolor:'#2a3240', ticksuffix:'%', range:[minY*(1-pad), maxY*(1+pad)]},
-			shapes:[
-				{type:'line', x0:-5, x1:5, y0:0, y1:0, line:{color:'#444', width:1, dash:'dot'}},
-				{type:'line', x0:0, x1:0, y0:-5, y1:5, line:{color:'#444', width:1, dash:'dot'}}
-			],
-			showlegend:false
-		};
-		const data = [{ type:'scattergl', mode:'markers', x:series.x, y:series.y, text:series.text, hovertemplate:'%{text}<br>x=%{x:.1f}%<br>y=%{y:.1f}%<extra></extra>', marker:{ color:'#2ea3f2', size:6, opacity:0.85 } }];
-		Plotly.newPlot('scatter', data, layout, {displayModeBar:false, responsive:true});
+	async function loadCertifiedIfAvailable(selectedDate){
+		const url = `${APP_DATA_DIR}/certified_candidates_${selectedDate}.csv`;
+		if (!(await headExists(url))) return null;
+		const df = await loadCSV(url);
+		const rows = [];
+		// load name map from nearest comparison table
+		let nameMap = new Map();
+		try {
+			let d = selectedDate;
+			let found = null;
+			for (let i=0;i<7;i++){
+				const test = `${APP_DATA_DIR}/comparison_table_${d}.csv`;
+				if (await headExists(test)) { found=test; break; }
+				const dt = new Date(Number(d.slice(0,4)), Number(d.slice(4,6))-1, Number(d.slice(6,8))); dt.setDate(dt.getDate()-1); d = ymd(dt);
+			}
+			if (found){ const cdf = await loadCSV(found); const cols = mapColumns(cdf); if (cols.name){ for (const rr of cdf.data){ const sym = String(rr.Symbol||rr.symbol||'').toUpperCase(); const nm = rr[cols.name]; if (sym) nameMap.set(sym, nm); } } }
+		} catch(e){}
+		for (const r of df.data){
+			const sym = String(r.symbol||r.Symbol||'').toUpperCase();
+			const ratio = Number(r.f10_over_c1_x);
+			const f10 = Number(r.f10_T);
+			const a1p = Number(r.a1_prev);
+			const a1t = Number(r.a1_T);
+			const growth_t = Number(r.f10_over_a1_T_x);
+			const s7 = Number(r.sentiment_7d);
+			const sflag = String(r.sentiment7d_gt_0_2||'').toLowerCase();
+			const sgt = (sflag==='true' || sflag==='1') ? 'Yes' : (sflag===''? '': 'No');
+			const bb = Number(r.bb_percent_b);
+			const sma = Number(r.pct_above_sma200);
+			if (!sym || !Number.isFinite(ratio)) continue;
+			// Preview filter: F10/C1 ≤ 1.03 (no absolute band)
+			if (!(ratio <= 1.03)) continue;
+			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
+			const growthNight = Number.isFinite(growth_t) ? growth_t : ((Number.isFinite(f10) && Number.isFinite(a1t) && a1t>0) ? (f10 / a1t) : NaN);
+			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, s7, sgt, bb, sma, a1t, growth_t: growthNight });
+		}
+		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
+		return rows;
+	}
+
+	async function renderActionTable(selectedDate, df, cols){
+		const tbody = document.querySelector('#actionTable tbody');
+		tbody.innerHTML='';
+		let rows = await loadCertifiedIfAvailable(selectedDate);
+		if (!rows){
+			// fallback: build from comparison (will miss momentum columns)
+			const ymdPrev = businessPrevYmd(selectedDate);
+			const prevMap = await loadPrevActualMap(ymdPrev);
+			rows = [];
+			for (const r of df.data){
+				const sym = String(r.Symbol||r.symbol||'').toUpperCase();
+				if (!sym) continue;
+				const f10 = Number(r[cols.f10]); const c1 = Number(r[cols.c1]); if (!Number.isFinite(f10) || !Number.isFinite(c1) || c1<=0) continue;
+				const ratio = f10 / c1;
+				if (!(ratio <= 1.03)) continue;
+				const prevA1 = prevMap.get(sym);
+				const growth = (prevA1 && prevA1>0) ? (f10 / prevA1) : NaN;
+				rows.push({ sym, ratio, growth, f10, a1p: prevA1, s7: NaN, sgt:'', bb: NaN, sma: NaN, a1t: NaN, growth_t: NaN });
+			}
+			rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
+		}
+		// Render
+		let certified=0;
+		for (const row of rows){
+			const tr = document.createElement('tr');
+			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent=row.sym; tr.appendChild(td0);
+			const tdName = document.createElement('td'); tdName.style.textAlign='left'; tdName.textContent=row.name||''; tr.appendChild(tdName);
+			const td1 = document.createElement('td'); td1.textContent=fmtPct(row.ratio); tr.appendChild(td1);
+			const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.f10)? row.f10.toFixed(2): 'N/A'); tr.appendChild(td2);
+			const td3 = document.createElement('td'); td3.textContent=(Number.isFinite(row.a1p)? row.a1p.toFixed(2): 'N/A'); tr.appendChild(td3);
+			const td4 = document.createElement('td'); td4.textContent=(Number.isFinite(row.growth)? fmtPct(row.growth) : 'N/A'); tr.appendChild(td4);
+			const tdS = document.createElement('td'); tdS.textContent=(Number.isFinite(row.s7)? row.s7.toFixed(2): (row.s7===''? '': 'N/A')); tr.appendChild(tdS);
+			const tdSf = document.createElement('td'); tdSf.textContent=(row.sgt||''); tr.appendChild(tdSf);
+			const tdBB = document.createElement('td'); tdBB.textContent=(Number.isFinite(row.bb)? row.bb.toFixed(2): ''); tr.appendChild(tdBB);
+			const tdSMA = document.createElement('td'); tdSMA.textContent=(Number.isFinite(row.sma)? (row.sma*100).toFixed(1)+'%': ''); tr.appendChild(tdSMA);
+			const td5 = document.createElement('td'); td5.textContent=(Number.isFinite(row.a1t)? row.a1t.toFixed(2): 'N/A'); tr.appendChild(td5);
+			const td6 = document.createElement('td'); td6.textContent=(Number.isFinite(row.growth_t)? fmtPct(row.growth_t): 'N/A'); tr.appendChild(td6);
+			tbody.appendChild(tr); certified++;
+		}
+		document.getElementById('certCount').textContent = `${certified} shown`;
+		enableSorting('actionTable');
 	}
 
 	async function loadBinsForDate(dateList, selected){
-		// prefer the selected date; fall back to latest available
 		const tryDates = [selected, ...dateList.slice().reverse()].filter(Boolean);
 		for (const d of tryDates){
 			const appUrl = `${APP_DATA_DIR}/bins_summary_${d}.csv`;
@@ -301,144 +322,19 @@
 		for (const r of bins.df.data){
 			const tr = document.createElement('tr');
 			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent = r[binC]; tr.appendChild(td0);
-			const td1 = document.createElement('td'); td1.textContent = toNum(r[countC])?.toLocaleString('en-US'); tr.appendChild(td1);
-			const td2 = document.createElement('td'); td2.textContent = Number.isFinite(toNum(r[meanC])) ? `${toNum(r[meanC]).toFixed(1)}%` : 'N/A'; tr.appendChild(td2);
-			const td3 = document.createElement('td'); td3.textContent = Number.isFinite(toNum(r[trendC])) ? `${toNum(r[trendC]).toFixed(1)}%` : 'N/A'; tr.appendChild(td3);
+			const td1 = document.createElement('td'); td1.textContent = Number(r[countC])?.toLocaleString('en-US'); tr.appendChild(td1);
+			const td2 = document.createElement('td'); td2.textContent = Number.isFinite(Number(r[meanC])) ? `${Number(r[meanC]).toFixed(1)}%` : 'N/A'; tr.appendChild(td2);
+			const td3 = document.createElement('td'); td3.textContent = Number.isFinite(Number(r[trendC])) ? `${Number(r[trendC]).toFixed(1)}%` : 'N/A'; tr.appendChild(td3);
 			tbody.appendChild(tr);
 		}
 		enableSorting('binsTable');
 	}
 
-	async function loadPrevActualMap(prevDate){
-		// Prefer dedicated prev-actuals map written by the morning exporter; fallback to historical comparison if needed
-		const appPrev = `${APP_DATA_DIR}/prev_actuals_${prevDate}.csv`;
-		let df = null;
-		if (await headExists(appPrev)) {
-			df = await loadCSV(appPrev);
-		} else {
-			const url = `${APP_DATA_DIR}/comparison_table_${prevDate}.csv`;
-			if (!(await headExists(url))) return new Map();
-			df = await loadCSV(url);
-		}
-		const cols = {}; const lc={}; for (const c of df.meta.fields){ lc[c.toLowerCase()] = c; }
-		const a1 = (Object.keys(lc).find(k=>k.includes('actual_t'))||Object.keys(lc).find(k==='actual'));
-		const a1c = lc[a1];
-		const symKey = (Object.keys(df.data[0]||{}).find(k=>k.toLowerCase()==='symbol')||'Symbol');
-		const m = new Map();
-		for (const row of df.data){ const sym = String(row[symKey]||'').toUpperCase(); const v = toNum(row[a1c]); if (sym && Number.isFinite(v)) m.set(sym, v); }
-		return m;
-	}
-
-	async function loadCertifiedIfAvailable(selectedDate){
-		const url = `${APP_DATA_DIR}/certified_candidates_${selectedDate}.csv`;
-		if (!(await headExists(url))) return null;
-		const df = await loadCSV(url);
-		const rows = [];
-		// load name map from nearest comparison table
-		let nameMap = new Map();
-		try {
-			let d = selectedDate;
-			let found = null;
-			for (let i=0;i<7;i++){
-				const test = `${APP_DATA_DIR}/comparison_table_${d}.csv`;
-				if (await headExists(test)) { found=test; break; }
-				const dt = new Date(Number(d.slice(0,4)), Number(d.slice(4,6))-1, Number(d.slice(6,8))); dt.setDate(dt.getDate()-1); d = ymd(dt);
-			}
-			if (found){ const cdf = await loadCSV(found); const cols = mapColumns(cdf); if (cols.name){ for (const rr of cdf.data){ const sym = String(rr.Symbol||rr.symbol||'').toUpperCase(); const nm = rr[cols.name]; if (sym) nameMap.set(sym, nm); } } }
-		} catch(e){}
-		for (const r of df.data){
-			const sym = String(r.symbol||r.Symbol||'').toUpperCase();
-			const ratio = toNum(r.f10_over_c1_x);
-			const f10 = toNum(r.f10_T);
-			const a1p = toNum(r.a1_prev);
-			const a1t = toNum(r.a1_T);
-			const growth_t = toNum(r.f10_over_a1_T_x);
-			const s7 = toNum(r.sentiment_7d);
-			const sflag = String(r.sentiment7d_gt_0_2||'').toLowerCase();
-			const sgt = (sflag==='true' || sflag==='1') ? 'Yes' : (sflag===''? '': 'No');
-			const f10d = r.f10_date || '';
-			const a1pd = r.a1_prev_date || '';
-			const bb = toNum(r.bb_percent_b);
-			const sma = toNum(r.pct_above_sma200);
-			if (!sym || !Number.isFinite(ratio)) continue;
-			// Enforce previewed production rule F10/C1 ≤ 1.03
-			if (!(ratio <= 1.03)) continue;
-			// Compute growth from numeric F10 and A1_(T-1) to avoid misinterpreting percent vs ratio
-			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
-			const growthNight = Number.isFinite(growth_t) ? growth_t : ((Number.isFinite(f10) && Number.isFinite(a1t) && a1t>0) ? (f10 / a1t) : NaN);
-			const ruleOK = (ratio <= 1.03) && (Number.isFinite(growth) && growth >= 1.05) && (Number.isFinite(bb) && bb >= 0.60);
-			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd, s7, sgt, bb, sma, ruleOK, a1t, growth_t: growthNight });
-		}
-		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
-		return rows;
-	}
-
-	async function renderActionTable(selectedDate, df, cols){
-		const tbody = document.querySelector('#actionTable tbody');
-		tbody.innerHTML='';
-		// Prefer precomputed certified file for the selected date
-		let rows = await loadCertifiedIfAvailable(selectedDate);
-		if (!rows){
-			// Build previous date from comparison tables
-		const ymdPrev = businessPrevYmd(selectedDate);
-		const prevMap = await loadPrevActualMap(ymdPrev);
-		for (const r of df.data){
-			const sym = String(r.Symbol||r.symbol||r.SYMBOL||r.ticker||r.Ticker||'').toUpperCase();
-			if (!sym) continue;
-			const f10 = toNum(r[cols.f10]); const c1 = toNum(r[cols.c1]); if (!Number.isFinite(f10) || !Number.isFinite(c1) || c1<=0) continue;
-			const ratio = f10 / c1; // certification check
-			if (!(ratio <= 1.03)) continue; // new rule: <=1.03
-			const prevA1 = prevMap.get(sym);
-			const growth = (prevA1 && prevA1>0) ? (f10 / prevA1) : NaN; // F10_T / A1_(T-1)
-			// Get A1_T from the same comparison file row if present
-			let a1t = NaN;
-			try {
-				const rowMatch = df.data.find(x => (String(x.Symbol||x.symbol||'').toUpperCase()) === sym);
-				// If df == comparison df, mapColumns will map a1; but in this branch df is comparison df
-			} catch(e){}
-			const ruleOK = (ratio <= 1.03) && (Number.isFinite(growth) && growth >= 1.05);
-			rows.push({ sym, ratio, growth, f10, a1p: prevA1, bb: NaN, sma: NaN, ruleOK, a1t: NaN, growth_t: NaN });
-		}
-		// sort by growth desc
-        rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
-		}
-    // Deduplicate by symbol to enforce primary key uniqueness
-    const seen = new Set();
-    const deduped = [];
-    for (const r of rows){ if (r && r.sym && !seen.has(r.sym)){ seen.add(r.sym); deduped.push(r); } }
-		// Render ALL certified (viewer can sort)
-		let certified=0;
-    for (const row of deduped){
-			const tr = document.createElement('tr');
-			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent=row.sym; tr.appendChild(td0);
-			const tdName = document.createElement('td'); tdName.style.textAlign='left'; tdName.textContent=row.name||''; tr.appendChild(tdName);
-			const td1 = document.createElement('td'); td1.textContent=fmtPct(row.ratio); tr.appendChild(td1);
-			const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.f10)? row.f10.toFixed(2): 'N/A'); if (row.f10d) td2.title = `F10 date ${row.f10d}`; tr.appendChild(td2);
-			const td3 = document.createElement('td'); td3.textContent=(Number.isFinite(row.a1p)? row.a1p.toFixed(2): 'N/A'); if (row.a1pd) td3.title = `A1 prev ${row.a1pd}`; tr.appendChild(td3);
-			const td4 = document.createElement('td'); td4.textContent=(Number.isFinite(row.growth)? fmtPct(row.growth) : 'N/A'); tr.appendChild(td4);
-			const tdS = document.createElement('td'); tdS.textContent=(Number.isFinite(row.s7)? row.s7.toFixed(2): (row.s7===''? '': 'N/A')); tr.appendChild(tdS);
-			const tdSf = document.createElement('td'); tdSf.textContent=(row.sgt||''); tr.appendChild(tdSf);
-			const tdBB = document.createElement('td'); tdBB.textContent=(Number.isFinite(row.bb)? row.bb.toFixed(2): ''); tr.appendChild(tdBB);
-			const tdSMA = document.createElement('td'); tdSMA.textContent=(Number.isFinite(row.sma)? (row.sma*100).toFixed(1)+'%': ''); tr.appendChild(tdSMA);
-			const tdRule = document.createElement('td'); tdRule.innerHTML = row.ruleOK ? '<span class="badge ok">RuleOK</span>' : ''; tr.appendChild(tdRule);
-			const td5 = document.createElement('td'); td5.textContent=(Number.isFinite(row.a1t)? row.a1t.toFixed(2): 'N/A'); tr.appendChild(td5);
-			const td6 = document.createElement('td'); td6.textContent=(Number.isFinite(row.growth_t)? fmtPct(row.growth_t): 'N/A'); tr.appendChild(td6);
-			tbody.appendChild(tr); certified++;
-		}
-		document.getElementById('certCount').textContent = `${certified} shown`;
-		enableSorting('actionTable');
-	}
-
 	async function main(){
 		statusLine.textContent = 'Discovering dates...';
-		const hasStaging = await loadStagingMeta();
 		let compDates = await discoverComparisonDates(60);
-		if (hasStaging && STAGING.analysis_T) { compDates = [STAGING.analysis_T]; }
 		const certDates = await discoverCertifiedDates(30);
-		// Populate per-section selectors
-		scatterDate.innerHTML = '';
-		binsDateSelect.innerHTML = '';
-		actionsDate.innerHTML = '';
+		scatterDate.innerHTML = ''; binsDateSelect.innerHTML = ''; actionsDate.innerHTML = '';
 		for (const d of compDates){ const opt=document.createElement('option'); opt.value=d; opt.textContent = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`; scatterDate.appendChild(opt); }
 		for (const d of compDates){ const opt=document.createElement('option'); opt.value=d; opt.textContent = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`; binsDateSelect.appendChild(opt); }
 		for (const d of certDates){ const opt=document.createElement('option'); opt.value=d; opt.textContent = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`; actionsDate.appendChild(opt); }
@@ -448,16 +344,6 @@
 		if (certDates.length) actionsDate.value = certDates[certDates.length-1];
 		const binsFor = await loadBinsForDate(compDates, binsDateSelect.value);
 		renderBinsTable(binsFor);
-		// Last update sticker from meta
-		try {
-			const meta = await (await fetch(`${APP_DATA_DIR}/meta.json`)).json();
-			if (meta && meta.last_update) {
-				const sticker = document.createElement('span');
-				sticker.className = 'small';
-				sticker.textContent = `Last update: ${meta.last_update}${STAGING.active?' – STAGING':''}`;
-				document.querySelector('.controls').appendChild(sticker);
-			}
-		} catch(e) {}
 		statusLine.textContent = 'Ready.';
 	}
 
@@ -466,7 +352,7 @@
 		const dBins = binsDateSelect.value || dTop;
 		const dMorning = actionsDate.value || dTop;
 		statusLine.textContent = `Loading T(scatter)=${dTop}, T(bins)=${dBins}, T+1(actions)=${dMorning}...`;
-		let url = STAGING.active ? `${STAGING_DIR}/comparison_table_${dTop}_5.csv` : `${APP_DATA_DIR}/comparison_table_${dTop}.csv`;
+		let url = `${APP_DATA_DIR}/comparison_table_${dTop}.csv`;
 		if (!(await headExists(url))) url = `${PRED_DIR}/comparison_table_${dTop}.csv`;
 		try{
 			const df = await loadCSV(url);
@@ -478,33 +364,8 @@
 			}
 			const filter = symbolFilter.value.trim();
 			const filterSet = new Set((filter? filter.split(','):[]).map(s=>s.trim().toUpperCase()).filter(Boolean));
-			const series = computeScatter(df, cols, filterSet);
-			plotScatter(series);
-			if (STAGING.active) {
-				const tbody = document.querySelector('#actionTable tbody');
-				tbody.innerHTML='';
-				const urlCert = `${STAGING_DIR}/certified_candidates_${dMorning}_5.csv`;
-				const sdf = await loadCSV(urlCert);
-				let rows = [];
-				for (const r of sdf.data){
-					const sym = String(r.symbol||r.Symbol||'').toUpperCase();
-					const ratio = toNum(r.f10_over_c1_x);
-					const growth = toNum(r.f10_over_prev_a1_x);
-					if (!sym || !Number.isFinite(ratio)) continue;
-					rows.push({ sym, ratio, growth });
-				}
-				rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
-				let certified=0; for (const row of rows.slice(0,50)){
-					const tr = document.createElement('tr');
-					const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent=row.sym; tr.appendChild(td0);
-					const td1 = document.createElement('td'); td1.textContent=(row.ratio).toFixed(3); tr.appendChild(td1);
-					const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.growth)? row.growth.toFixed(3): 'N/A'); tr.appendChild(td2);
-					const td3 = document.createElement('td'); td3.textContent='N/A'; tr.appendChild(td3);
-					tbody.appendChild(tr); certified++; }
-				document.getElementById('certCount').textContent = `${certified} shown (top 50)`;
-			} else {
-				await renderActionTable(dMorning, df, cols);
-			}
+			// Skip plotting scatter in preview; focus on certified table
+			await renderActionTable(dMorning, df, cols);
 			const compDates = await discoverComparisonDates(60);
 			const binsFor = await loadBinsForDate(compDates, dBins);
 			renderBinsTable(binsFor);
@@ -512,7 +373,7 @@
 			const y=Number(dMorning.slice(0,4)), m=Number(dMorning.slice(4,6))-1, d=Number(dMorning.slice(6,8)); const dt=new Date(y,m,d); dt.setDate(dt.getDate()-1);
 			const prev = `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
 			if (actionsPrevLabel) actionsPrevLabel.textContent = prev;
-			statusLine.textContent = `Loaded T(scatter)=${dTop} (${series.text.length} pts), T(bins)=${dBins}, Actions T+1=${dMorning}.`;
+			statusLine.textContent = `Loaded Actions T+1=${dMorning}.`;
 		}catch(e){
 			console.error(e); statusLine.textContent = 'Failed to load date.';
 		}
@@ -522,3 +383,4 @@
 	</script>
 </body>
 </html>
+
