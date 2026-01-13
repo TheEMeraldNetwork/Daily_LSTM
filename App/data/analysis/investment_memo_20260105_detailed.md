@@ -1,0 +1,31 @@
+# Portfolio Proposal (Detailed) 20260105
+
+Methodology: 40-day window of certified signals; evaluate realized 10-business-day outcomes (A1 at T+10). Score combines: 
+- Fulfillment rate (weight 0.4): share of cases where A1_outcome ≥ F10_T.
+- Realized 10d return vs A1(T-1) (0.3): average (A1_outcome/A1_prev − 1).
+- Sharpe proxy (0.2): average 10d return divided by its std.
+- Avg Sent7d (0.1): average Tigro 7d sentiment across signals.
+
+## Selected Top-10 and Rationales
+- CDE: score=0.838, signals=14, fulfilled_rate=50.00%, avg_ret10d=0.12160371358672054, sharpe_proxy=1.5024311255822687, avg_sent7d=0.3728571428571429.
+  Rationale: fulfillment 50%, avg10d +12.16%, Sharpe~1.50, Sent7d +0.37. News(7d): neg=2, high_impact=0
+- MU: score=0.818, signals=18, fulfilled_rate=44.44%, avg_ret10d=0.16202338085726528, sharpe_proxy=2.137467630738211, avg_sent7d=0.2644444444444444.
+  Rationale: fulfillment 44%, avg10d +16.20%, Sharpe~2.14, Sent7d +0.26. News(7d): neg=1, high_impact=1; e.g., ServiceNow (NOW) stock price today: Shares slide nearly 4% to start 2026 as software lags
+- NESR: score=0.810, signals=13, fulfilled_rate=53.85%, avg_ret10d=0.03902962386522159, sharpe_proxy=1.2700086116130507, avg_sent7d=0.4242857142857143.
+  Rationale: fulfillment 54%, avg10d +3.90%, Sharpe~1.27, Sent7d +0.42. News(7d): neg=0, high_impact=0
+- PACS: score=0.776, signals=18, fulfilled_rate=44.44%, avg_ret10d=0.15003817101504094, sharpe_proxy=3.194046309730141, avg_sent7d=-0.07411764705882354.
+  Rationale: fulfillment 44%, avg10d +15.00%, Sharpe~3.19, Sent7d -0.07. News(7d): neg=1, high_impact=1; e.g., |Bronstein, Gewirtz & Grossman, LLC Initiates an Investigation into Allegations Against PACS Group, Inc. (PACS) And Encourages Shareholders 
+- VERA: score=0.770, signals=18, fulfilled_rate=38.89%, avg_ret10d=0.17596341184041173, sharpe_proxy=1.1407432255060035, avg_sent7d=0.1927272727272727.
+  Rationale: fulfillment 39%, avg10d +17.60%, Sharpe~1.14, Sent7d +0.19. News(7d): neg=0, high_impact=0
+- HBM: score=0.766, signals=18, fulfilled_rate=44.44%, avg_ret10d=0.10035958576656603, sharpe_proxy=2.7273421575743018, avg_sent7d=0.16833333333333333.
+  Rationale: fulfillment 44%, avg10d +10.04%, Sharpe~2.73, Sent7d +0.17. News(7d): neg=0, high_impact=0
+- HRTG: score=0.756, signals=8, fulfilled_rate=50.00%, avg_ret10d=0.03744265944696925, sharpe_proxy=0.475425190195882, avg_sent7d=0.2750000000000001.
+  Rationale: fulfillment 50%, avg10d +3.74%, Sharpe~0.48, Sent7d +0.28. News(7d): neg=2, high_impact=0
+- SLGN: score=0.747, signals=10, fulfilled_rate=50.00%, avg_ret10d=0.029138533580380495, sharpe_proxy=0.9004706818343292, avg_sent7d=0.21999999999999997.
+  Rationale: fulfillment 50%, avg10d +2.91%, Sharpe~0.90, Sent7d +0.22. News(7d): neg=2, high_impact=1; e.g., A Look Back at Industrial Packaging Stocks’ Q3 Earnings: Silgan Holdings (NYSE:SLGN) Vs The Rest Of The Pack
+- TWLO: score=0.700, signals=18, fulfilled_rate=38.89%, avg_ret10d=0.0599843203839015, sharpe_proxy=1.636143098444898, avg_sent7d=0.27666666666666667.
+  Rationale: fulfillment 39%, avg10d +6.00%, Sharpe~1.64, Sent7d +0.28. News(7d): neg=0, high_impact=0
+- UAL: score=0.678, signals=14, fulfilled_rate=35.71%, avg_ret10d=0.07304496303334744, sharpe_proxy=2.554022121495641, avg_sent7d=0.1521428571428571.
+  Rationale: fulfillment 36%, avg10d +7.30%, Sharpe~2.55, Sent7d +0.15. News(7d): neg=3, high_impact=0
+
+## Portfolio Summary (Top-10)
