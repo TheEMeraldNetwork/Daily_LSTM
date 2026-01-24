@@ -65,6 +65,7 @@
 				<table class="table" id="actionTable">
 					<thead><tr>
 						<th style="text-align:left">Symbol</th>
+						<th style="text-align:left">Name</th>
 						<th>F10/C1 (%)</th>
 						<th>F10_T</th>
 						<th>A1_(T-1)</th>
@@ -74,8 +75,6 @@
 						<th>BB %b</th>
 						<th>Pct>200d</th>
 						<th>Rule</th>
-						<th>Market</th>
-						<th>R4a OK</th>
 					</tr></thead>
 					<tbody></tbody>
 				</table>
@@ -340,7 +339,18 @@
 		if (!(await headExists(url))) return null;
 		const df = await loadCSV(url);
 		const rows = [];
-		// legacy Name column removed
+		// load name map from nearest comparison table
+		let nameMap = new Map();
+		try {
+			let d = selectedDate;
+			let found = null;
+			for (let i=0;i<7;i++){
+				const test = `${APP_DATA_DIR}/comparison_table_${d}.csv`;
+				if (await headExists(test)) { found=test; break; }
+				const dt = new Date(Number(d.slice(0,4)), Number(d.slice(4,6))-1, Number(d.slice(6,8))); dt.setDate(dt.getDate()-1); d = ymd(dt);
+			}
+			if (found){ const cdf = await loadCSV(found); const cols = mapColumns(cdf); if (cols.name){ for (const rr of cdf.data){ const sym = String(rr.Symbol||rr.symbol||'').toUpperCase(); const nm = rr[cols.name]; if (sym) nameMap.set(sym, nm); } } }
+		} catch(e){}
 		for (const r of df.data){
 			const sym = String(r.symbol||r.Symbol||'').toUpperCase();
 			const ratio = toNum(r.f10_over_c1_x);
@@ -362,7 +372,7 @@
 			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
 			const growthNight = NaN;
 			const ruleOK = (ratio <= 1.03) && (Number.isFinite(growth) && growth >= 1.05) && (Number.isFinite(bb) && bb >= 0.60);
-			rows.push({ sym, ratio, growth, f10, a1p, f10d, a1pd, s7, sgt, bb, sma, ruleOK });
+			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd, s7, sgt, bb, sma, ruleOK });
 		}
 		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
 		return rows;
@@ -402,6 +412,7 @@
     for (const row of deduped){
 			const tr = document.createElement('tr');
 			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent=row.sym; tr.appendChild(td0);
+			const tdName = document.createElement('td'); tdName.style.textAlign='left'; tdName.textContent=row.name||''; tr.appendChild(tdName);
 			const td1 = document.createElement('td'); td1.textContent=fmtPct(row.ratio); tr.appendChild(td1);
 			const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.f10)? row.f10.toFixed(2): 'N/A'); if (row.f10d) td2.title = `F10 date ${row.f10d}`; tr.appendChild(td2);
 			const td3 = document.createElement('td'); td3.textContent=(Number.isFinite(row.a1p)? row.a1p.toFixed(2): 'N/A'); if (row.a1pd) td3.title = `A1 prev ${row.a1pd}`; tr.appendChild(td3);
@@ -411,9 +422,6 @@
 			const tdBB = document.createElement('td'); tdBB.textContent=(Number.isFinite(row.bb)? row.bb.toFixed(2): ''); tr.appendChild(tdBB);
 			const tdSMA = document.createElement('td'); tdSMA.textContent=(Number.isFinite(row.sma)? (row.sma*100).toFixed(1)+'%': ''); tr.appendChild(tdSMA);
 			const tdRule = document.createElement('td'); tdRule.innerHTML = row.ruleOK ? '<span class="badge ok">RuleOK</span>' : ''; tr.appendChild(tdRule);
-			// Optional R4a summary fields if present in CSV
-			const tdMkt = document.createElement('td'); tdMkt.textContent = (row.spy_bin||''); tr.appendChild(tdMkt);
-			const tdR4 = document.createElement('td'); tdR4.innerHTML = (String(row.rule_4a).toLowerCase()==='true'||String(row.rule_4a)==='1') ? '<span class="badge ok">YES</span>' : ''; tr.appendChild(tdR4);
 			tbody.appendChild(tr); certified++;
 		}
 		document.getElementById('certCount').textContent = `${certified} shown`;
