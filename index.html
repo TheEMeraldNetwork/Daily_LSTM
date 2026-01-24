@@ -75,8 +75,6 @@
 						<th>BB %b</th>
 						<th>Pct>200d</th>
 						<th>Rule</th>
-						<th>A1_T</th>
-						<th>F10 / A1_T (%)</th>
 					</tr></thead>
 					<tbody></tbody>
 				</table>
@@ -358,8 +356,8 @@
 			const ratio = toNum(r.f10_over_c1_x);
 			const f10 = toNum(r.f10_T);
 			const a1p = toNum(r.a1_prev);
-			const a1t = toNum(r.a1_T);
-			const growth_t = toNum(r.f10_over_a1_T_x);
+			const a1t = NaN;
+			const growth_t = NaN;
 			const s7 = toNum(r.sentiment_7d);
 			const sflag = String(r.sentiment7d_gt_0_2||'').toLowerCase();
 			const sgt = (sflag==='true' || sflag==='1') ? 'Yes' : (sflag===''? '': 'No');
@@ -372,9 +370,9 @@
 			if (!(ratio <= 1.03)) continue;
 			// Compute growth from numeric F10 and A1_(T-1) to avoid misinterpreting percent vs ratio
 			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
-			const growthNight = Number.isFinite(growth_t) ? growth_t : ((Number.isFinite(f10) && Number.isFinite(a1t) && a1t>0) ? (f10 / a1t) : NaN);
+			const growthNight = NaN;
 			const ruleOK = (ratio <= 1.03) && (Number.isFinite(growth) && growth >= 1.05) && (Number.isFinite(bb) && bb >= 0.60);
-			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd, s7, sgt, bb, sma, ruleOK, a1t, growth_t: growthNight });
+			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd, s7, sgt, bb, sma, ruleOK });
 		}
 		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
 		return rows;
@@ -399,12 +397,8 @@
 			const growth = (prevA1 && prevA1>0) ? (f10 / prevA1) : NaN; // F10_T / A1_(T-1)
 			// Get A1_T from the same comparison file row if present
 			let a1t = NaN;
-			try {
-				const rowMatch = df.data.find(x => (String(x.Symbol||x.symbol||'').toUpperCase()) === sym);
-				// If df == comparison df, mapColumns will map a1; but in this branch df is comparison df
-			} catch(e){}
 			const ruleOK = (ratio <= 1.03) && (Number.isFinite(growth) && growth >= 1.05);
-			rows.push({ sym, ratio, growth, f10, a1p: prevA1, bb: NaN, sma: NaN, ruleOK, a1t: NaN, growth_t: NaN });
+			rows.push({ sym, ratio, growth, f10, a1p: prevA1, bb: NaN, sma: NaN, ruleOK });
 		}
 		// sort by growth desc
         rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
@@ -428,8 +422,6 @@
 			const tdBB = document.createElement('td'); tdBB.textContent=(Number.isFinite(row.bb)? row.bb.toFixed(2): ''); tr.appendChild(tdBB);
 			const tdSMA = document.createElement('td'); tdSMA.textContent=(Number.isFinite(row.sma)? (row.sma*100).toFixed(1)+'%': ''); tr.appendChild(tdSMA);
 			const tdRule = document.createElement('td'); tdRule.innerHTML = row.ruleOK ? '<span class="badge ok">RuleOK</span>' : ''; tr.appendChild(tdRule);
-			const td5 = document.createElement('td'); td5.textContent=(Number.isFinite(row.a1t)? row.a1t.toFixed(2): 'N/A'); tr.appendChild(td5);
-			const td6 = document.createElement('td'); td6.textContent=(Number.isFinite(row.growth_t)? fmtPct(row.growth_t): 'N/A'); tr.appendChild(td6);
 			tbody.appendChild(tr); certified++;
 		}
 		document.getElementById('certCount').textContent = `${certified} shown`;
