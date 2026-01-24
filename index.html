@@ -35,7 +35,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Forecast10 Dashboard</h1>
+		<h1>Forecast10 Dashboard <span class="small" style="margin-left:10px;"><a href="./index_preview_r4a.html" style="color:var(--accent); text-decoration:none;">R4a Preview</a></span></h1>
 		<div class="controls">
 			<label>
 				<span class="small">Filter symbol</span><br/>
@@ -65,7 +65,6 @@
 				<table class="table" id="actionTable">
 					<thead><tr>
 						<th style="text-align:left">Symbol</th>
-						<th style="text-align:left">Name</th>
 						<th>F10/C1 (%)</th>
 						<th>F10_T</th>
 						<th>A1_(T-1)</th>
@@ -75,8 +74,6 @@
 						<th>BB %b</th>
 						<th>Pct>200d</th>
 						<th>Rule</th>
-						<th>A1_T</th>
-						<th>F10 / A1_T (%)</th>
 					</tr></thead>
 					<tbody></tbody>
 				</table>
@@ -341,25 +338,14 @@
 		if (!(await headExists(url))) return null;
 		const df = await loadCSV(url);
 		const rows = [];
-		// load name map from nearest comparison table
-		let nameMap = new Map();
-		try {
-			let d = selectedDate;
-			let found = null;
-			for (let i=0;i<7;i++){
-				const test = `${APP_DATA_DIR}/comparison_table_${d}.csv`;
-				if (await headExists(test)) { found=test; break; }
-				const dt = new Date(Number(d.slice(0,4)), Number(d.slice(4,6))-1, Number(d.slice(6,8))); dt.setDate(dt.getDate()-1); d = ymd(dt);
-			}
-			if (found){ const cdf = await loadCSV(found); const cols = mapColumns(cdf); if (cols.name){ for (const rr of cdf.data){ const sym = String(rr.Symbol||rr.symbol||'').toUpperCase(); const nm = rr[cols.name]; if (sym) nameMap.set(sym, nm); } } }
-		} catch(e){}
+		// legacy Name column removed
 		for (const r of df.data){
 			const sym = String(r.symbol||r.Symbol||'').toUpperCase();
 			const ratio = toNum(r.f10_over_c1_x);
 			const f10 = toNum(r.f10_T);
 			const a1p = toNum(r.a1_prev);
-			const a1t = toNum(r.a1_T);
-			const growth_t = toNum(r.f10_over_a1_T_x);
+			const a1t = NaN;
+			const growth_t = NaN;
 			const s7 = toNum(r.sentiment_7d);
 			const sflag = String(r.sentiment7d_gt_0_2||'').toLowerCase();
 			const sgt = (sflag==='true' || sflag==='1') ? 'Yes' : (sflag===''? '': 'No');
@@ -372,9 +358,9 @@
 			if (!(ratio <= 1.03)) continue;
 			// Compute growth from numeric F10 and A1_(T-1) to avoid misinterpreting percent vs ratio
 			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
-			const growthNight = Number.isFinite(growth_t) ? growth_t : ((Number.isFinite(f10) && Number.isFinite(a1t) && a1t>0) ? (f10 / a1t) : NaN);
+			const growthNight = NaN;
 			const ruleOK = (ratio <= 1.03) && (Number.isFinite(growth) && growth >= 1.05) && (Number.isFinite(bb) && bb >= 0.60);
-			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd, s7, sgt, bb, sma, ruleOK, a1t, growth_t: growthNight });
+			rows.push({ sym, ratio, growth, f10, a1p, f10d, a1pd, s7, sgt, bb, sma, ruleOK });
 		}
 		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
 		return rows;
@@ -399,12 +385,8 @@
 			const growth = (prevA1 && prevA1>0) ? (f10 / prevA1) : NaN; // F10_T / A1_(T-1)
 			// Get A1_T from the same comparison file row if present
 			let a1t = NaN;
-			try {
-				const rowMatch = df.data.find(x => (String(x.Symbol||x.symbol||'').toUpperCase()) === sym);
-				// If df == comparison df, mapColumns will map a1; but in this branch df is comparison df
-			} catch(e){}
 			const ruleOK = (ratio <= 1.03) && (Number.isFinite(growth) && growth >= 1.05);
-			rows.push({ sym, ratio, growth, f10, a1p: prevA1, bb: NaN, sma: NaN, ruleOK, a1t: NaN, growth_t: NaN });
+			rows.push({ sym, ratio, growth, f10, a1p: prevA1, bb: NaN, sma: NaN, ruleOK });
 		}
 		// sort by growth desc
         rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
@@ -418,7 +400,6 @@
     for (const row of deduped){
 			const tr = document.createElement('tr');
 			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent=row.sym; tr.appendChild(td0);
-			const tdName = document.createElement('td'); tdName.style.textAlign='left'; tdName.textContent=row.name||''; tr.appendChild(tdName);
 			const td1 = document.createElement('td'); td1.textContent=fmtPct(row.ratio); tr.appendChild(td1);
 			const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.f10)? row.f10.toFixed(2): 'N/A'); if (row.f10d) td2.title = `F10 date ${row.f10d}`; tr.appendChild(td2);
 			const td3 = document.createElement('td'); td3.textContent=(Number.isFinite(row.a1p)? row.a1p.toFixed(2): 'N/A'); if (row.a1pd) td3.title = `A1 prev ${row.a1pd}`; tr.appendChild(td3);
@@ -428,8 +409,6 @@
 			const tdBB = document.createElement('td'); tdBB.textContent=(Number.isFinite(row.bb)? row.bb.toFixed(2): ''); tr.appendChild(tdBB);
 			const tdSMA = document.createElement('td'); tdSMA.textContent=(Number.isFinite(row.sma)? (row.sma*100).toFixed(1)+'%': ''); tr.appendChild(tdSMA);
 			const tdRule = document.createElement('td'); tdRule.innerHTML = row.ruleOK ? '<span class="badge ok">RuleOK</span>' : ''; tr.appendChild(tdRule);
-			const td5 = document.createElement('td'); td5.textContent=(Number.isFinite(row.a1t)? row.a1t.toFixed(2): 'N/A'); tr.appendChild(td5);
-			const td6 = document.createElement('td'); td6.textContent=(Number.isFinite(row.growth_t)? fmtPct(row.growth_t): 'N/A'); tr.appendChild(td6);
 			tbody.appendChild(tr); certified++;
 		}
 		document.getElementById('certCount').textContent = `${certified} shown`;
