@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>E_LSTM_Forecasting – Daily Dashboard (Preview)</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+	<style>
+		:root { --bg:#0e1116; --card:#151a22; --muted:#8a94a6; --text:#e7ecf3; --accent:#2ea3f2; --ok:#18c49c; --warn:#ffba08; --bad:#ff5c5c; }
+		html,body { height:100%; margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background:var(--bg); color:var(--text); }
+		.container { max-width: 1400px; margin: 0 auto; padding: 16px 20px 32px; }
+		h1 { font-size: 20px; margin: 0 0 10px; }
+		.controls { display:flex; gap:12px; align-items:center; flex-wrap: wrap; margin-bottom: 14px; }
+		select, input[type="text"] { background: var(--card); color: var(--text); border: 1px solid #2a3240; border-radius: 8px; padding: 8px 10px; }
+		.grid { display:grid; grid-template-columns: 1fr 1fr; grid-auto-rows: minmax(320px, auto); gap: 16px; }
+		.card { background: var(--card); border: 1px solid #1f2430; border-radius: 12px; padding: 12px; box-shadow: 0 0 0 1px rgba(255,255,255,0.02) inset; }
+		.card h2 { font-size: 16px; margin: 0 0 8px; }
+		.small { color: var(--muted); font-size: 12px; }
+		.table { width: 100%; border-collapse: collapse; }
+		.table th, .table td { border-bottom: 1px solid #222836; padding: 8px 10px; font-size: 13px; text-align: right; }
+		.table th { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .02em; font-size: 12px; }
+		.badge { display:inline-block; padding: 2px 6px; border-radius: 6px; font-size: 12px; }
+		.badge.ok { background: rgba(24,196,156,.14); color: var(--ok); }
+		.badge.warn { background: rgba(255,186,8,.14); color: var(--warn); }
+		.badge.bad { background: rgba(255,92,92,.14); color: var(--bad); }
+		.flex { display:flex; gap:10px; align-items:center; justify-content: space-between; }
+		.kpi { font-weight: 700; }
+		.footer { margin-top: 16px; color: var(--muted); font-size: 12px; }
+		@media (max-width: 1100px) { .grid { grid-template-columns: 1fr; } }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Forecast10 Dashboard (Preview)</h1>
+		<div class="controls">
+			<label>
+				<span class="small">Filter symbol</span><br/>
+				<input id="symbolFilter" type="text" placeholder="e.g. AAPL, MSFT (optional)" />
+			</label>
+			<button id="applyBtn">Apply</button>
+			<span class="small" id="statusLine"></span>
+		</div>
+
+		<div class="grid">
+			<div class="card">
+				<div class="flex"><h2>Scatter: F10_T / C1_T vs F10_T / A1_T</h2><div class="small">T
+					<select id="scatterDate"></select>
+				</div></div>
+				<div id="scatter" style="height:360px;"></div>
+				<div class="small">Axes show % deltas. Guide lines at 0% (x,y). <span id="quadCounts"></span></div>
+			</div>
+			<div class="card">
+				<div class="flex"><h2>Bins (latest day)</h2><div class="small">T <select id="binsDateSelect"></select> <span class="small" id="binsDate"></span></div></div>
+				<table class="table" id="binsTable">
+					<thead><tr><th style="text-align:left">Bin</th><th>Count</th><th>Mean F10 vs A1 (%)</th><th>Trend (7d)</th></tr></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+			<div class="card" style="grid-column:1/3;">
+				<div class="flex"><h2>Certified candidates (Preview: F10/C1 ≤ 1.03)</h2><div class="small">T+1 <select id="actionsDate"></select> · uses A1_(T-1)=<span id="actionsPrevLabel"></span> · <span id="certCount"></span></div></div>
+				<table class="table" id="actionTable">
+					<thead><tr>
+						<th style="text-align:left">Symbol</th>
+						<th style="text-align:left">Name</th>
+						<th>F10/C1 (%)</th>
+						<th>F10_T</th>
+						<th>A1_(T-1)</th>
+						<th>F10 / A1(T-1) (%)</th>
+						<th>Sent7d</th>
+						<th>Sent>0.2</th>
+						<th>BB %b</th>
+						<th>Pct>200d</th>
+						<th>A1_T</th>
+						<th>F10 / A1_T (%)</th>
+					</tr></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="footer">Preview uses the same CSVs under App/data, with tightened F10/C1 ≤ 1.03 and momentum columns when available.</div>
+	</div>
+
+	<script>
+	// Configuration
+	const PRED_DIR = './data/processed/predictions';
+	const APP_DATA_DIR = './App/data';
+	const BINS = [0,2,5,10,20];
+	const BIN_LABELS = ['<0%','0-2%','2-5%','5-10%','10-20%','>20%'];
+	let CURRENT = { scatterT:null, binsT:null, actionsTp1:null };
+
+	const scatterDate = document.getElementById('scatterDate');
+	const binsDateSelect = document.getElementById('binsDateSelect');
+	const actionsDate = document.getElementById('actionsDate');
+	const symbolFilter = document.getElementById('symbolFilter');
+	const statusLine = document.getElementById('statusLine');
+	const binsDate = document.getElementById('binsDate');
+	const actionsPrevLabel = document.getElementById('actionsPrevLabel');
+
+	function ymd(date){ const y=date.getFullYear(); const m=String(date.getMonth()+1).padStart(2,'0'); const d=String(date.getDate()).padStart(2,'0'); return `${y}${m}${d}`; }
+	function addDays(date, delta){ const d=new Date(date); d.setDate(d.getDate()+delta); return d; }
+	function businessPrevYmd(yyyymmdd){
+		const y = Number(yyyymmdd.slice(0,4)), m = Number(yyyymmdd.slice(4,6))-1, d = Number(yyyymmdd.slice(6,8));
+		const dt = new Date(y,m,d);
+		do { dt.setDate(dt.getDate()-1); } while (dt.getDay()===0 || dt.getDay()===6);
+		return ymd(dt);
+	}
+
+	async function headExists(url){
+		try {
+			const sep = url.includes('?') ? '&' : '?';
+			const res = await fetch(`${url}${sep}v=${Date.now()}`, {method:'GET'});
+			return res.ok;
+		} catch(e){ return false; }
+	}
+
+	async function discoverComparisonDates(maxBack=60){
+		const found = [];
+		const today = new Date();
+		for (let i=0;i<maxBack;i++){
+			const d = ymd(addDays(today, -i));
+			if (await headExists(`${APP_DATA_DIR}/comparison_table_${d}.csv`)) found.push(d);
+			else if (await headExists(`${PRED_DIR}/comparison_table_${d}.csv`)) found.push(d);
+		}
+		return found.reverse();
+	}
+
+	async function discoverCertifiedDates(maxBack=30){
+		const found = [];
+		const today = new Date();
+		for (let i=0;i<maxBack;i++){
+			const d = ymd(addDays(today, -i));
+			if (await headExists(`${APP_DATA_DIR}/certified_candidates_${d}.csv`)) found.push(d);
+		}
+		return found.reverse();
+	}
+
+	function mapColumns(df){
+		const cols = {}; const lc = {};
+		for (const c of df.meta.fields){ lc[c.toLowerCase()] = c; }
+		const pick = (keys) => {
+			for (const k of keys){ for (const key in lc){ if (key.includes(k)) return lc[key]; } }
+			return null;
+		};
+		return {
+			f10: pick(['forecast10_t','forecast10']),
+			f1: pick(['forecast1_t','forecast1']),
+			c1: pick(['consensus1_t','consensus1','consensus']),
+			a1: pick(['actual_t','actual']),
+			name: pick(['name','company','security'])
+		};
+	}
+
+	async function loadCSV(url){
+		const sep = url.includes('?') ? '&' : '?';
+		const txt = await (await fetch(`${url}${sep}v=${Date.now()}`)).text();
+		return await new Promise((resolve)=>{
+			Papa.parse(txt, { header:true, dynamicTyping:true, skipEmptyLines:true, complete: (res)=> resolve(res) });
+		});
+	}
+
+	function toNum(v){
+		if (v === null || v === undefined) return NaN;
+		const s = String(v).trim();
+		if (!s) return NaN;
+		const x = Number(s);
+		return Number.isFinite(x) ? x : NaN;
+	}
+	function ratioToPct(r){ return Number.isFinite(r) ? (r-1)*100 : NaN; }
+	function fmtPct(r, digits=1){ const v = ratioToPct(r); return Number.isFinite(v) ? `${v.toFixed(digits)}%` : 'N/A'; }
+
+	function enableSorting(tableId){
+		const table = document.getElementById(tableId);
+		if (!table) return;
+		const ths = table.querySelectorAll('thead th');
+		ths.forEach((th, idx)=>{
+			th.style.cursor = 'pointer';
+			th.addEventListener('click', ()=>{
+				const tbody = table.querySelector('tbody');
+				const rows = Array.from(tbody.querySelectorAll('tr'));
+				const dir = th.dataset.dir ? (th.dataset.dir === 'asc' ? 'desc' : 'asc') : 'asc';
+				ths.forEach(h=> delete h.dataset.dir); th.dataset.dir = dir;
+				rows.sort((a,b)=>{
+					const av = a.children[idx]?.textContent || '';
+					const bv = b.children[idx]?.textContent || '';
+					const an = Number(av.replace(/[%,$\s]/g,'')), bn = Number(bv.replace(/[%,$\s]/g,''));
+					let cmp;
+					if (Number.isFinite(an) && Number.isFinite(bn)) cmp = an - bn; else cmp = String(av).localeCompare(String(bv));
+					return dir==='asc' ? cmp : -cmp;
+				});
+				rows.forEach(r=> tbody.appendChild(r));
+			});
+		});
+	}
+
+	async function loadPrevActualMap(prevDate){
+		const appPrev = `${APP_DATA_DIR}/prev_actuals_${prevDate}.csv`;
+		let df = null;
+		if (await headExists(appPrev)) {
+			df = await loadCSV(appPrev);
+		} else {
+			const url = `${APP_DATA_DIR}/comparison_table_${prevDate}.csv`;
+			if (!(await headExists(url))) return new Map();
+			df = await loadCSV(url);
+		}
+		const cols = {}; const lc={}; for (const c of df.meta.fields){ lc[c.toLowerCase()] = c; }
+		const a1 = (Object.keys(lc).find(k=>k.includes('actual_t'))||Object.keys(lc).find(k==='actual'));
+		const a1c = lc[a1];
+		const symKey = (Object.keys(df.data[0]||{}).find(k=>k.toLowerCase()==='symbol')||'Symbol');
+		const m = new Map();
+		for (const row of df.data){ const sym = String(row[symKey]||'').toUpperCase(); const v = Number(row[a1c]); if (sym && Number.isFinite(v)) m.set(sym, v); }
+		return m;
+	}
+
+	async function loadCertifiedIfAvailable(selectedDate){
+		const url = `${APP_DATA_DIR}/certified_candidates_${selectedDate}.csv`;
+		if (!(await headExists(url))) return null;
+		const df = await loadCSV(url);
+		const rows = [];
+		// load name map from nearest comparison table
+		let nameMap = new Map();
+		try {
+			let d = selectedDate;
+			let found = null;
+			for (let i=0;i<7;i++){
+				const test = `${APP_DATA_DIR}/comparison_table_${d}.csv`;
+				if (await headExists(test)) { found=test; break; }
+				const dt = new Date(Number(d.slice(0,4)), Number(d.slice(4,6))-1, Number(d.slice(6,8))); dt.setDate(dt.getDate()-1); d = ymd(dt);
+			}
+			if (found){ const cdf = await loadCSV(found); const cols = mapColumns(cdf); if (cols.name){ for (const rr of cdf.data){ const sym = String(rr.Symbol||rr.symbol||'').toUpperCase(); const nm = rr[cols.name]; if (sym) nameMap.set(sym, nm); } } }
+		} catch(e){}
+		for (const r of df.data){
+			const sym = String(r.symbol||r.Symbol||'').toUpperCase();
+			const ratio = Number(r.f10_over_c1_x);
+			const f10 = Number(r.f10_T);
+			const a1p = Number(r.a1_prev);
+			const a1t = Number(r.a1_T);
+			const growth_t = Number(r.f10_over_a1_T_x);
+			const s7 = Number(r.sentiment_7d);
+			const sflag = String(r.sentiment7d_gt_0_2||'').toLowerCase();
+			const sgt = (sflag==='true' || sflag==='1') ? 'Yes' : (sflag===''? '': 'No');
+			const bb = Number(r.bb_percent_b);
+			const sma = Number(r.pct_above_sma200);
+			if (!sym || !Number.isFinite(ratio)) continue;
+			// Preview filter: F10/C1 ≤ 1.03 (no absolute band)
+			if (!(ratio <= 1.03)) continue;
+			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
+			const growthNight = Number.isFinite(growth_t) ? growth_t : ((Number.isFinite(f10) && Number.isFinite(a1t) && a1t>0) ? (f10 / a1t) : NaN);
+			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, s7, sgt, bb, sma, a1t, growth_t: growthNight });
+		}
+		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
+		return rows;
+	}
+
+	async function renderActionTable(selectedDate, df, cols){
+		const tbody = document.querySelector('#actionTable tbody');
+		tbody.innerHTML='';
+		let rows = await loadCertifiedIfAvailable(selectedDate);
+		if (!rows){
+			// fallback: build from comparison (will miss momentum columns)
+			const ymdPrev = businessPrevYmd(selectedDate);
+			const prevMap = await loadPrevActualMap(ymdPrev);
+			rows = [];
+			for (const r of df.data){
+				const sym = String(r.Symbol||r.symbol||'').toUpperCase();
+				if (!sym) continue;
+				const f10 = Number(r[cols.f10]); const c1 = Number(r[cols.c1]); if (!Number.isFinite(f10) || !Number.isFinite(c1) || c1<=0) continue;
+				const ratio = f10 / c1;
+				if (!(ratio <= 1.03)) continue;
+				const prevA1 = prevMap.get(sym);
+				const growth = (prevA1 && prevA1>0) ? (f10 / prevA1) : NaN;
+				rows.push({ sym, ratio, growth, f10, a1p: prevA1, s7: NaN, sgt:'', bb: NaN, sma: NaN, a1t: NaN, growth_t: NaN });
+			}
+			rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
+		}
+		// Render
+		let certified=0;
+		for (const row of rows){
+			const tr = document.createElement('tr');
+			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent=row.sym; tr.appendChild(td0);
+			const tdName = document.createElement('td'); tdName.style.textAlign='left'; tdName.textContent=row.name||''; tr.appendChild(tdName);
+			const td1 = document.createElement('td'); td1.textContent=fmtPct(row.ratio); tr.appendChild(td1);
+			const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.f10)? row.f10.toFixed(2): 'N/A'); tr.appendChild(td2);
+			const td3 = document.createElement('td'); td3.textContent=(Number.isFinite(row.a1p)? row.a1p.toFixed(2): 'N/A'); tr.appendChild(td3);
+			const td4 = document.createElement('td'); td4.textContent=(Number.isFinite(row.growth)? fmtPct(row.growth) : 'N/A'); tr.appendChild(td4);
+			const tdS = document.createElement('td'); tdS.textContent=(Number.isFinite(row.s7)? row.s7.toFixed(2): (row.s7===''? '': 'N/A')); tr.appendChild(tdS);
+			const tdSf = document.createElement('td'); tdSf.textContent=(row.sgt||''); tr.appendChild(tdSf);
+			const tdBB = document.createElement('td'); tdBB.textContent=(Number.isFinite(row.bb)? row.bb.toFixed(2): ''); tr.appendChild(tdBB);
+			const tdSMA = document.createElement('td'); tdSMA.textContent=(Number.isFinite(row.sma)? (row.sma*100).toFixed(1)+'%': ''); tr.appendChild(tdSMA);
+			const td5 = document.createElement('td'); td5.textContent=(Number.isFinite(row.a1t)? row.a1t.toFixed(2): 'N/A'); tr.appendChild(td5);
+			const td6 = document.createElement('td'); td6.textContent=(Number.isFinite(row.growth_t)? fmtPct(row.growth_t): 'N/A'); tr.appendChild(td6);
+			tbody.appendChild(tr); certified++;
+		}
+		document.getElementById('certCount').textContent = `${certified} shown`;
+		enableSorting('actionTable');
+	}
+
+	async function loadBinsForDate(dateList, selected){
+		const tryDates = [selected, ...dateList.slice().reverse()].filter(Boolean);
+		for (const d of tryDates){
+			const appUrl = `${APP_DATA_DIR}/bins_summary_${d}.csv`;
+			if (await headExists(appUrl)) { const df = await loadCSV(appUrl); return { date:d, df }; }
+			const url = `${PRED_DIR}/bins_summary_${d}.csv`;
+			if (await headExists(url)) { const df = await loadCSV(url); return { date:d, df }; }
+		}
+		return null;
+	}
+
+	function mapBinsColumns(df){
+		const lc = {}; for (const c of df.meta.fields){ lc[c.toLowerCase()] = c; }
+		const binC = lc['bin'] || lc['bins'] || Object.values(lc).find(v=>/bin/i.test(v));
+		const countC = lc['count'] || Object.values(lc).find(v=>/count/i.test(v));
+		const meanC = Object.values(lc).find(v=>/mean.*f10.*a1|mean.*error|avg.*f10/i.test(v.toLowerCase())) || Object.values(lc).find(v=>/mean/i.test(v));
+		const trendC = Object.values(lc).find(v=>/trend|7d/i.test(v.toLowerCase()));
+		return { binC, countC, meanC, trendC };
+	}
+
+	function renderBinsTable(bins){
+		const tbody = document.querySelector('#binsTable tbody');
+		tbody.innerHTML = '';
+		if (!bins || !bins.df || !bins.df.data || !bins.df.data.length){ binsDate.textContent=''; return; }
+		const { binC, countC, meanC, trendC } = mapBinsColumns(bins.df);
+		binsDate.textContent = `T=${bins.date.slice(0,4)}-${bins.date.slice(4,6)}-${bins.date.slice(6,8)}`;
+		for (const r of bins.df.data){
+			const tr = document.createElement('tr');
+			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent = r[binC]; tr.appendChild(td0);
+			const td1 = document.createElement('td'); td1.textContent = Number(r[countC])?.toLocaleString('en-US'); tr.appendChild(td1);
+			const td2 = document.createElement('td'); td2.textContent = Number.isFinite(Number(r[meanC])) ? `${Number(r[meanC]).toFixed(1)}%` : 'N/A'; tr.appendChild(td2);
+			const td3 = document.createElement('td'); td3.textContent = Number.isFinite(Number(r[trendC])) ? `${Number(r[trendC]).toFixed(1)}%` : 'N/A'; tr.appendChild(td3);
+			tbody.appendChild(tr);
+		}
+		enableSorting('binsTable');
+	}
+
+	async function main(){
+		statusLine.textContent = 'Discovering dates...';
+		let compDates = await discoverComparisonDates(60);
+		const certDates = await discoverCertifiedDates(30);
+		scatterDate.innerHTML = ''; binsDateSelect.innerHTML = ''; actionsDate.innerHTML = '';
+		for (const d of compDates){ const opt=document.createElement('option'); opt.value=d; opt.textContent = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`; scatterDate.appendChild(opt); }
+		for (const d of compDates){ const opt=document.createElement('option'); opt.value=d; opt.textContent = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`; binsDateSelect.appendChild(opt); }
+		for (const d of certDates){ const opt=document.createElement('option'); opt.value=d; opt.textContent = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`; actionsDate.appendChild(opt); }
+		if (!compDates.length){ statusLine.textContent = 'No comparison tables found.'; return; }
+		scatterDate.value = compDates[compDates.length-1];
+		binsDateSelect.value = compDates[compDates.length-1];
+		if (certDates.length) actionsDate.value = certDates[certDates.length-1];
+		const binsFor = await loadBinsForDate(compDates, binsDateSelect.value);
+		renderBinsTable(binsFor);
+		statusLine.textContent = 'Ready.';
+	}
+
+	document.getElementById('applyBtn').addEventListener('click', async ()=>{
+		const dTop = scatterDate.value; if (!dTop){ return; }
+		const dBins = binsDateSelect.value || dTop;
+		const dMorning = actionsDate.value || dTop;
+		statusLine.textContent = `Loading T(scatter)=${dTop}, T(bins)=${dBins}, T+1(actions)=${dMorning}...`;
+		let url = `${APP_DATA_DIR}/comparison_table_${dTop}.csv`;
+		if (!(await headExists(url))) url = `${PRED_DIR}/comparison_table_${dTop}.csv`;
+		try{
+			const df = await loadCSV(url);
+			const cols = mapColumns(df);
+			if (!cols.f10 || !cols.c1 || !cols.a1){ 
+				statusLine.textContent = 'Comparison incomplete for scatter; rendering certified table only.'; 
+				await renderActionTable(dMorning, { data:[] }, {});
+				return; 
+			}
+			const filter = symbolFilter.value.trim();
+			const filterSet = new Set((filter? filter.split(','):[]).map(s=>s.trim().toUpperCase()).filter(Boolean));
+			// Skip plotting scatter in preview; focus on certified table
+			await renderActionTable(dMorning, df, cols);
+			const compDates = await discoverComparisonDates(60);
+			const binsFor = await loadBinsForDate(compDates, dBins);
+			renderBinsTable(binsFor);
+			// update A1 prev date label
+			const y=Number(dMorning.slice(0,4)), m=Number(dMorning.slice(4,6))-1, d=Number(dMorning.slice(6,8)); const dt=new Date(y,m,d); dt.setDate(dt.getDate()-1);
+			const prev = `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+			if (actionsPrevLabel) actionsPrevLabel.textContent = prev;
+			statusLine.textContent = `Loaded Actions T+1=${dMorning}.`;
+		}catch(e){
+			console.error(e); statusLine.textContent = 'Failed to load date.';
+		}
+	});
+
+	main().then(()=>{ document.getElementById('applyBtn').click(); });
+	</script>
+</body>
+</html>
+
