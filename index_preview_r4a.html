@@ -70,7 +70,6 @@
 						<th>F10_T</th>
 						<th>A1_(T-1)</th>
 						<th>F10 / A1(T-1) (%)</th>
-						<th>F10/MA20 (%)</th>
 						<th>Sent7d</th>
 						<th>Sent>0.2</th>
 						<th>BB %b</th>
@@ -78,8 +77,6 @@
 						<th>SPY 10d (T-1) (%)</th>
 						<th>Tape bin</th>
 						<th>Rule 4a</th>
-						<th>A1_T</th>
-						<th>F10 / A1_T (%)</th>
 					</tr></thead>
 					<tbody></tbody>
 				</table>
@@ -270,7 +267,7 @@
 			if (!(ratio <= 1.03)) continue;
 			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
 			const growthNight = Number.isFinite(growth_t) ? growth_t : ((Number.isFinite(f10) && Number.isFinite(a1t) && a1t>0) ? (f10 / a1t) : NaN);
-			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10_over_ma20, s7, sgt, bb, sma, spy_val, spy_bin, ruleOK4a, a1t, growth_t: growthNight });
+			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, s7, sgt, bb, sma, spy_val, spy_bin, ruleOK4a });
 		}
 		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
 		// Update global tape badge from first row if present
@@ -312,7 +309,6 @@
 			const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.f10)? row.f10.toFixed(2): 'N/A'); tr.appendChild(td2);
 			const td3 = document.createElement('td'); td3.textContent=(Number.isFinite(row.a1p)? row.a1p.toFixed(2): 'N/A'); tr.appendChild(td3);
 			const td4 = document.createElement('td'); td4.textContent=(Number.isFinite(row.growth)? fmtPct(row.growth) : 'N/A'); tr.appendChild(td4);
-			const tdMA = document.createElement('td'); tdMA.textContent=(Number.isFinite(row.f10_over_ma20)? fmtPct(row.f10_over_ma20): ''); tr.appendChild(tdMA);
 			const tdS = document.createElement('td'); tdS.textContent=(Number.isFinite(row.s7)? row.s7.toFixed(2): (row.s7===''? '': 'N/A')); tr.appendChild(tdS);
 			const tdSf = document.createElement('td'); tdSf.textContent=(row.sgt||''); tr.appendChild(tdSf);
 			const tdBB = document.createElement('td'); tdBB.textContent=(Number.isFinite(row.bb)? row.bb.toFixed(2): ''); tr.appendChild(tdBB);
@@ -320,8 +316,6 @@
 			const tdSpy = document.createElement('td'); tdSpy.textContent=(Number.isFinite(row.spy_val)? (row.spy_val*100).toFixed(1)+'%': ''); tr.appendChild(tdSpy);
 			const tdBin = document.createElement('td'); tdBin.textContent=(row.spy_bin||''); tr.appendChild(tdBin);
 			const tdRule = document.createElement('td'); tdRule.innerHTML = row.ruleOK4a ? '<span class=\"badge ok\">YES</span>' : ''; tr.appendChild(tdRule);
-			const td5 = document.createElement('td'); td5.textContent=(Number.isFinite(row.a1t)? row.a1t.toFixed(2): 'N/A'); tr.appendChild(td5);
-			const td6 = document.createElement('td'); td6.textContent=(Number.isFinite(row.growth_t)? fmtPct(row.growth_t): 'N/A'); tr.appendChild(td6);
 			tbody.appendChild(tr); certified++;
 		}
 		document.getElementById('certCount').textContent = `${certified} shown`;
