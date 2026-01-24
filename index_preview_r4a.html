@@ -373,7 +373,14 @@
 		for (const d of compDates){ const opt=document.createElement('option'); opt.value=d; opt.textContent = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`; scatterDate.appendChild(opt); }
 		for (const d of compDates){ const opt=document.createElement('option'); opt.value=d; opt.textContent = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`; binsDateSelect.appendChild(opt); }
 		for (const d of certDates){ const opt=document.createElement('option'); opt.value=d; opt.textContent = `${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}`; actionsDate.appendChild(opt); }
-		if (!compDates.length){ statusLine.textContent = 'No comparison tables found.'; return; }
+		// If no comparison tables, still allow rendering certified preview (cert-only mode)
+		if (!compDates.length){
+			if (!certDates.length){ statusLine.textContent = 'No data available.'; return; }
+			actionsDate.value = certDates[certDates.length-1];
+			await renderActionTable(actionsDate.value, { data:[] }, {});
+			statusLine.textContent = 'Ready (cert-only).';
+			return;
+		}
 		scatterDate.value = compDates[compDates.length-1];
 		binsDateSelect.value = compDates[compDates.length-1];
 		if (certDates.length) actionsDate.value = certDates[certDates.length-1];
