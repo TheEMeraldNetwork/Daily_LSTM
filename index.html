@@ -366,12 +366,16 @@
 			const bb = toNum(r.bb_percent_b);
 			const sma = toNum(r.pct_above_sma200);
 			if (!sym || !Number.isFinite(ratio)) continue;
-			// Enforce previewed production rule F10/C1 ≤ 1.03
+			// Enforce production certification rule F10/C1 ≤ 1.03
 			if (!(ratio <= 1.03)) continue;
 			// Compute growth from numeric F10 and A1_(T-1) to avoid misinterpreting percent vs ratio
 			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
 			const growthNight = NaN;
-			const ruleOK = (ratio <= 1.03) && (Number.isFinite(growth) && growth >= 1.05) && (Number.isFinite(bb) && bb >= 0.60);
+			// Prefer backend Rule2 flag if present; otherwise compute legacy (≥3% over A1_prev and %b≥0.60)
+			const rule2Field = String(r.rule2_ok || '').toLowerCase();
+			const ruleBackend = (rule2Field === 'true' || rule2Field === '1');
+			const ruleCalc = (ratio <= 1.03) && (Number.isFinite(growth) && growth >= 1.03) && (Number.isFinite(bb) && bb >= 0.60);
+			const ruleOK = ruleBackend || ruleCalc;
 			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd, s7, sgt, bb, sma, ruleOK });
 		}
 		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
