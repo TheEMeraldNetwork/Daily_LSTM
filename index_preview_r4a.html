@@ -66,17 +66,20 @@
 					<thead><tr>
 						<th style="text-align:left">Symbol</th>
 						<th style="text-align:left">Name</th>
-						<th>F10/C1 (%)</th>
+						<th>F10/C1 (%)</th> <!-- KPI1: Quality -->
 						<th>F10_T</th>
 						<th>A1_(T-1)</th>
-						<th>F10 / A1(T-1) (%)</th>
+						<th>F10 / A1(T-1) (%)</th> <!-- legacy -->
+						<th>F10/MA20 (%)</th> <!-- KPI2: Direction -->
+						<th>BB %b</th> <!-- KPI3: Momentum -->
+						<th>Persist 2of3</th> <!-- KPI4: Persistence -->
+						<th>Market bin</th>
+						<th>R4a OK</th>
+						<th>F1 / A1(T-1) (%)</th>
 						<th>Sent7d</th>
 						<th>Sent>0.2</th>
-						<th>BB %b</th>
 						<th>Pct>200d</th>
-						<th>SPY 10d (T-1) (%)</th>
-						<th>Tape bin</th>
-						<th>Rule 4a</th>
+						<th>Rule2 OK</th>
 					</tr></thead>
 					<tbody></tbody>
 				</table>
@@ -262,12 +265,17 @@
 			const spy_bin = String(r.spy_trend_bin||'');
 			const rule4a = String(r.rule_4a||'').toLowerCase();
 			const ruleOK4a = (rule4a==='true' || rule4a==='1');
+			const f1_over_prev = Number(r.f1_over_prev_a1_x);
+			const rule2ok = String(r.rule2_ok||'').toLowerCase();
+			const rule2OK = (rule2ok==='true' || rule2ok==='1');
+			const persist = String(r.persist_2of3_ok||'').toLowerCase();
+			const persistOK = (persist==='true' || persist==='1');
 			if (!sym || !Number.isFinite(ratio)) continue;
 			// Preview filter: F10/C1 ≤ 1.03 (no absolute band)
 			if (!(ratio <= 1.03)) continue;
 			const growth = (Number.isFinite(f10) && Number.isFinite(a1p) && a1p>0) ? (f10 / a1p) : NaN;
 			const growthNight = Number.isFinite(growth_t) ? growth_t : ((Number.isFinite(f10) && Number.isFinite(a1t) && a1t>0) ? (f10 / a1t) : NaN);
-			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, s7, sgt, bb, sma, spy_val, spy_bin, ruleOK4a });
+			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10_over_ma20, bb, persistOK, spy_val, spy_bin, ruleOK4a, f1_over_prev, s7, sgt, sma, rule2OK });
 		}
 		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
 		// Update global tape badge from first row if present
@@ -309,13 +317,16 @@
 			const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.f10)? row.f10.toFixed(2): 'N/A'); tr.appendChild(td2);
 			const td3 = document.createElement('td'); td3.textContent=(Number.isFinite(row.a1p)? row.a1p.toFixed(2): 'N/A'); tr.appendChild(td3);
 			const td4 = document.createElement('td'); td4.textContent=(Number.isFinite(row.growth)? fmtPct(row.growth) : 'N/A'); tr.appendChild(td4);
-			const tdS = document.createElement('td'); tdS.textContent=(Number.isFinite(row.s7)? row.s7.toFixed(2): (row.s7===''? '': 'N/A')); tr.appendChild(tdS);
-			const tdSf = document.createElement('td'); tdSf.textContent=(row.sgt||''); tr.appendChild(tdSf);
+			const tdDir = document.createElement('td'); tdDir.textContent=Number.isFinite(row.f10_over_ma20)? fmtPct(row.f10_over_ma20): ''; tr.appendChild(tdDir);
 			const tdBB = document.createElement('td'); tdBB.textContent=(Number.isFinite(row.bb)? row.bb.toFixed(2): ''); tr.appendChild(tdBB);
-			const tdSMA = document.createElement('td'); tdSMA.textContent=(Number.isFinite(row.sma)? (row.sma*100).toFixed(1)+'%': ''); tr.appendChild(tdSMA);
-			const tdSpy = document.createElement('td'); tdSpy.textContent=(Number.isFinite(row.spy_val)? (row.spy_val*100).toFixed(1)+'%': ''); tr.appendChild(tdSpy);
+			const tdPersist = document.createElement('td'); tdPersist.innerHTML = row.persistOK ? '<span class=\"badge ok\">2of3</span>' : ''; tr.appendChild(tdPersist);
 			const tdBin = document.createElement('td'); tdBin.textContent=(row.spy_bin||''); tr.appendChild(tdBin);
 			const tdRule = document.createElement('td'); tdRule.innerHTML = row.ruleOK4a ? '<span class=\"badge ok\">YES</span>' : ''; tr.appendChild(tdRule);
+			const tdF1 = document.createElement('td'); tdF1.textContent=(Number.isFinite(row.f1_over_prev)? fmtPct(row.f1_over_prev): ''); tr.appendChild(tdF1);
+			const tdS = document.createElement('td'); tdS.textContent=(Number.isFinite(row.s7)? row.s7.toFixed(2): (row.s7===''? '': 'N/A')); tr.appendChild(tdS);
+			const tdSf = document.createElement('td'); tdSf.textContent=(row.sgt||''); tr.appendChild(tdSf);
+			const tdSMA = document.createElement('td'); tdSMA.textContent=(Number.isFinite(row.sma)? (row.sma*100).toFixed(1)+'%': ''); tr.appendChild(tdSMA);
+			const tdR2 = document.createElement('td'); tdR2.innerHTML = row.rule2OK ? '<span class=\"badge ok\">YES</span>' : ''; tr.appendChild(tdR2);
 			tbody.appendChild(tr); certified++;
 		}
 		document.getElementById('certCount').textContent = `${certified} shown`;
