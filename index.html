@@ -74,6 +74,8 @@
 						<th>BB %b</th>
 						<th>Pct>200d</th>
 						<th>Rule</th>
+						<th>Market</th>
+						<th>R4a OK</th>
 					</tr></thead>
 					<tbody></tbody>
 				</table>
@@ -409,6 +411,9 @@
 			const tdBB = document.createElement('td'); tdBB.textContent=(Number.isFinite(row.bb)? row.bb.toFixed(2): ''); tr.appendChild(tdBB);
 			const tdSMA = document.createElement('td'); tdSMA.textContent=(Number.isFinite(row.sma)? (row.sma*100).toFixed(1)+'%': ''); tr.appendChild(tdSMA);
 			const tdRule = document.createElement('td'); tdRule.innerHTML = row.ruleOK ? '<span class="badge ok">RuleOK</span>' : ''; tr.appendChild(tdRule);
+			// Optional R4a summary fields if present in CSV
+			const tdMkt = document.createElement('td'); tdMkt.textContent = (row.spy_bin||''); tr.appendChild(tdMkt);
+			const tdR4 = document.createElement('td'); tdR4.innerHTML = (String(row.rule_4a).toLowerCase()==='true'||String(row.rule_4a)==='1') ? '<span class="badge ok">YES</span>' : ''; tr.appendChild(tdR4);
 			tbody.appendChild(tr); certified++;
 		}
 		document.getElementById('certCount').textContent = `${certified} shown`;
