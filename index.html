@@ -35,14 +35,14 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Forecast10 Dashboard <span class="small" style="margin-left:10px;"><a href="./index_preview_r4a.html" style="color:var(--accent); text-decoration:none;">R4a Preview</a></span></h1>
+		<h1>Forecast10 Dashboard</h1>
 		<div class="controls">
 			<label>
 				<span class="small">Filter symbol</span><br/>
 				<input id="symbolFilter" type="text" placeholder="e.g. AAPL, MSFT (optional)" />
 			</label>
 			<button id="applyBtn">Apply</button>
-			<span class="small" id="statusLine"></span>
+			<span class="small" id="statusLine"></span><span class="small" id="qcR4a" style="margin-left:10px;"></span>
 		</div>
 
 		<div class="grid">
@@ -65,7 +65,6 @@
 				<table class="table" id="actionTable">
 					<thead><tr>
 						<th style="text-align:left">Symbol</th>
-						<th style="text-align:left">Name</th>
 						<th>F10/C1 (%)</th>
 						<th>F10_T</th>
 						<th>A1_(T-1)</th>
@@ -75,6 +74,9 @@
 						<th>BB %b</th>
 						<th>Pct>200d</th>
 						<th>Rule</th>
+						<th>Market</th>
+						<th>R4a</th>
+						<th>Stop</th>
 					</tr></thead>
 					<tbody></tbody>
 				</table>
@@ -339,18 +341,7 @@
 		if (!(await headExists(url))) return null;
 		const df = await loadCSV(url);
 		const rows = [];
-		// load name map from nearest comparison table
-		let nameMap = new Map();
-		try {
-			let d = selectedDate;
-			let found = null;
-			for (let i=0;i<7;i++){
-				const test = `${APP_DATA_DIR}/comparison_table_${d}.csv`;
-				if (await headExists(test)) { found=test; break; }
-				const dt = new Date(Number(d.slice(0,4)), Number(d.slice(4,6))-1, Number(d.slice(6,8))); dt.setDate(dt.getDate()-1); d = ymd(dt);
-			}
-			if (found){ const cdf = await loadCSV(found); const cols = mapColumns(cdf); if (cols.name){ for (const rr of cdf.data){ const sym = String(rr.Symbol||rr.symbol||'').toUpperCase(); const nm = rr[cols.name]; if (sym) nameMap.set(sym, nm); } } }
-		} catch(e){}
+		// optional name mapping skipped (column removed)
 		for (const r of df.data){
 			const sym = String(r.symbol||r.Symbol||'').toUpperCase();
 			const ratio = toNum(r.f10_over_c1_x);
@@ -365,6 +356,10 @@
 			const a1pd = r.a1_prev_date || '';
 			const bb = toNum(r.bb_percent_b);
 			const sma = toNum(r.pct_above_sma200);
+			const spyBin = (r.spy_trend_bin===''||r.spy_trend_bin==null)? 'NA' : String(r.spy_trend_bin);
+			const r4aFlag = String(r.rule_4a||'').toLowerCase();
+			const r4a = (r4aFlag==='true' || r4aFlag==='1') ? 'Yes' : (r4aFlag===''? 'NA': 'No');
+			const stop = toNum(r.stop_loss_pct);
 			if (!sym || !Number.isFinite(ratio)) continue;
 			// Enforce production certification rule F10/C1 ≤ 1.03
 			if (!(ratio <= 1.03)) continue;
@@ -373,7 +368,7 @@
 			const growthNight = NaN;
 			// Production Rule OK (legacy): F10/C1 ≤ 1.03 AND F10/A1_(T-1) ≥ 1.05 AND BB %b ≥ 0.60
 			const ruleOK = (ratio <= 1.03) && (Number.isFinite(growth) && growth >= 1.05) && (Number.isFinite(bb) && bb >= 0.60);
-			rows.push({ sym, name: nameMap.get(sym)||'', ratio, growth, f10, a1p, f10d, a1pd, s7, sgt, bb, sma, ruleOK });
+			rows.push({ sym, ratio, growth, f10, a1p, f10d, a1pd, s7, sgt, bb, sma, ruleOK, spyBin, r4a, stop });
 		}
 		rows.sort((a,b)=> (isNaN(b.growth)?-1: b.growth) - (isNaN(a.growth)?-1: a.growth));
 		return rows;
@@ -410,10 +405,10 @@
     for (const r of rows){ if (r && r.sym && !seen.has(r.sym)){ seen.add(r.sym); deduped.push(r); } }
 		// Render ALL certified (viewer can sort)
 		let certified=0;
+		let spyNonEmpty=0, r4aYes=0, r4aNo=0, r4aNA=0, stopNonEmpty=0;
     for (const row of deduped){
 			const tr = document.createElement('tr');
 			const td0 = document.createElement('td'); td0.style.textAlign='left'; td0.textContent=row.sym; tr.appendChild(td0);
-			const tdName = document.createElement('td'); tdName.style.textAlign='left'; tdName.textContent=row.name||''; tr.appendChild(tdName);
 			const td1 = document.createElement('td'); td1.textContent=fmtPct(row.ratio); tr.appendChild(td1);
 			const td2 = document.createElement('td'); td2.textContent=(Number.isFinite(row.f10)? row.f10.toFixed(2): 'N/A'); if (row.f10d) td2.title = `F10 date ${row.f10d}`; tr.appendChild(td2);
 			const td3 = document.createElement('td'); td3.textContent=(Number.isFinite(row.a1p)? row.a1p.toFixed(2): 'N/A'); if (row.a1pd) td3.title = `A1 prev ${row.a1pd}`; tr.appendChild(td3);
@@ -423,9 +418,17 @@
 			const tdBB = document.createElement('td'); tdBB.textContent=(Number.isFinite(row.bb)? row.bb.toFixed(2): ''); tr.appendChild(tdBB);
 			const tdSMA = document.createElement('td'); tdSMA.textContent=(Number.isFinite(row.sma)? (row.sma*100).toFixed(1)+'%': ''); tr.appendChild(tdSMA);
 			const tdRule = document.createElement('td'); tdRule.innerHTML = row.ruleOK ? '<span class="badge ok">RuleOK</span>' : ''; tr.appendChild(tdRule);
+			const tdM = document.createElement('td'); tdM.textContent = row.spyBin || 'NA'; tr.appendChild(tdM);
+			const tdR4 = document.createElement('td'); tdR4.textContent = row.r4a || 'NA'; tr.appendChild(tdR4);
+			const tdStop = document.createElement('td'); tdStop.textContent = Number.isFinite(row.stop)? `${(row.stop*100).toFixed(1)}%` : (row.stop===''? 'NA':''); tr.appendChild(tdStop);
 			tbody.appendChild(tr); certified++;
+			if (row.spyBin && row.spyBin!=='NA') spyNonEmpty++;
+			if (row.r4a==='Yes') r4aYes++; else if (row.r4a==='No') r4aNo++; else r4aNA++;
+			if (Number.isFinite(row.stop)) stopNonEmpty++;
 		}
 		document.getElementById('certCount').textContent = `${certified} shown`;
+		const qc = document.getElementById('qcR4a');
+		if (qc) qc.textContent = `Market non-empty=${spyNonEmpty} · R4a Yes=${r4aYes} No=${r4aNo} NA=${r4aNA} · Stops=${stopNonEmpty}`;
 		enableSorting('actionTable');
 	}
 
