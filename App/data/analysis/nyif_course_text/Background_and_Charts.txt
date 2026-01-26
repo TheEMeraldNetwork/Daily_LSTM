@@ -1,0 +1,2562 @@
+Fundamentals
+of
+Technical Analysis
+
+Day 1
+Background and Charts
+
+
+Course objective
+
+• Learn how to apply technical analysis as a standalone
+
+trading methodology or as a supplement to fundamental
+analysis using tools that are based on price action and
+other technical principles.
+
+2
+
+
+Module 1
+
+Introduction
+
+3
+
+
+Learning objectives
+
+• Understand how technical analysis is an integral part of
+
+market analysis.
+
+• Technical analysis fits into the framework of investment
+
+analysis alongside fundamental analysis and
+quantitative analysis.
+
+• Understand what technical analysis is.
+
+4
+
+
+Investing
+
+• In simple terms, investors seek to buy something that they can sell
+
+later at a higher price.
+
+• The general theory of investing is no different than that of any other
+
+business.
+
+• Investors are buying stocks, bonds, commodities, options, foreign
+exchange and other financial instruments because they believe the
+price will increase or meet a specific financial goal.
+
+• Bonds may be bought for income.
+
+• Investors will usually buy other financial instruments with the goal of
+
+selling in the future at a higher price.
+
+5
+
+
+To Know What Everyone Knows Is To Know Nothing
+
+• This idea of “buy low and sell high” is appealing to many investors
+
+so there is significant competition for available profits.
+
+• To find profits, investors analyze available financial information.
+
+• Futurist George Gilder notes, “The source of all wealth is
+
+information.”
+
+• Successful investors all rely on an information edge.
+
+6
+
+
+Information Is Limited
+
+• All investors have access to financial statements and price history.
+
+• Income statement, balance sheet and statement of cash flows provide 156
+pieces of data that can be combined to generate 2,090,365 unique signals.
+
+• Some investors pursue more unique information.
+
+• Discussions with management can be useful despite legal limits on what
+
+management can say under Regulation FD.
+
+• Credit card data can show where consumers spend money and that can be
+
+used to find trends.
+
+• Satellite images of parking lots can offer insights into customer behavior.
+
+7
+
+
+Satellites Can Count Cars
+
+8
+
+
+Over Time, the Data Provides Insights
+
+9
+
+
+Studies Confirm Usefulness of the Data
+
+• Parking lot data is correlated with increases or decreases in same
+
+store sales.
+
+• Same store sales provide insights into earnings.
+
+• Hedge funds use the parking lot data to gain an edge on the
+
+earnings data.
+
+• Technical analysis tools should identify the actions of the large investors
+
+at hedge funds.
+
+10
+
+
+This Builds on the Difference
+Between a Stock and the
+Company
+
+11
+
+
+Many investors Focus on Value
+
+• Extensive efforts have been applied to understanding value.
+
+12
+
+
+But, Value Is Not Price
+
+Intrinsic value is an elusive concept. In general terms it is
+understood to be that value which is justified by the facts, e.g., the
+assets, earnings, dividends, definite prospects, as distinct, let us say,
+from market quotations established by artificial manipulation or
+distorted by psychological excesses.
+
+The market is not a weighing machine, on which the value of each
+issue is recorded by an exact and impersonal mechanism, in
+accordance with its specific qualities. Rather should we say that the
+market is a voting machine, whereon countless individuals register
+choices which are the product partly of reason and partly of
+emotion.
+
+- “Security Analysis” by Benjamin Graham and David Dodd
+
+13
+
+
+Shiller’s CAPE Shows Variability of Value
+
+14
+
+
+All Investors Are Trying to Understand the Same
+Equation
+
+P(x) = σ𝑖=1
+
+𝑧 ω ∗ σ𝑘=1
+
+𝑦
+
+ν
+
+where
+
+P(x) = the current market price of x
+
+ω = the current market sentiment related to x
+z = number of participants with an opinion on the
+sentiment of x
+ν = the current intrinsic value of x
+y = number of participants with an opinion on the
+intrinsic value of x
+
+15
+
+
+Market Prices Fluctuate Around Intrinsic Value
+
+• Sentiment determines whether the market price is above or below
+
+the intrinsic value.
+
+• Optimism pushes the price above the intrinsic value.
+
+• Pessimism pushes prices below the intrinsic value.
+
+• Technical analysis seeks to understand the nature of the prevailing
+
+sentiment.
+
+• Technical analysis begins with the understanding that the stock will move
+
+between overvalued and undervalued extremes driven by sentiment
+related to the company, the market and the economy.
+
+16
+
+
+The Truth About Value Investing
+
+P(x) = σ𝑖=1
+
+𝑧 ω ∗ σ𝑘=1
+
+𝑦
+
+ν
+
+• Value investors attempt to calculate a stock’s fair value.
+
+• They believe the market price will rarely reflect the fair
+
+value.
+
+• Value investors when buy when price is below fair value.
+
+• Buy when P < ν which means ω is low (bearish).
+
+• Value investors sell to realize a profit when price is above
+
+fair value.
+
+• Sell when P > ν which means ω is high (bullish).
+
+17
+
+
+Value Investing Depends on Sentiment
+
+• Sentiment is the broadest possible definition of technical
+
+analysis.
+
+• Technical analysis ignores value and focuses solely on the price
+
+action.
+
+18
+
+
+Formal definition
+
+• Technical analysis is a method of forecasting the direction of
+
+prices through the study of past market data, primarily price and
+volume.
+
+The study of market action based on four premises
+
+Market action
+discounts the
+future
+
+Prices move in
+trends
+
+History repeats in
+a general manner
+
+Human behavior is
+at least somewhat
+consistent over
+time
+
+19
+
+
+The study of technical analysis
+
+• In general terms, technical analysts:
+
+• Study charts to uncover patterns
+
+• Apply indicators to identify trends
+
+• Use relative strength to identify potential outperformers
+
+• Study cycles to spot potential turning points in advance
+
+20
+
+
+Many fundamental ratios incorporate price into
+calculations
+
+• Price-to-earnings (P/E) ratio is obviously dependent on
+
+price.
+
+• Same is true of P/S, P/B, P/CF, etc…
+
+• Dividend yield is determined by price.
+
+dividend amount ($) / current price ($)
+
+• The state of fundamental ratios (overvalued or
+
+undervalued) are understood in terms that are similar  for
+technical indicators (overbought or oversold).
+
+21
+
+
+Fundamental and Technical Indicators Often
+Disagree
+
+Rising dividend yield shows increasing value.
+
+As prices rise, value
+investors find the stock
+more attractive.
+
+22
+
+
+Assumptions of Technical Analysis
+
+• Price is determined by supply and demand.
+• Price discounts everything and the price of the security contains all
+
+the information that’s available about that security.
+
+• Prices move in trends.
+
+• Trends can exist in varying time frames from intraday to multi-year.
+
+• History repeats itself .
+
+• This is because human nature is unchanging -- reactions to internet stocks
+
+in 2000 is similar to reactions to tulip bulbs in 1637.
+
+• Emotional decisions are affected by previous emotional decisions.
+• This explains technical concepts like support and resistance, for example,
+
+and behavioral finance concepts like loss aversion.
+
+23
+
+
+TA Can Be Applied To Free and Liquid Markets
+
+• To apply TA:
+
+• Markets must be free and open, meaning free from
+
+price manipulation and open to informed participants.
+
+• Liquid so buyers and sellers can immediately execute
+
+orders.
+
+• Market data must be widely available.
+
+• Assets are substitutable which means an analysis of the
+stock is applicable to all shares of a stock. This is also
+called fungibility.
+
+24
+
+
+Why Technical Analysis Works
+
+• Technical analysis works because prices reflect all available
+information and because many market participants make
+decisions based on emotions.
+
+• Stock market participants include:
+
+• Traders who are leveraged and will sell on a small decline.
+• Long-term value investors accumulating positions over time.
+• Long-term value investors with positions they believe they can’t sell
+
+because they’ll face taxes.
+
+• Individual investors with an emotional attachment to the company.
+• High frequency traders buying and selling to benefit from market moves.
+• Investors who believe the stock represents a special situation.
+• Random buyers and sellers.
+
+25
+
+
+To Know What Everyone Knows Is to Know Nothing
+
+https://ssrn.com/abstract=3144223
+
+26
+
+
+Most Traders Already Know How to Win
+
+• Richard Dennis (Turtle Trader):
+
+“I always say that you could publish my trading rules in the
+newspaper and no one would follow them. The key is consistency
+and discipline. Almost anybody can make up a list of rules that are
+80% as good as what we taught our people. What they couldn’t do is
+give them the confidence to stick to those rules even when things
+are going bad.”
+
+From Market Wizards by Jack Schwager
+
+27
+
+
+Turtle Trading Legend
+
+• Successful traders Richard Dennis and William Eckhardt held the
+turtle experiment to prove that anyone could be taught to trade.
+
+• By the early 1980s, Dennis had turned an initial stake of less than
+
+$5,000 into more than $100 million.
+
+• Dennis believed anyone could be taught to trade while Eckhardt
+
+countered that Dennis had a special gift that allowed him to profit
+from trading.
+
+28
+
+
+The Experiment
+
+• Dennis would find a group of people to teach his rules to, and then
+
+have them trade his ideas with his money.
+
+• The training would last for two weeks and could be repeated over
+and over. He called his students "turtles" after recalling turtle
+farms he had visited in Singapore and deciding that he could grow
+traders as quickly and efficiently as farm-grown turtles.
+
+• Dennis placed an ad in The Wall Street Journal and thousands
+
+applied. Only 14 traders were accepted.
+
+• No one knows the exact criteria Dennis used, but the process
+
+included a series of true-or-false questions.
+
+29
+
+
+Example Turtle Test Questions
+
+1. The big money in trading is made when one can get long at lows
+
+after a big downtrend.
+It is not helpful to watch every quote in the markets one trades.
+
+2.
+3. Others' opinions of the market are good to follow.
+4.
+
+If one has $10,000 to risk, one ought to risk $2,500 on every
+trade.
+
+5. On initiation one should know precisely where to liquidate if a
+
+loss occurs.
+
+30
+
+
+Example Turtle Test Questions
+
+1. The big money in trading is made when one can get long at lows
+
+after a big downtrend. FALSE
+
+2.
+
+It is not helpful to watch every quote in the markets one trades.
+TRUE
+
+3. Others' opinions of the market are good to follow. FALSE
+
+4.
+
+If one has $10,000 to risk, one ought to risk $2,500 on every
+trade. TRUE
+
+5. On initiation one should know precisely where to liquidate if a
+
+loss occurs. TRUE
+
+31
+
+
+Experiment Results
+
+• After training, accounts were funded with $500,000 to
+
+$2,000,000 in 1983.
+
+• Over the next four years, the group delivered an annual average
+
+compound rate of return of 80%.
+
+32
+
+
+Module 2
+
+Constructing and
+Interpreting Charts
+
+33
+
+
+Learning Objectives
+
+• Identify different chart types including line charts, bar charts,
+candlestick charts, point and figure charts and other styles.
+
+• Integrate chart patterns and behavioral finance.
+
+• Apply important charting concepts including trend, support,
+
+resistance, volume and gaps.
+
+34
+
+
+Patterns Can Be Seen In All Chart
+Styles
+
+• Line charts include the least amount of information but just as
+
+useful as other styles.
+
+• Bar charts represent each time period as a bar and add
+
+information about the size of the range (high – low) which depicts
+a measure of volatility.
+
+• Candlesticks add a level of detail absent from bar charts by
+
+coloring the candle to show whether the close was up or down
+relative to the open.
+
+• Point and figure charts ignore time and show only price action,
+
+focusing on the trend.
+
+35
+
+
+Different Styles Show the Same Patterns
+
+Line
+
+Line
+
+Candle
+
+Bar
+
+P&F
+
+36
+
+
+Which Chart Is Best?
+
+• The answer to any “which is best?” question is always:
+
+• The best one is the one you are most comfortable with.
+
+• Or, the one your client or boss prefers.
+
+• All chart styles can be used productively and sometimes
+
+profitably.
+
+• Profitability will require a disciplined approach.
+• To be profitable, a complete trading plan will be needed
+defining entries and exits; the plan must be followed
+with discipline, taking all trades; and the plan must be
+followed for an extended period of time.
+
+37
+
+
+Most Popular Charting Styles on Bloomberg
+
+Americas
+
+Europe
+
+Line
+
+Bar
+
+Candlestick
+
+Log
+
+51%
+
+32%
+
+14%
+
+3%
+
+55%
+
+20%
+
+21%
+
+4%
+
+Asia
+
+41%
+
+14%
+
+43%
+
+1%
+
+MESA
+
+48%
+
+20%
+
+31%
+
+1%
+
+Log charts provide a long-term perspective.
+
+Most chart views (69%) are of historical data while 31% are intraday data.
+
+Source: New Frontiers in Technical Analysis (2011) by Paul Ciana, CMT.
+
+38
+
+
+Log Charts Provide a Long-Term Perspective
+
+Arithmetic scale
+
+Log scale
+
+39
+
+
+Line Chart
+
+40
+
+
+Charts are fractal
+
+• Patterns are visible in any time frame.
+
+• The same principles apply in any time frame.
+
+• Trends are often easier to spot in higher time frames
+
+(monthly, for example).
+
+• Prices tend to exhibit mean reversion in the short term
+
+and trending behavior in the long run.
+
+• Indicators can be applied in any time frame.
+
+• This applies to any type of chart style.
+
+41
+
+
+Patterns are visible in any time frame
+
+One-minute chart
+
+Monthly chart
+
+Uptrend
+with break
+
+Daily chart
+
+Uptrend
+
+Uptrend
+
+42
+
+
+Bar charts
+
+• The length of the bar shows the struggle between bulls and bears
+
+during the day.
+
+• The high shows the maximum power of bulls.
+
+• The low shows the maximum power of bears.
+
+43
+
+
+Bar chart (with volume)
+
+44
+
+
+Construction of a candlestick chart
+
+• Each candle shows the price action for one time period (day, week,
+
+etc.).
+
+• The candle consists of a rectangle defined by the open and close
+
+and wicks or shadows which show the high and low. Body is
+colored in if the close < open and clear if close > open.
+
+45
+
+
+Comparison of candlestick charts with other chart
+types
+
+• The body of the candlestick adds information not visually available
+
+in other charts.
+
+• The color of the body (black/white or red/green) shows
+
+whether bulls or bears had more power in that time period.
+
+• Candles form patterns quickly, just 1-3 candles in many cases.
+
+• This allows for quick reaction to changes in the trend
+
+• There are no real disadvantages to candlesticks since they include
+
+the same information a bar chart has
+
+• Like a bar chart, candlestick patterns should be confirmed with
+
+volume or other indicators
+
+46
+
+
+Traditional candlestick chart
+
+47
+
+
+P&F chart
+
+Uses X for up
+trends, O for
+downtrends
+
+48
+
+
+P&F charts
+
+• Xs signify up moves; Os signify down moves.
+• Construction based on box size and reversal size.
+• Box size is the number of points per X or O.
+
+• Often set to $1.
+• Higher values are less sensitive to trend reversals.
+• Lower values are more prone to reverse.
+
+• Reversal size is usually 3.
+
+• When price reverses by 3, start a new column.
+• If up trend, and price moves down by $3, switch from a
+
+column of Xs to Os.
+
+• If down trend and price rises $3, switch from Os to Xs.
+
+49
+
+
+Constructing a P&F chart
+
+Prices are in a down trend and the following market action unfolds:
+
+High
+
+Low
+
+15.50
+
+12.90
+
+12.20
+
+11.70
+
+12.60
+
+10.90
+
+10.95
+
+10.75
+
+14.10
+
+11.95
+
+15.99
+
+13.80
+
+15.10
+
+12.00
+
+Day 1
+
+Day 2
+
+Day 3
+
+Day 4
+
+Day 5
+
+Day 6
+
+Day 7
+
+Box size is $1 and reversal size is $3.
+
+50
+
+
+Day 1
+
+• Prices are in a downtrend which means we are in a column of Os.
+
+So, we look if the price action dictates more Os.
+
+Day 1 High = 15.50 Low = 12.90
+
+We fill in Os to $13.
+
+51
+
+
+Day 2
+
+Day 2 High = 12.20 Low = 11.70
+
+We fill in Os to $12.
+
+52
+
+
+Day 3
+
+Day 3 High = 12.60 Low = 10.90
+
+We fill in Os to $11.
+
+53
+
+
+Day 4
+
+Day 4 High = 10.95 Low = 10.75
+
+Price move is small and no
+changes are needed.
+
+54
+
+
+Day 5
+
+Day 5 High = 14.10 Low = 11.95
+
+There is little downside
+movement but, the upside
+move allows us to draw 3
+Xs.
+
+55
+
+
+Day 6
+
+Day 6 High = 15.99 Low = 13.80
+
+We fill in Xs to 15.
+
+56
+
+
+Day 7
+
+Day 6 High = 15.90 Low = 12.00
+
+There is a downside
+reversal with 3 Os.
+
+57
+
+
+Over time, the chart develops more detail
+
+58
+
+
+Generally P&F patterns are based on breakouts
+
+59
+
+
+Typical P&F chart: Signals are rare and useful
+
+60
+
+
+Example: Zoom
+
+61
+
+
+Example: Lyft
+
+62
+
+
+Example: GE
+
+63
+
+
+Other chart types
+
+• While line, bar, candles and P&F are the most popular,
+
+other charts are used.
+
+• Other charts are used by traders seeking an edge.
+• Some traders believe they can gain an edge by using
+
+information that other traders are ignoring.
+
+• Note that this might not be correct since we need
+
+trends to actually profit.
+
+• Among the less widely-used chart styles are Renko charts
+
+and Ichomoku clouds.
+
+64
+
+
+Renko
+
+• Ignores time. Can be used for trend following.
+
+• Useful for end of day, or weekly, trend-following strategies.
+
+• A renko chart is constructed by placing a brick in the next
+column once the price surpasses the top or bottom of the
+previous brick by a predefined amount (similar to the
+reversal amount in P&F charts).
+
+• White bricks are used when the direction of the trend is
+
+up.
+
+• Red bricks are used when the trend is down.
+
+65
+
+
+Renko chart: Gold $10 per box
+
+Can wait for 3-
+box reversal or
+trade each
+reversal
+
+66
+
+
+Renko chart: Gold $5 per box
+
+67
+
+
+Ichimoku clouds
+
+68
+
+
+Ichimoku is based on moving averages and is
+generally as accurate as other MA strategies
+
+69
+
+
+Full Ichimoku Cloud Chart
+
+Five components to a full cloud chart
+
+70
+
+
+Full Ichimoku Cloud chart
+
+Five components to a full cloud chart
+
+
+Five Components of the Chart
+
+• Turning Line – midpoint of the high and low of the last 9 sessions.
+• Standard Line - midpoint of the high and low of the last 26 sessions.
+• Cloud Span A – midpoint of turning line and standard line shifted
+
+forward 26 bars forward.
+
+• Cloud Span B - midpoint of the high and low of last 52 sessions shifted
+
+26 bars forward.
+
+• The Lagging Line – the price line (close) shifted back 26 bars.”
+
+72
+
+
+Interpreting Ichimoku Clouds
+
+• Prices above the cloud are bullish.
+
+• Prices below the cloud are bearish.
+
+• Prices in the cloud are bullish if they came from the bullish zone.
+
+• Prices in the cloud are bearish if the came from the bearish zone.
+
+• Historically thick clouds after a run in prices might signal an
+
+imminent trend change.
+
+• The lagging line crossing the cloud is the main signal of a trend
+
+change.
+
+73
+
+
+Example of using the lagging line as a sell signal
+
+Sell signal came 5.5% below high and
+well before bear market was obvious
+
+74
+
+
+Not All Signals Are That Accurate
+
+• Signals from the lagging line are delayed by 26 weeks
+
+• Although they appear timely on historical charts, you
+
+cannot act on them in real time
+
+• In this case, the action would have been taken in June
+
+when SPY was almost 11% below its high
+
+• Signals from the lagging line are good, but not as good as
+
+they seem to be on historic charts because of the lag
+
+75
+
+
+Signals Often Lag the Market
+
+By the time you knew the signal occurred,
+SPY was 29% above its low
+
+76
+
+
+Despite limitations, clouds are still useful (turning line &
+standard line)
+
+
+To Focus On Signals Prices Can Be Turned Off
+
+IWM
+
+78
+
+
+Most Important, Real-Time Information Comes
+From Two Lines
+
+• Buy and hold only when the turning line is above the
+standard line wins about 48% of the time (vs 61% for
+random buy)
+
+• Using SPY, data since May 1, 1999 to April 30, 2019
+• Assumes $2.50 per trade in commissions and costs
+• Average trade open  18 trading days
+
+Daily
+
+Weekly
+
+Avg annual
+gain
+
+Max
+loss
+
+Avg annual gain
+
+Max loss
+
+Ichimoku cloud system
+
+1.5%
+
+-7.5%
+
+2.7%
+
+-8.5%
+
+SPY random buy with 18-
+day exit
+
+2.3%
+
+-27.9%
+
+2.2%
+
+-17.2%
+
+79
+
+
+Current state of the market
+
+• Ichimoku cloud status for:
+
+• SPY
+• DIA
+• IWM
+• Gold
+• Oil
+• Other indexes
+
+80
+
+
+Important charting concepts for all chart styles
+
+• Trends
+
+• Support and resistance levels
+
+• Gaps
+
+• Volume
+
+81
+
+
+Trends
+
+Price will always move in one of three directions: up, down
+or sideways
+
+• Up trend = a series of higher lows and higher highs
+
+• Down trend = a series of lower highs and lower lows
+
+• Sideways Trend = neutral price action with nearly
+
+parallel highs and lows
+
+Heuristic of representativeness and saliency bias are at
+work
+
+82
+
+
+Trend
+
+• The primary direction of price change is usually easy to determine.
+
+Down
+
+Volume
+diverging
+
+Sideways
+
+Up
+
+Volume
+confirming
+
+83
+
+
+Uptrend
+
+• A trend with prices moving higher. An up trend may represent the
+
+primary trend or correction in a primary downtrend
+
+84
+
+
+Downtrend
+
+• A series of lower highs and lower lows
+
+85
+
+
+Sideways trend or consolidation
+
+• A trading pattern in which the price movement is sideways rather
+than in either an up trend or a down trend. Breakouts might be in
+either direction and intermediate term price action can be helpful.
+
+86
+
+
+Trendline
+
+• An up trendline connects lows; a down trendline connects highs.
+• Need at least two touches, ideally three. More touches and greater
+
+length add to significance.
+
+87
+
+
+Acceleration can be seen in trendlines
+
+88
+
+
+When is a trendline broken? Rules vary by trader
+
+• Intraday prices can break the trendline and signal time to act.
+
+• Can wait for a close below (or above) the trendline.
+
+• Can require a close below (or above) the trendline for 2 or more
+
+consecutive days.
+
+• Can require a move of 1% or 3% or x% from the trendline.
+
+• Each approach has advantages and disadvantages.
+
+89
+
+
+Trendline breaks
+
+Stricter requirements can keep a trade open longer.
+
+90
+
+
+Waiting for confirmation can increase gains
+
+91
+
+
+Signals can come well after price reversals
+
+92
+
+
+Examples of trendline violations
+
+Same concepts apply in downtrends.
+
+93
+
+
+Determining validity of trend breaks
+
+• General guidelines can be developed.
+
+• Is the trend broken on an intraday or closing basis?
+
+• Closing basis is more important.
+
+• Is the trendline steep or gradual?
+
+• Steep trends tend to be less significant.
+
+• What is the timeframe of the chart?
+
+• Longer term trends tend to be more significant.
+
+• Is the break on heavy volume?
+
+• Some analysts use volume to confirm the break.
+
+94
+
+
+Real world: trendline breaks are not always clean.
+Here we have a trendline break and a sell signal
+
+95
+
+
+Market did not turn down after that trendline break
+
+96
+
+
+New trendlines can always be drawn but that is not
+a guarantee the next break will be a valid trend
+reversal
+
+97
+
+
+Trendlines are ultimately subjective
+
+• Subjective tools can provide different results for different
+
+traders.
+
+• They can also lead to different interpretations of the same
+
+chart by the same trader.
+
+• Trendlines tend to be prone to whipsaw trades.
+
+• A whipsaw trade is a trade that is quickly reversed.
+• For example, a price decline breaks a trendline and
+
+prices then quickly resume their rally.
+
+98
+
+
+Minimizing whipsaws
+
+• Require time confirmation.
+
+• Delay action until the break is confirmed by 1 or more
+
+subsequent closes.
+
+• 3% Rule.
+
+• Wait to act until prices are at least 3% away from the
+
+break.
+
+• Confirmation from indicators.
+
+• Confirm break with moving averages or indicators.
+
+99
+
+
+Current trend?
+
+100
+
+
+Does more data add anything to trendline analysis?
+
+101
+
+
+Example: CAC 40 daily
+
+102
+
+
+Example CAC 40 weekly
+
+103
+
+
+Important charting concepts
+
+• Trends
+• Support and resistance levels
+• Gaps
+• Volume
+
+104
+
+
+Support and resistance
+
+Support: an area where buyers come into the market. Indicates demand
+
+exceeds supply.
+
+Resistance: an area where sellers become more active. Indicates supply
+
+exceeds demand.
+
+Examples of anchoring bias because support and resistance prices are
+
+where a significant number of traders anchored expectations.
+
+105
+
+
+Support and resistance can combine to form a
+trading range
+
+Resistance
+
+Support
+
+106
+
+
+Market actions determines trading strategy
+
+Buy upside
+breakout
+
+107
+
+
+Resistance in Action
+
+Reported to be a
+$4 billion trade.
+
+Closed after second
+reversal.
+
+108
+
+
+These concepts also apply to economic data
+because supply and demand constrain many data
+series
+
+109
+
+
+Important charting concepts
+
+• Trends
+• Support and resistance levels
+• Gaps
+• Volume
+
+110
+
+
+Gaps
+
+• An area on the chart where no trades occur. Called “windows” on a
+
+candlestick chart.
+
+111
+
+
+Gaps follow news
+
+• Under EMH, gaps show areas where news is announced and it
+
+immediately incorporated into the market price.
+
+• For an up gap, the opening price will be above the previous day’s
+high and the low for the day will remain above the previous day’s
+high.
+
+• For a down gap, the open will be below the previous day’s low and
+
+the day’s high will remain below the previous day’s low.
+
+112
+
+
+Gaps signal important market action
+
+• If news explains the gap, traders are signaling new
+
+opinions on the stock.
+
+• An up gap shows enthusiasm and a down gap shows
+
+pessimism.
+
+• The news could be real (such as earnings) or a rumor
+
+(such as a buyout or regulatory action).
+
+• If there is no news, the gap is an emotional response and
+
+could indicate the market is irrational.
+
+• At times, gaps can show changes in market structure as
+
+in 1999 when day traders created gaps.
+
+113
+
+
+Gap on earnings news for Intel
+
+Many traders are
+tempted to buy the gap.
+This is the idea that
+stocks are on sale after a
+drop.
+
+114
+
+
+Breakaway gap
+
+• One of four types of gaps.
+• This describes a gap that “breaks away” from a consolidation
+
+range.
+
+• Breakaway gaps are usually the start of a new trend. This is
+
+especially true when confirmed by volume.
+
+• Demonstrates saliency bias.
+
+115
+
+
+Gaps can be obvious on charts, but do not always
+prove to be tradable
+
+116
+
+
+Exhaustion Gap
+
+• A gap that comes after a strong move in one direction. It signals
+
+the end of the trend, a loss of momentum, and a likely reversal in
+the short-term.
+
+• Buyers are acting on overconfidence and over-optimism heuristics.
+
+117
+
+
+Runaway Gaps
+
+• Runaway gaps are also called measuring gaps, and are caused by
+
+increased interest in the stock.
+
+• Combines overconfidence and over-optimism.
+
+118
+
+
+Common gap
+
+• Gaps which occur “routinely” or are “common” in trading.
+• Chart below highlights several common gaps with arrows. In this
+
+case, low volume could be the cause of the gaps but the chart
+demonstrates gaps are common in this stock and do not identify
+important information.
+
+• This is common for ADRs or ETFs of foreign indexes.
+
+119
+
+
+Example: TSLA
+
+120
+
+
+Other Factors to Consider: Buy or Short?
+
+121
+
+
+TSLA Broke Down
+
+122
+
+
+Important charting concepts
+
+• Trends
+• Support and resistance levels
+• Gaps
+• Volume
+
+123
+
+
+Volume analysis is a personal choice
+
+• Volume was, at one time, indispensable information.
+
+• This was when market makers on the exchange floor
+
+handled all trades in a stock.
+
+• Changes in market structure make volume less
+
+meaningful.
+
+• In particular, HFT and off floor trading make it almost
+
+impossible to know what the true volume is.
+
+• High frequency trading (HFT) replaces market
+
+making to a degree and their activity to obtain shares
+to deliver for trades inflates volume.
+
+• Off floor trading is reported but the purpose of the
+activity is unknown and it isn’t known how much is
+related to market making activity.
+
+124
+
+
+Volume analysis can still provide insights
+
+125
+
+
+Volume can show conviction of traders
+
+The lack of a pullback indicates this was a low risk entry point.
+
+126
+
+
+Volume analysis can be subjective
+
+127
+
+
+High volume can show sentiment shifts, but volume
+tends to be high on one day selloffs
+
+128
+
+
+General guidelines for volume
+
+• It take volume to push prices higher.
+
+• Buyers are needed for price gains but prices can fall on
+
+high or low volume.
+
+• Volume tends to taper off during trends.
+
+• This is normal and tells us little.
+
+• Volume tends to spike near bottoms.
+
+• Usual pattern is capitulation low followed by rally on
+
+high volume.
+
+• Volume, by itself, does not provide tradable information.
+
+129
+
+
+Module 3
+
+Chart Patterns
+
+130
+
+
+Learning Objectives
+
+• Identify chart patterns on bar charts and candlestick
+
+charts so that trading decisions can be made based solely
+on the chart.
+
+131
+
+
+Chart patterns
+
+• In the early 1900s, traders identified recurring patterns in charts.
+• In some ways, this is analogous to the identification of constellations.
+• The patterns, in both cases, connect dots that are subjective to the
+
+viewer.
+
+• Chart patterns are often tied to logical explanations.
+
+• This provides an appearance of rationality but can also provide an
+
+appearance of pseudoscience.
+
+• Beginning in the 1990s, patterns were subjected to testing.
+
+• This required strict definitions of patterns.
+• Results were mixed to negative.
+
+• But, patterns can still be useful.
+
+• Even if the pattern has a low win rate, the disciplined approach can
+
+avoid large losses.
+
+132
+
+
+Patterns can be broadly categorized
+
+• Topping patterns.
+• Bottoming patterns.
+• Continuation patterns.
+
+Before cataloguing patterns, let’s start with an in-depth review of
+the concept using a specific pattern.
+
+133
+
+
+Head and Shoulders Top
+
+• Perhaps the most famous pattern.
+
+• Widely viewed as a precursor of major declines.
+
+• Derives its name from the distinctive shape of the top.
+• The chart shows the rough outline of an individual’s
+
+head and shoulders.
+
+134
+
+
+Head and Shoulders
+
+• A pattern consisting of three peaks. The first and third are the
+
+shoulders, and the middle (second) is the head. Provides a price
+target with a measured move.
+
+135
+
+
+Left shoulder and head are a normal uptrend
+
+As prices move in an uptrend, they form a series of higher highs and higher lows.
+The LS and head are simply the two last highs of a normal uptrend.
+
+136
+
+
+The right shoulder is a failure in the trend
+
+After the head forms, price is still in a defined uptrend. The RS fails to make a
+new high, warning that trend is ending.
+
+137
+
+
+The neckline shows fear of missing out giving way
+to fear
+
+Pullbacks in uptrends tend to be viewed as buying opportunities. This explains
+support after the LS and head form. A break of that level means buyers over the
+time the pattern formed all show losses and their selling pushes prices down.
+
+138
+
+
+All patterns use the same price targeting technique
+
+Assume a sense of symmetry exists in the market. The height of the pattern
+(head to neckline) is used to project the price target.
+
+139
+
+
+If volume is considered…
+
+• Trades should not be excluded because volume pattern is
+
+not ideal.
+
+• Volume may not include all trading.
+
+• Relative volume is more meaningful than absolute
+
+volume.
+
+• Volume could be normalized as a comparison to its MA.
+• This would show whether volume is relatively higher or
+
+lower when compared to recent activity.
+
+140
+
+
+Topping patterns
+
+• Head & Shoulder Top
+
+• V – Top
+
+• Double Top
+
+• Triple Top
+
+• Rectangular Top
+
+• Saucer Top
+
+141
+
+
+Head & Shoulder example
+
+142
+
+
+V-top
+
+143
+
+
+V-tops are more common in futures markets
+
+144
+
+
+Psychology of futures differs from stocks
+
+• In stocks, fear rises as prices fall.
+• In futures, fear rises as prices rise.
+
+• Fear of missing out on large gains builds as prices rally.
+• Anecdotal evidence from gold market: as gold reaches
+new highs, public participation in the market increases.
+• Advertising for gold buyers increases in media while
+local markets see increases in “gold bought here” ads.
+
+• The price rise results in a rush of buyers and a V-top.
+
+• Commodities tend to form V-tops and broad bottoms
+while stock markets tend to form broad tops and V-
+bottoms.
+
+145
+
+
+Double Top
+
+• A pattern where resistance is tested, followed by a down side
+
+breakout
+
+146
+
+
+Double Top
+
+Roughly an M pattern.
+
+147
+
+
+Triple top
+
+148
+
+
+Rectangle (top/bottom/consolidation)
+
+• A price pattern marked by a relatively narrow range bound by
+
+support and resistance
+
+149
+
+
+Rectangles Show Various Biases
+
+• Some investors are making decisions based on the status
+
+quo effect and are doing nothing.
+
+• They may be overconfident in their analysis of the
+
+fundamentals.
+
+• This will always be the case.
+
+• Others are anchoring on recent price action.
+
+• They may be overly optimistic or pessimistic.
+• Excessive optimism is shown with buying at support.
+• Excessive pessimism leads to selling at resistance.
+
+• Often, it will take news to break the relative balance.
+
+150
+
+
+Saucer top or rounding top
+
+151
+
+
+More important than the name is the sense of
+symmetry to develop price targets
+
+152
+
+
+Remember the patterns are not precise and
+multiple targets are possible
+
+153
+
+
+Bottoming patterns
+
+• V-Bottom
+
+• Double Bottom
+
+• Triple Bottom
+
+• Saucer Bottom
+
+• Rectangle Bottom
+
+• Head & Shoulder Bottom
+
+154
+
+
+V-bottom
+
+155
+
+
+Double Bottom
+
+• A pattern where support is tested, followed by an upside breakout.
+
+Roughly, a “W” pattern.
+
+Investors anchor on price level of first bottom as a
+buy point.
+
+156
+
+
+Triple bottom
+
+The anchoring at point 3 should be more visible and prices may
+not reach the previous lows as buyers jump in.
+
+157
+
+
+Patterns may not be precise
+
+158
+
+
+Inverse head and shoulders
+
+• A bullish reversal pattern.
+
+159
+
+
+Inverse Head and Shoulders
+
+• Trend is driving prices down as investors overcome loss aversion
+
+to sell.
+
+• This is a powerful driver of trends and explains why downtrends are faster
+
+than uptrends.
+
+• Sellers take action all at once while buyers will buy slowly.
+
+• Each new low brings in more sellers, all with orders to sell
+
+relatively quickly.
+
+• The reversal develops in a manner similar to the H&S top with a
+
+normal trend giving way to reversal.
+
+160
+
+
+Continuation patterns
+
+• Falling Wedge
+
+• Rising Wedge
+
+• Flag
+
+• Pennant
+
+• Ascending Triangle
+
+• Symmetrical Triangle
+
+• Descending Triangle
+
+161
+
+
+Flags are continuation patterns
+
+162
+
+
+Pennants are similar to flags, except sloped
+
+163
+
+
+Triangle (Ascending)
+
+• A bullish continuation pattern. Marked by support which
+
+continues rising and resistance which remains at the same level.
+Indicates buyers are entering earlier on pullbacks.
+
+164
+
+
+Triangle (Symmetrical)
+
+• Also called a coil, a symmetrical triangle is a continuation pattern
+found in either an uptrend or a downtrend. It’s characterized by a
+narrowing trading range. Resistance trends downward while
+support trends upward.
+
+165
+
+
+Triangle (Descending)
+
+• A bearish pattern representing a period of period of distribution.
+Although the descending triangle may provide reversal after an
+uptrend, it is most often a continuation formation.
+
+166
+
+
+Falling Wedge
+
+• A bullish pattern characterized by a decreasing range trending
+
+downward
+
+167
+
+
+Rising Wedge
+
+• A bearish formation that starts with a wide range that narrows. As
+
+the range narrows, prices rise.
+
+168
+
+
+Miscellaneous patterns
+
+• Important features of patterns include
+
+• Island reversal
+
+• Breakouts
+
+• Failed patterns
+
+• Narrow range days
+
+• Wide range days
+
+169
+
+
+Island reversal top
+
+Gap up followed by gap down, leaving an “island” at the top.
+
+170
+
+
+Island reversal bottom in Dow during 1991 Russian
+coup
+
+171
+
+
+Breakout
+
+• At the completion of a pattern, prices “break out”
+• A breakout could be to the upside or downside
+
+172
+
+
+Failed Pattern
+
+• An indicator pointing to a change that does not materialize
+
+The most powerful signal is a failed signal.
+
+173
+
+
+Narrow-Range Day
+
+• A day when the range (Range = High – Low) is less than the range
+
+of the previous day
+
+A narrow range often occurs before an increase in volatility
+
+174
+
+
+Wide-Range Day
+
+• A day when the range (Range = High – Low) is greater than the
+
+range of the previous day
+
+WR Day
+
+W
+
+A wide range often occurs before a decrease in volatility
+
+175
+
+
+Strategy for Trading Charts
+
+• Identify opportunity based on the pattern.
+• Determine profit potential and risk.
+• Consider using stop orders to enter positions.
+
+• Plan exit.
+
+• Can exit at target or initial risk point.
+• Can use a trailing stop.
+
+176
+
+
+Example: Building a Trading Plan
+
+Can enter a trade to but at a new high, or short a
+break of support. Risk the midpoint of the range
+(about $263).
+
+177
+
+
+Initial Break Followed By a Rally
+
+178
+
+
+A Strong Move; A Difficult Trade
+
+179
+
+
+Example: Buy, Sell or Pass?
+
+180
+
+
+A Month Later: New Trade?
+
+181
+
+
+Consolidating: Strategy?
+
+182
+
+
+Next Move?
+
+183
+
+
+Potentially Attractive to Value Investors
+
+184
+
+
+Line Chart: DIA Buy, Sell or Pass?
+
+185
+
+
+Followup
+
+186
+
+
+Weekly Line Chart
+
+187
+
+
+Next Trade?
+
+188
+
+
+Followup
+
+189
+
+
+Reading candlestick charts
+
+• Candlestick patterns often consist of one to three candles.
+
+• Because they form in such a short time, they should only be used
+
+for short-term analysis.
+
+• Patterns are often given descriptive names.
+
+• Three black crows, tweezers and homing pigeon are examples.
+• Three black crows are three down days that follow an uptrend.
+• Tweezers form when two bars have the same high or low but the
+
+trend reverses.
+
+• Homing pigeon is a narrow range bar with a down close following
+
+a wide range bar with a down close.
+
+• Like with traditional patterns, names are not as important as the
+
+general outline.
+
+• Three consecutive down days after an uptrend signals a reversal.
+• Support or resistance indicate the direction of the trend could
+
+change.
+
+• Narrow range forecasts increased volatility.
+
+190
+
+
+General characteristics of patterns
+
+• Size of the body can offer insights about the strength of the price
+
+move.
+
+• Long candles can show strength of traders’ convictions.
+• Short candles show indecision.
+
+• Color of the candle shows direction of trend.
+
+• Black or red candles are bearish.
+
+• Size of the wicks can provide insights.
+
+• The longer wick could be thought of as pushing the candle.
+• Long tail below the body is pushing up, for example.
+
+191
+
+
+Six basic candlesticks: Long, Short, Doji
+
+Gravestone is bearish
+Dragonfly is bullish
+
+192
+
+
+Six basic candlesticks: Long Shadows, Long upper
+shadow only, Long lower shadow only
+
+Indecision
+
+Bearish
+
+Bullish
+
+193
+
+
+• The last bar is a long body and indicates the close was below the open.
+• Bearish implications for next day.
+
+194
+
+
+• The next day, a small body indicates indecision.
+• The lower wick is noticeably longer.
+
+• Bullish implications for next day.
+
+195
+
+
+• The next day closed lower, but volatility continued to fall as indicated
+
+by the small size of the candle body.
+• The wicks appear to be almost equal.
+
+• There are no real implications for next day’s direction, but, the
+
+narrowing ranges indicate volatility is likely to increase. Consider
+trading the breakout.
+
+196
+
+
+• This chart jumps ahead two days and shows the breakout did occur, to
+
+the downside.
+
+• The long lower wick forecasts limited downside but the large body
+
+reveals strength in the down move. Odds favor further downside after
+the breakout and series of bearish days.
+
+197
+
+
+• This chart jumps further ahead and shows
+
+• The long lower wick forecasts limited downside but the large body
+
+reveals strength in the down move. Odds favor further downside after
+the breakout and series of bearish days.
+
+198
+
+
+Analysis of candles tends to be subjective
+
+• Traders often seek to identify patterns on charts.
+
+• This can be useful if applied consistently and with discipline since many
+
+patterns do show a small trading edge.
+
+• However, because the patterns can be defined, analysis could be
+
+quantitative.
+
+• A bearish three line strike pattern, for example, consists of four
+
+candles:
+• Today:
+
+199
+
+
+Bearish three line strike
+
+• Best candlestick pattern in backtesting.
+• Prices close higher within 3 days 81% of the time.
+
+• Can be defined as
+
+Close > Open and Close > Close[-1] and Close [-1] < Open [-1]
+and Close [-1] < Close [-2] and Close [-2] < Open [-2]
+and Close [-2] < Close [-3] and Close [-3] < Open [-3]
+
+200
+
+
+Popular bullish patterns: Hanging Man
+
+Note the long longer wick is the distinguishing feature. This
+pattern appears in an uptrend.
+
+201
+
+
+Popular bullish patterns: Hammer
+
+Again, the long longer wick is the distinguishing feature. This
+pattern appears in an downtrend.
+
+202
+
+
+Popular bearish patterns: Shooting Star
+
+The long longer wick is the distinguishing feature. This pattern
+appears in an uptrend.
+
+203
+
+
+Popular patterns: Harami
+
+• Long candle at the end of a trend followed by a narrow range day
+
+and then a breakout day.
+
+204
+
+
+Popular patterns: Engulfing Candles
+
+• This is a large candle indicating a wide ranging day that reverses
+
+the direction of the previous day.
+
+205
+
+
+Popular patterns: Abandoned Baby
+
+• Can be bullish or bearish.
+• Consists of a doji that marks a short-term bottom or top.
+
+206
+
+
+Example: TSLA
+
+207
+
+
+Followup
+
+208
+
+
+Example: NFLX
+
+209
+
+
+Followup
+
+210
+
+
+Example: GE
+
+211
+
+
+Followup
+
+212
+
+
+Pattern Recognition on Bar Charts: What Works?
+
+http://thepat
+ternsite.com/
+BestPatterns.
+html
+
+213
+
+
+Candlestick Patterns: What Works?
+
+http://thepatternsite.com/CandlePerformers.html
+
+214
+
+
+Trading Charts
+
+• Remember that bar charts or line charts offer longer term
+
+opportunities than candlesticks.
+
+• Line charts can offer an uncluttered longer term perspective.
+
+• Chart analysis should be used as part of a strategy.
+
+215
+
+
+Technical Analysis
+
+216
+

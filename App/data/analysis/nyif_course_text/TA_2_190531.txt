@@ -1,0 +1,5812 @@
+Fundamentals
+of
+Technical Analysis
+
+Day 2
+Practical Technical Theories
+
+
+Day 2: Focus on the Practical
+
+• Testing technical indicators.
+• Beyond momentum: sentiment and breadth indicators.
+• Relative strength analysis (the momentum anomaly).
+• Technical theories:
+
+• Dow theory.
+• Cycle analysis.
+• Elliott wave theory.
+• Fibonacci sequence.
+• Intermarket analysis.
+
+2
+
+
+Module 4
+
+Technical Indicators
+
+3
+
+
+Learning objectives
+
+• Understand the most popular indicators on Bloomberg:
+
+• Moving averages
+• RSI indicator
+• Stochastics
+• Rate of change (RoC) indicator
+• MACD
+• Bollinger bands
+
+Source: New Frontiers in Technical Analysis (2011) by Paul Ciana, CMT
+
+4
+
+
+Most Popular Indicators on Bloomberg
+
+% of Charts Using
+
+Purpose
+
+RSI
+
+MACD
+
+Bollinger Bands
+
+Stochastics
+
+DMI
+
+Volume at Time
+
+44%
+
+22%
+
+12%
+
+9%
+
+5%
+
+3%
+
+Reversal
+
+Strength of trend
+
+Strength of trend
+
+Reversal
+
+Direction of trend
+
+Liquidity
+
+Source: New Frontiers in Technical Analysis (2011) by Paul Ciana, CMT
+
+5
+
+
+Moving Averages (MAs)
+
+• A moving average (MA) is simply an average that moves.
+
+• A 200-day MA uses the last 200 days of data.
+
+• Any time period could be used. The average could use
+
+daily, weekly, monthly or intraday data.
+
+• To calculate a daily MA, the oldest data point is discarded
+
+each day and the newest data point is added to the
+calculation.
+
+• The data used in the calculation “moves” with the market
+
+action.
+
+6
+
+
+Why Use a Moving Average?
+
+• MAs are used to identify the direction of the trend.
+
+• By definition,
+
+• When prices are above the MA, the trend is up.
+• When prices are below the MA, the trend is down.
+
+• With a long-term MA, you are guaranteed to be on the
+
+right side of major trends.
+
+7
+
+
+8
+
+
+9
+
+
+Whipsaw trades
+
+• Whipsaw trades are trade signals that are quickly
+
+reversed.
+
+• They usually result in small gains or losses.
+
+• There can be several whipsaw trades in rapid
+
+succession.
+
+• Whipsaws increase trading costs and add frustration.
+
+• Can make it difficult to follow an MA trading strategy.
+
+10
+
+
+To address whipsaw trades, traders searched for an
+edge
+
+• The standard MA is the simple MA which adds up the data
+
+and divides by the number of data points.
+
+• Each data point is assigned equal weight.
+
+• Weighted MA calculations assign different importance to
+
+data points.
+
+• Exponential MAs are front-weighted and assign more
+
+weight to most recent data.
+
+• Back-weighted MAs assign more weight to older data.
+• Triangular MA emphasizes data in the middle.
+• Adaptive MA varies the weighting using a formula to
+
+assign multipliers.
+
+11
+
+
+Exponential MA (EMA)
+
+• EMAs use a weighting factor (WF) found with the following
+
+formula, using a 10-day EMA as an example.
+
+WF = (2 / (Time periods + 1) ) = (2 / (10
+
++ 1) ) = 0.1818 (18.18%)
+
+(Close * WF) + (EMA(previous day) * (1-WF))
+
+• If close today is $11 and the previous EMA was $10,
+
+($11 * 0.1818) + ($10 * (1-0.1818))
+= $1.9998 + ($10 * 0.8182)
+= $1.9998 + $8.182 = $10.1818
+
+12
+
+
+Back-weighted MA
+
+• Can also overweight older data relative to more recent
+
+data.
+
+• This minimizes the impact of short-term reversals that
+
+often occur after large price spikes.
+
+• For example, in a 10-day WMA, each of the first 9 days
+could be weighted by 10.125% and the most recent day
+carries just 8.875% of the weight.
+
+• In a simple MA, each day would carry a 10% weighting.
+
+13
+
+
+Other MAs
+
+• Triangular: over-weights data in the center.
+• Particularly useful for finding cycles.
+
+• Geometric: uses the nth root of the product of n data
+
+points.
+
+• Not particularly useful for trading but useful to
+
+combine varying fundamental data series.
+
+• Adaptive: adjusts to data and tends to deliver an excessive
+number of whipsaw trades in range-bound markets but
+works well in trending markets.
+
+14
+
+
+15
+
+
+Which type of MA is best?
+
+• Defining best as the most profitable.
+
+▪ Testing the 200-day MA on S&P 500 from 1928 to April 2018,
+
+ignoring trading costs.
+
+16
+
+
+Can any MA beat the market?
+
+• Test all MAs lengths from 5 days to 252 days.
+
+• 61, 504 individual tests.
+
+• Enter and exit rules can be asymmetric (for example, exit
+on break below 5-day MA and enter on break above 10-
+day MA).
+
+• This test includes all MA crossovers, including the “golden
+cross” of 50-day rising above 200-day, “death cross” of
+50-day falling below 200-day and other popular
+combinations.
+
+17
+
+
+Data mining MAs
+
+• Best strategy provided 76% of the buy and hold gains and 56% of
+
+combinations were profitable.
+
+• Most importantly, 54% of the combinations reduced risk.
+
+• This is the value of MAs.
+
+• They reduce risk by exiting during market declines.
+
+• This indicates they could be combined with another
+
+indicator to manage risk.
+
+18
+
+
+Because MAs cannot beat the market, traders
+developed more indicators
+
+• Trend - Moving Averages, MACD, ADX, Parabolic.
+
+• Momentum - RSI, Stochastics.
+
+• Volatility - ATR, Bollinger Bands.
+
+• Volume - OBV, Money Flow.
+
+• Breadth – advance-decline line, McClellan Oscillator.
+
+• Sentiment – VIX, Surveys.
+
+19
+
+
+Indicators Address Problems with MAs
+
+• All MAs will lag the market action.
+
+• This leads to delayed signals.
+
+• All MAs will suffer from whipsaws.
+
+• This leads to multiple losing trades.
+
+• A typical win rate for MA strategies is about 40%.
+
+20
+
+
+Learning objectives
+
+• Most popular indicators on Bloomberg
+
+• Moving averages
+• RSI indicator
+• Stochastics
+• Rate of change (RoC) indicator
+• MACD
+• Bollinger bands
+
+Source: New Frontiers in Technical Analysis (2011) by Paul Ciana, CMT
+
+21
+
+
+Most indicators are designed to identify momentum
+
+• Momentum in a stock price is the change in its price.
+
+• Can be calculated over any time frame.
+
+• Most general formula:
+
+P / Po – 1
+
+Price divided price (some time ago) minus 1 to
+
+express it as a percentage
+
+• As an example, that formula could be used to compare the
+
+current close with the close six months ago.
+
+22
+
+
+Many indicators attempt to improve that formula
+
+• Traders are always seeking an edge.
+
+• This led to innovations in moving averages and that
+
+same strategy is applied to indicators.
+
+• Most indicators will use the closing prices and attempt to
+improve the timeliness or effectiveness of the signal in
+some way.
+
+• RSI seeks to improve on the fact that simple momentum is
+
+unbounded and therefore signals will not be clear.
+
+• This indicator addresses perceived infectiveness of the
+
+simple formula.
+
+23
+
+
+RSI
+
+• A momentum oscillator that measures recent price movement to
+
+determine when conditions are overbought or oversold.
+
+• Developed by J. Welles Wilder in his book, New Concepts in
+
+Technical Trading Systems (Trend Research, 1978).
+
+• Uses a series of EMAs to find RSI.
+• The formula for RSI is:
+
+100 – [ 100 ÷ (1 + { U ÷ D})] = RSI
+
+where:
+
+U = average of days closing higher (up) over a set period
+D = average of days closing lower (down) over a set period
+
+(the set period used in most RSI calculations is 14 days)
+
+• Ranges from 0 to 100 with values below 30 oversold and above 70
+
+overbought.
+
+• Also interpreted with divergences and trendline breaks or pattern
+
+analysis.
+
+24
+
+
+RSI example
+
+25
+
+
+Traditional interpretation of RSI
+
+• Overbought and oversold levels are defined as:
+
+• Above 70 is overbought which is interpreted to mean
+
+avoid buying or sell.
+
+• Below 30 is oversold which is interpreted to mean the
+
+stock is due for a bounce and is a buy candidate.
+
+• Wilder also explained that RSI can be interpreted with
+
+chart patterns, trendlines or divergences.
+• This is subjective and difficult to test.
+
+• Proof in his book consisted of several charts showing well-
+
+selected examples
+
+26
+
+
+Testing RSI as an OB indicator
+
+• Testing an overbought RSI with default parameters:
+
+• Buy when RSI > 70
+• Sell after a predefined # of days
+• Test on S&P 500 stocks
+• Deduct $5 in commissions for each trade
+
+• Using traditional interpretation, expect to see a loss since
+RSI > 70 identifies a time when the stock is overbought
+and is expected to decline.
+
+27
+
+
+Testing an overbought RSI(14)
+
+Days after moving
+above 70
+
+% wins
+
+10
+
+22 (1 month)
+
+65 (3 months)
+
+130 (6 months)
+
+252 (12 months)
+
+52.7%
+
+57.6%
+
+62.5%
+
+66.6%
+
+70.3%
+
+Average
+trade
+size
+
+2.3%
+
+3.8%
+
+8.1%
+
+14.2%
+
+23.6%
+
+Test results from July 1, 2000 to June 30, 2015 (15 years). Results
+are after commissions of $5 per trade.
+
+Rules:
+- Buy when RSI > 70
+- Sell after X days. No other exit rules.
+
+28
+
+
+Results for overbought signals with 14-day calculation
+
+• On average, stocks go up after they become overbought.
+
+• Result confirms fact that stocks trend and high
+
+momentum is likely to be a sign of a trend as a reversal.
+
+• Remember that the standard interpretation is to sell when
+
+RSI moves above 70.
+
+• Using RSI to avoid overbought stocks would result in
+
+missing almost all big winners.
+
+29
+
+
+Testing an oversold RSI(14)
+
+• We find stocks also go up after RSI becomes oversold.
+
+Rules:
+- Buy when RSI < 30
+- Sell after X days. No other exit rules.
+
+30
+
+
+RSI(14) conclusions based on testing
+
+• RSI(14) does not provide information that allows you to
+
+trade effectively in the short-term.
+
+• Selling stocks with high RSI, the traditional application
+
+of the indicator, will underperform the market.
+
+• When RSI is low, stocks also tend to rally indicating
+
+RSI(14) offers little, if any, useful information.
+
+• RSI(14) should not be used as an overbought/oversold
+
+indicator.
+
+31
+
+
+Can RSI be fixed?
+
+• Short-term traders can use a shorter calculation period; using less
+
+than 5 bars in the calculation makes the indicator more
+responsive.
+
+RSI(2) is a popular short-term indicator and that can be tested.
+
+32
+
+
+For reference, RSI(14)
+
+Testing an oversold RSI(2)
+
+Days after
+moving
+below 10
+
+10
+
+22 (1 month)
+
+65 (3 months)
+
+130 (6
+months)
+
+252 (12
+months)
+
+% wins
+
+56.1%
+
+57.7%
+
+62.0%
+
+65.4%
+
+Avera
+ge
+trade
+size
+
+1.2%
+
+2.2%
+
+5.6%
+
+11.4%
+
+68.3%
+
+23.2%
+
+Test results from October 1, 1997 to October 1, 2017 (20 years).
+Results are after commissions of $5 per trade.
+
+Rules:
+- Buy when RSI < 10
+- Sell after X days. No other exit rules.
+
+33
+
+
+More tests of RSI(2)
+
+Rule
+
+% wins
+
+Average trade
+size
+
+RSI(2) < 5, 10 days
+
+RSI(2) < 2, 10 days
+
+RSI(2) > 90, 10 days
+
+RSI(2) > 95, 10 days
+
+RSI(2) > 99, 10 days
+
+Random entry, 10 days
+
+55.2%
+
+55.3%
+
+53.3%
+
+53.1%
+
+53.5%
+
+55.3%
+
+1.4%
+
+2.0%
+
+0.75%
+
+0.91%
+
+2.63%
+
+0.92%
+
+34
+
+
+Conclusions on RSI
+
+• RSI shows little value as a mean reversion indicator.
+
+• This is the standard use for the indicator.
+
+• Extreme values of RSI(2) can provide trade signals.
+
+• RSI(2) < 5 and RSI(2) > 99 provides a tradable edge.
+
+35
+
+
+Learning objectives
+
+• Most popular indicators on Bloomberg
+
+• Moving averages
+• RSI indicator
+• Stochastics
+• Rate of change (RoC) indicator
+• MACD
+• Bollinger bands
+
+Source: New Frontiers in Technical Analysis (2011) by Paul Ciana, CMT
+
+36
+
+
+Stochastic Oscillator
+
+• A widely used momentum oscillator popularized by George Lane
+that shows the location of the close relative to the high-low range
+over a set number of periods:
+
+%K = (Current Close - Lowest Low)/(Highest High - Lowest Low) *
+100
+%D = 3-day SMA of %K
+
+• Traded with crossovers (%D is faster than %K so buy when %D >
+
+%K and sell when %D < %K).
+
+• Or, use at extremes with overbought above 80 and oversold less
+
+than 20.
+
+37
+
+
+Stochastic oscillator example
+
+38
+
+
+Market psychology explains the stochastic
+
+• The high of any period shows the maximum power of bulls
+
+during that time. The low of that period shows the
+maximum power of bears.
+
+• Stochastic measures the capacity of bulls or bears to close
+
+the market near the upper or lower edge of the recent range.
+
+• When prices rally, markets tend to close near the high. If
+
+bulls can lift prices during the day but can't close them near
+the top, Stochastic turns down. It shows that bulls are
+weaker than they appear and gives a sell signal.
+
+• Daily closes tend to occur near the lows in downtrends.
+
+When a bar closes near its high, it shows that bears can only
+push prices down during the day but cannot hold them
+down. An upturn of Stochastic shows that bears are weaker
+than they appear and flashes a buy signal
+
+39
+
+
+Buy and sell signals generated from the Stochastic
+
+• Overbought and Oversold:
+
+• Use 80/20 as key levels
+
+• Can wait for crossover after the indicator becomes
+
+overbought or oversold.
+
+• Alternatively, don’t buy when Stochastic is overbought,
+and don't sell short when it is oversold. This rule filters
+out some bad trades.
+
+40
+
+
+Trading with the stochastic
+
+• Divergences: often called “the most powerful buy and sell
+
+signals”
+
+• A bullish divergence occurs when prices fall to a new
+
+low, but Stochastic traces a higher bottom than
+during its previous decline. When Stochastic turns up
+from its second bottom, it’s a strong buy signal. The
+best buy signals occur when the first bottom is below
+20 and the second above it.
+
+• A bearish divergence occurs when prices rally to a
+new high, but Stochastic traces a lower top than
+during its previous rally. As soon as Stochastic turns
+down from the second top, it gives a sell signal. The
+best sell signals occur when the first top is above 80
+and the second below.
+
+41
+
+
+Signals are not reliable on daily chart
+
+42
+
+
+Weekly chart looks more useful
+
+43
+
+
+Test results – daily data
+
+Rule
+
+% wins
+
+Average trade
+size
+
+Crossover when under 20,
+10 days
+
+Crossover at anytime, 10
+days
+
+Crossover when over 80, 10
+days
+
+Random entry, 10 days
+
+54.2%
+
+54.4%
+
+54.1%
+
+55.3%
+
+0.72%
+
+0.56%
+
+0.43%
+
+0.92%
+
+Daily data does not beat a random entry
+
+44
+
+
+Test results – weekly data
+
+Rule
+
+% wins
+
+Average trade
+size
+
+Crossover when under 20,
+hold 2 weeks
+
+Crossover at anytime, hold 2
+weeks
+
+Crossover when over 80,
+hold 2 weeks
+
+Random entry, hold 2 weeks
+
+54.2%
+
+53.8%
+
+51.5%
+
+55.3%
+
+0.91%
+
+0.45%
+
+0.13%
+
+0.92%
+
+Weekly data does not beat a random entry
+
+45
+
+
+Testing divergences on SPY
+
+• On daily chart, since 2000:
+
+• Bullish divergences resolve to the upside 58.9% of the
+
+time.
+
+• Bearish divergence short trades are winners about 40%
+
+of the time.
+
+• On weekly chart, since 2000:
+
+• Bullish and bearish divergences both result in losses.
+
+• Trading rules: divergence exists for at least 5 bars and the
+
+trade is closed 4 weeks after the signal.
+
+• Bottom line: divergences are not tradable.
+
+46
+
+
+Learning objectives
+
+• Most popular indicators on Bloomberg
+
+• Moving averages
+• RSI indicator
+• Stochastics
+• Rate of change (RoC) indicator
+• MACD
+• Bollinger bands
+
+Source: New Frontiers in Technical Analysis (2011) by Paul Ciana, CMT
+
+47
+
+
+Rate of Change (ROC)
+
+• This is a simple momentum indicator.
+
+• Compares price to the price some time ago:
+
+P / Po
+
+• Can be expressed as a percentage:
+((P / Po) – 1 )* 100.
+
+• Often used as the basis of relative strength calculations.
+• Can be used as a standalone indicator.
+• Can be used as part of an momentum strategy.
+
+48
+
+
+Absolute Momentum
+
+• Calculate 1-year ROC
+
+• If > 0, buy. If < 0, hold cash or alternative investment like AGG.
+
+1974 through March 2015. ACWX = MSCI All Country World Index ex-US (ACWX). AGG = Barclays
+Capital U.S. Aggregate Bond Index. Source: Dual Momentum Investing: An Innovative Strategy for
+Higher Returns with Lower Risk, a 2014 book by Gary Antonacci
+
+49
+
+
+A long track record
+
+• Antonacci attributes this idea to
+
+“Some a Posteriori Probabilities in Stock Market
+Actions” (Alfred Cowles with Herbert E. Jones),
+reprinted in Econometrica (July 1937), 5(3): 280–294.
+
+• Antonacci applies this work to asset classes only:
+
+• US stock market averages
+• International stock market averages
+• Sectors
+• Bonds
+• Commodity indexes
+
+50
+
+
+ROC can spot unsustainably fast moves (bubbles)
+
+51
+
+
+Markets can remain irrational longer than you can
+remain solvent
+
+52
+
+
+Also Applies to Futures
+
+53
+
+
+Long Trades
+
+54
+
+
+Short Trades Are Also Profitable
+
+55
+
+
+Can Also Be Used With a Simple 20-day ROC
+
+56
+
+
+Long Trades: Long When 20-day ROC > 0
+
+57
+
+
+Short Trades: Short When 20-day ROC < 0
+
+58
+
+
+ROC is profitable to trade
+
+59
+
+
+Learning objectives
+
+• Most popular indicators on Bloomberg
+
+• Moving averages
+• RSI indicator
+• Stochastics
+• Rate of change (RoC) indicator
+• MACD
+• Bollinger bands
+
+Source: New Frontiers in Technical Analysis (2011) by Paul Ciana, CMT
+
+60
+
+
+MACD Indicator
+
+• More formally, the Moving Average Convergence-Divergence
+
+indicator.
+
+• It’s a momentum indicator that uses two moving averages (MAs).
+
+• Shows the convergence and divergence of the MAs.
+
+• Originally developed in the late 1970s when technical analysts
+were focused on finding new ways to use exponential moving
+averages (EMAs).
+
+• The responsiveness of the EMA to the price action was considered a key to
+
+developing timely signals.
+
+61
+
+
+Calculating MACD: Add MAs to Prices
+
+Uptrend when
+the fast MA is
+above the slow
+MA.
+
+62
+
+
+Calculating MACD: Find the MACD Line
+
+Subtract the value of the 26-period
+MA from the value of the 12-period
+MA.
+
+Value above zero
+indicates an uptrend.
+
+Value below zero indicates
+slow MA above fast MA.
+
+63
+
+
+Calculating MACD: Add the Signal Line
+
+The signal line is
+a 9-period MA of
+the MACD line.
+
+Sell when MACD crosses below signal line.
+
+Buy when MACD crosses
+above signal line.
+
+64
+
+
+Calculating MACD: Add the Histogram
+
+Histogram is found by
+subtracting MACD line from
+the signal line.
+
+Buy signal when fast
+line is above slow line.
+
+65
+
+
+MACD Basics
+
+• Trade signals generated by crossovers of the MACD line and the
+
+signal line, which is the MA of the MACD line.
+• Can also be applied with divergence analysis.
+
+• Divergences should work based on logic.
+• If MACD is falling while prices are rising, traders are not working hard
+
+enough to sustain the uptrend.
+
+• If MACD is rising while prices are falling, traders are working hard to stop
+
+the decline, and the downtrend should end soon.
+
+66
+
+
+Test Results, Average for Stocks in S&P 500
+
+Long when MACD is
+bullish
+
+% wins
+
+Daily
+
+Weekly
+
+S&P 500 B&H
+
+39.6%
+
+39.0%
+
+N/A
+
+Average
+annual
+return
+
+12.0%
+
+13.6%
+
+5.2%
+
+Maximum
+drawdown
+
+88%
+
+84%
+
+56%
+
+Test results March 1, 1999 to March 1, 2019 (20 years). Results are after
+commissions of $5 per trade.
+
+Rules:
+- Buy when MACD histogram > 0.
+- Sell when MACD histogram < 0.
+
+67
+
+
+Test Results for SPY ETF
+
+Long when MACD is
+bullish
+
+% wins
+
+Daily
+
+Weekly
+
+S&P 500 B&H
+
+41.0%
+
+43.8%
+
+N/A
+
+Average
+annual
+return
+
+Maximum
+drawdown
+
+-1.9%
+
+2.1%
+
+5.2%
+
+67%
+
+27%
+
+56%
+
+Test results from March 1, 1999 to March 1, 2019 (20 years).
+Results are after commissions of $5 per trade.
+
+Rules:
+- Buy when MACD histogram > 0.
+- Sell when MACD histogram < 0.
+
+68
+
+
+Monthly MACD
+
+52.9% wins, annualized gain
+4.7% (vs. 5.2%) with 16.3%
+drawdown.
+
+69
+
+
+Is MACD Worth Using?
+
+• Monthly or weekly MACD can be used to reduce risk.
+
+• Stop buying stocks, or increase cash when MACD on major market
+
+averages is bearish.
+
+• Can also add put options when MACD is bearish.
+
+• As a standalone indicator, it is not tradable on daily or weekly
+
+data.
+
+• Monthly data could be used as a complete, long-only trading strategy.
+
+70
+
+
+Learning objectives
+
+• Most popular indicators on Bloomberg
+
+• Moving averages
+• RSI indicator
+• Stochastics
+• Rate of change (RoC) indicator
+• MACD
+• Bollinger bands
+
+Source: New Frontiers in Technical Analysis (2011) by Paul Ciana, CMT
+
+71
+
+
+Bollinger Bands
+
+• Bands drawn 2 standard deviations above and below a 20-
+
+period moving average.
+
+• A measure of volatility where volatility decreases as Bands
+
+narrow and expands as Bands widen.
+
+• In theory, two standard deviations should contain 95% of
+
+the data points.
+
+• In practice, the Bands contain about 90% of the price
+
+action.
+
+• This is useful to know since it tells us a break of the
+
+Bands is unusual and relatively rare.
+
+72
+
+
+Bollinger Bands
+
+73
+
+
+Interpretation
+
+• Per Bollinger,
+
+• High volatility begets low volatility and vice versa.
+
+• Some traders expect reversals at Bands.
+• Buy at lower Band, sell at upper Band.
+
+• Some traders expect continuation on a break of a Band.
+• Buy on a break of the upper Band, short breaks of the
+
+lower Band.
+
+• This is especially true in commodities.
+
+74
+
+
+Can be used as a trend following strategy. Shown
+below: crude oil, Bands = 16 weeks (80 days)
+
+75
+
+
+A strategy for futures
+
+• Futures are ideal for technical traders because they are
+
+largely technical markets.
+
+• Many traders in these markets use only technicals and
+
+ignore the fundamental data.
+
+• Futures are liquid and are leveraged which can boost
+
+returns.
+
+76
+
+
+Entry and exit rules
+
+• Use Bollinger Bands with parameters set to  80 days, 2
+
+standard deviation.
+
+• Open long position when close > upper Band.
+• Close long when close < 80-day MA.
+• Open short position when close < lower Band.
+• Close short when close > 80-day MA.
+
+77
+
+
+Position sizing
+
+• Fixed percentage risk sizing algorithm, risking 5% of the
+
+account on any trade.
+
+• With a $100,000 account, risk is 5%, or $5,000, on any
+
+trade.
+
+• Example, a buy signal in gold. Gold is at $1,200 and the
+
+MA is at $1,175. The MA is the exit signal.
+
+• For gold contracts, each $1 move is a $100 change in
+
+value and the MA is $25 below the entry, so $2,500 is at
+risk per contract.
+
+• $5,000 risk allows for trading 2 contracts.
+
+78
+
+
+For testing, eight contracts are used
+
+• Crude oil
+• Copper
+• Cotton
+• US dollar futures
+
+• Sugar
+• Cattle
+• Five-year Treasuries
+
+79
+
+
+System results with equity curve filter
+
+80
+
+
+Detailed system report
+
+System averaged 10.3% a year
+over 20 years with an account
+size of about $60,000.
+
+81
+
+
+Which Indicator Is Best?
+
+• After reviewing and testing various indicators, it’s
+
+reasonable to ask which one is best.
+
+• The answer is, to use the one or two that a trader believes
+
+work the best.
+
+• Most indicators do not hold up to testing.
+
+• Most indicators provide redundant information.
+
+• This is why just one or two is all that is needed.
+
+82
+
+
+Indicators Turn and Reach Extremes At the Same Time
+
+83
+
+
+Academic Research Shows Indicators Work
+Sometimes
+
+• An Anatomy of Trading Strategies by Conrad & Kaul; The
+Review of Financial Studies, Volume 11, Issue 3, 1 July
+1998, Pages 489–
+519,https://doi.org/10.1093/rfs/11.3.489
+
+“In this article we use a single unifying framework to
+analyze the sources of profits to a wide spectrum of return-
+based trading strategies implemented in the literature. We
+show that less than 50% of the 120 strategies implemented
+in the article yield statistically significant profits and,
+unconditionally, momentum and contrarian strategies are
+equally likely to be successful.”
+
+84
+
+
+Detailed findings
+
+• A momentum strategy is usually profitable at the medium
+
+(3- to 12-months) horizon.
+
+• This is a trend following approach and is also called
+
+relative strength.
+
+• A countertrend strategy nets statistically significant profits
+
+at long horizons, but only during the 1926–1947
+subperiod.
+
+• This was a trading range and demonstrates oscillator
+based strategies have the potential to work at times.
+
+Source: An Anatomy of Trading Strategies by Conrad & Kaul; The Review of
+Financial Studies, Volume 11, Issue 3, 1 July 1998, Pages 489–
+519,https://doi.org/10.1093/rfs/11.3.489
+
+85
+
+
+Countertrend strategies worked from 1926 to 1947
+
+86
+
+
+Module 5
+Other Technical Indicators
+
+A FINANCIAL TIMES COMPANY
+
+87
+
+
+Learning Objectives
+
+• Sentiment (CBOE volatility index (VIX), surveys, insider
+
+buying and selling).
+
+• Breadth (advance decline, % stocks above a moving
+
+average).
+
+88
+
+
+Sentiment Indicators Take the Pulse of Market Participants
+
+• When the market moves to an extreme, analysts usually
+
+attribute it to fear or greed.
+
+• Fear increases in bear markets.
+• Greed dominates in bull markets.
+
+• Sentiment indicators attempt to measure the level of fear
+
+and greed.
+
+• Extremes in sentiment are expected to occur at market
+
+turning points.
+
+89
+
+
+Sentiment Indicators
+
+• Sentiment indicators measure whether various groups feel bullish
+
+or bearish about the markets.
+
+• Some sentiment indicators are based on polls:
+
+• American Association of Individual Investors (AAII) Sentiment
+
+Survey.
+
+• Investors Intelligence Advisors Sentiment reports.
+
+• Others are calculated:
+• Put/Call ratio.
+• VIX.
+• Margin debt.
+• Short Interest Ratio.
+
+90
+
+
+Interpreting Sentiment
+
+• Sentiment is a contrary indicator.
+
+• When there are too many bulls, there aren’t many
+
+investors left to buy and prices should be near a top.
+
+• Too many bears indicates many investors have taken
+losses and there should be reduced selling pressure.
+
+• Extremes in sentiment indicators often mark important
+
+turning points in the markets.
+
+91
+
+
+Cautions Regarding Surveys
+
+• Watch what investors do rather than what they say.
+
+• Investors may say they are bearish but be buying. Their
+
+buying is more important than their statements.
+
+• Surveys have small sample sizes.
+
+• Are often “opt in” surveys rather than a statistically
+
+valid sample.
+
+• Interpretation tends to be subjective.
+
+• Trades are signaled when it’s assumed too many
+
+investors are one side of a market.
+
+92
+
+
+VIX Index May Be the Most Widely Followed
+Sentiment Indicator
+
+• The VIX index is widely known ad the “fear index” because it rises
+
+when markets decline and fear rises.
+
+• It is calculated with the implied volatility of short-term option on
+
+the S&P 500.
+
+• VIX rises when put option buying increases and falls when call
+
+buying activity increases.
+
+93
+
+
+VIX Can Used to Forecast Expected Volatility
+
+• A VIX of 22 translates to implied volatility of 22% on the
+
+S&P 500. This means that the index has a 68.2%
+probability (one standard deviation) of trading within a
+range that’s 22% higher and lower than its current level
+over the next year
+
+• To find monthly volatility, divide VIX by square root of
+
+12 (3.464) to get 6.35%, in this example.
+
+22 / 3.464 = 6.35%
+
+• To find daily volatility, divide VIX by square root of 252
+
+(15.874) to get 1.39% in this example.
+
+22 / 15.874 = 1.39%
+
+94
+
+
+VIX Can Be Used to Calculate the Expected 30-day
+Move in the S&P 500
+
+• VIX is telling us whether or not
+
+traders expect volatility and can be
+used to find the expected price
+change over the next 30 days.
+
+• If VIX is 3.46, there is a 68.2%
+
+probability of a 1% price move over
+the next 30 days.
+
+95
+
+
+A Rough Approximation
+
+• As a rough guide, traders take the level for the VIX and
+divide it by 16 to get a quick estimate how large a daily
+move is expected in the stock market based on the level of
+the VIX.
+
+• Remember, expected daily move was found using the
+
+square root of 252 or about 15.87.
+
+• Traders can round this up to 16 for the denominator.
+
+• VIX of 16 would indicate S&P 500 index options are
+
+pricing in a daily price move of 1% (16/16).
+
+• VIX of 32 would be interpreted as the S&P 500 option
+market anticipating a daily price move of 2% (32/16).
+
+96
+
+
+VIX Is Reacting To the Market Action
+
+• High VIX is a response to high market movement.
+
+• Large selloffs generally lead to increased demand for
+
+put options and the increased demand results in higher
+prices leading to higher IV and higher VIX.
+
+• When markets rally, there isn’t usually an increased
+
+demand for call options. Therefore when the market is
+rising, there is rarely dramatically higher option
+purchasing.
+
+• This is why VIX drops as markets rise.
+
+97
+
+
+Volatility signals can be part of a market forecast
+
+• Rising VIX expect a selloff.
+• Declining VIX expect a rally.
+
+• Buy signals are given when VIX peaks.
+
+98
+
+
+Limits of VIX Spikes
+
+• No way to know in real time when VIX has actually
+
+topped.
+
+• Spikes are only visible in hindsight.
+
+• VIX strictly applies only to the S&P 500.
+
+• Calculated using data from options contracts on S&P
+
+500.
+
+• VIX does not apply to individual stocks.
+• The majority of stocks will move with the market trend
+
+but some will not.
+
+• The same is true for international stocks which have a
+
+high, but imperfect correlation to the S&P 500.
+
+99
+
+
+VIX Is Not a Timing Tool
+
+• There is no way to know when VIX is “high enough” to
+
+signal a market bottom.
+
+• VIX was not designed to be a timing tool.
+
+• It measures expected volatility.
+• Expected volatility is not a directional indicator.
+
+• To trade based on VIX a timing strategy would need to be
+
+developed (e.g., combine with an MA).
+
+• With a timing strategy, VIX could be used to trade the S&P
+
+500 but could not directly be applied to anything else .
+
+100
+
+
+VIX Flip Indicator Overcomes Limits of VIX
+
+• Approximates the values of VIX by taking a comparing the
+
+close to recent highs and lows.
+
+(Highest (Close, 22) - Low) / (Highest (Close, 22)) * 100
+
+Highest (Close, 22) = highest close in last 22 periods
+Low = current low
+
+101
+
+
+VIX and VIX Flip
+
+VIX Flip
+
+VIX
+
+102
+
+
+VIX Flip Is Versatile and Adaptable
+
+• VIX Flip can be applied to any stock or ETF.
+
+• Finds the right stock at the right time rather than
+
+providing a signal about the broad market.
+
+• Can be applied in any time frame (intraday, daily, weekly
+
+or monthly).
+
+• Can be incorporated into a complete trading strategy.
+
+103
+
+
+VIX Flip Trading Strategy
+
+• Add a 26-week moving average to the VIX Flip indicator.
+• Buy when indicator < MA and the stock and S&P 500
+
+are both above their 200-day MA.
+
+• Sell when indicator > MA or when the trade has been
+open 8 weeks and shows a loss or when the stock or
+S&P 500 closes below its 200-day MA.
+
+• The absolute value of the indicator is not important. The
+position of the indicator  relative to the MA is what we
+trade.
+
+104
+
+
+Rationale for Trading Rules
+
+• VIX Flip mirrors VIX so when VIX Flip is high, fear is
+
+high.
+
+• We want to buy when fear is high because we expect a
+
+bottom in price at that time.
+
+• Adding an MA to the indicator provides us with timing
+
+signals.
+
+• When VIX Flip > MA, fear is higher than average.
+• When VIX Flip falls below the MA, we have a signal that
+
+fear is subsiding.
+
+105
+
+
+Rationale for Trading Rules (continued)
+
+• Selling when the trade is open for 2 months without a
+profit frees up limited trading capital for additional
+opportunities.
+
+• Avoids dead money and also avoids large losses.
+
+• Using the MA filters means we are buying dips in long-
+
+term uptrends.
+
+• This is a quantified approach to the popular dip buying
+
+philosophy.
+
+106
+
+
+Can’t We Just Add an MA to the VIX?
+
+• Yes, but…
+
+• The buy signal from VIX and the MA would be
+
+applicable to the broad stock market.
+
+• Using VIX we would be getting a signal to buy or sell all
+
+500 stocks in the index at one time and that’s not
+practical for any individual trader.
+
+107
+
+
+Testing the VIX Flip Strategy
+
+• Using weekly data.
+
+• This is a time frame that any individual could find time
+
+to trade in.
+
+• More active traders could use daily data.
+
+• Applied to the individual stocks in the Dow Jones
+
+Industrial Average.
+
+• These are very liquid stocks which means options could
+
+be used.
+
+• Test period: 4/1/1998 through 4/30/2018.
+• Deduct $5 per trade for commissions and trading costs.
+
+108
+
+
+Test Results
+
+• Win rate: 47.6%
+
+• Average annual total return: 11.0%
+
+• S&P 500 average annual total return = 6.5%
+
+• Max drawdown: 11.6%
+
+• S&P 500 max drawdown = 55%
+
+• Invested about 35% of the time so traders can use other
+
+strategies the rest of the time.
+
+109
+
+
+With Variations of the MA Filter
+
+% Wins Average Annual
+
+VIX Flip with 200-day MA 47.6%
+43.5%
+VIX Flip with 50-day MA
+42.9%
+VIX Flip with 20-day MA
+44.9%
+VIX Flip without an MA
+
+Total Return
+11.0%
+9.3%
+8.3%
+9.1%
+
+Max
+Drawdown
+11.6%
+43.4%
+> 100%
+> 100%
+
+Without a filter, the indicator is not
+tradable because the maximum
+drawdown is too large.
+
+110
+
+
+Trading the VIX Flip Strategy
+
+• The VIX Flip strategy can be used to buy stocks that
+
+provide buy signals.
+
+• The strategy could also be used to buy call options.
+
+• The strategy could be useful for selling put options.
+
+• Put prices are elevated when VIX Flip is high and the
+underlying stock is likely to rise when the buy signal
+occurs, offering two profit opportunities.
+
+111
+
+
+Put/Call Ratio
+
+Ratio =
+
+Total Volume Of Puts Traded
+
+Total Volume Of Calls Traded
+
+• As this ratio increases, investors are putting their money
+
+into put options rather than call options.
+
+• An increase in put options signals investors are either
+
+starting to speculate that the market will move lower, or
+starting to hedge their portfolios in case of a sell-off.
+
+• Either way, the increase in puts is a contrarian buy signal.
+
+112
+
+
+Data For 5/13/19: Dow Lost 610 Points
+
+http://www.cboe.com/data/current-market-statistics
+
+113
+
+
+Put-Call Ratio Can Signal Turning Points in Price
+
+• Reached a value of 0.70 at March 2009 low
+
+• In week before December 2018 low, the value ranged from 1.02 to
+
+1.89.
+
+• Effectiveness of this indicator, and others based on how markets
+
+trade, evolved over time.
+
+• In 1993, Stock Market Logic cited this as the most sensitive market timing
+
+tool available with buy signals below 35% and sell signals near 140%.
+
+• The ratio has not been below 0.55 since at least 2006
+
+114
+
+
+Commitment of Traders (COT) Data
+
+• COT data is published weekly by the Commodity Futures
+
+Trading Commission (CFTC).
+
+• To draw valid conclusions from the CFTC reports, we
+need to compare current positions to their historical
+norms.
+
+• All open interest (OI) is assigned to one of three groups:
+
+Hedgers, Large Speculators or Small Speculators.
+
+115
+
+
+COT Data Breakdown
+
+• Commercials are producers and large users who hedge
+
+their needs.
+
+• As a group, commercials have inside information and
+
+are well-capitalized.
+
+• Important insights can be gained from their actions
+
+because they are successful in the long run.
+
+• They often short futures because many own physical
+
+commodities.
+
+• Large specs are usually commodity funds, generally trend-
+
+followers who do poorly as a group.
+
+• Small specs are the proverbial “dumb money” of the
+
+markets and are usually long, reflecting their perennial
+optimism.
+
+116
+
+
+COT Raw Data
+
+117
+
+
+COT Data Charted
+
+118
+
+
+Raw Data Is Volatile
+
+• Raw data is also difficult to interpret.
+
+• In some markets commercials will be short most of the time.
+
+• This can be overcome by converting data to an index:
+
+• Look back period could be 3 years, 26 weeks of some other period.
+
+• Multiplied by 100 to express value as a percentage.
+
+119
+
+
+Raw Data and Indexed Data
+
+120
+
+
+Advisory Opinion
+
+• Advisory opinion indicators covers newsletter writers.
+
+• The widespread belief is that writers follow trends out
+of fear of losing subscribers by missing major moves.
+• According to Elder (Trading for a Living), “bullishness
+
+helps sell subscriptions, while bearish comments turn off
+subscribers. Even in a bear market, we rarely see more
+bears than bulls among advisors for more than a few
+weeks at a time.”
+
+• Advisory opinion is most bullish at market tops and most
+
+bearish at market bottoms.
+
+• When the mass of letter writers turns strongly bullish or
+bearish, this indicator says to look for trend reversals.
+
+121
+
+
+Example: Investor’s Intelligence
+
+High readings bearish.
+
+https://www.yardeni.com/pub
+/peacockbullbear.pdf
+
+122
+
+
+Investors Intelligence Bull/Bear Ratio
+
+Source: Yardeni Research
+
+123
+
+
+Buy Signals from Investors Intelligence Bull/Bear
+Ratio
+
+Source: Yardeni Research
+
+124
+
+
+No clear point
+where writers
+consistently
+turn bearish.
+
+Writers do turn
+bullish in bear
+markets.
+
+125
+
+
+Magazine Covers
+
+• Skewed sentiment is an important coincident indicator at
+
+market turns.
+
+• By definition, financial markets are most bullishly
+
+optimistic at major tops and most bearishly pessimistic at
+major bottoms.
+
+• Magazine covers can act as a sentiment thermometer at
+
+market turns of different time constants.
+
+• Anecdotally useful sometimes.
+
+126
+
+
+127
+
+
+Newsweek Days Before 2010 Flash Crash
+
+128
+
+
+September 2011: Brief Pullback Brings Out Bears
+
+129
+
+
+Applies to Markets Other Than Stocks
+
+130
+
+
+Housing Headlines Proliferated Near Peak
+
+131
+
+
+Margin Debt
+
+• Margin debt is debt a brokerage customer takes on by trading on
+
+margin.
+
+• Increases leverage and potential returns and risks.
+
+• A customer may also borrow a security to short sell, rather than
+
+borrowing money with which to buy a security.
+
+• Changes in margin debt can precede trend reversals.
+
+132
+
+
+Margin Was Used By Federal Reserve as a Policy
+Tool In the Past
+
+https://www.yardeni.com/pub/stmkteqmardebt.pdf
+
+133
+
+
+Margin Debt Tracks Prices
+
+134
+
+
+Changes in Margin Debt Can Be More Important
+Than Levels of Debt
+
+135
+
+
+Can Also Be Analyzed as Percent of Market Cap
+
+136
+
+
+Short interest
+
+• Exchanges report the number of shares sold short for any stock.
+
+• Absolute numbers vary a great deal so it’s often expressed as
+
+• Short Percent of Float: the number of shares sold short divided
+by that stock’s float. Higher % indicates sentiment is bearish
+and is a contrarian buy signal.
+
+• Days to Cover: the number of shares sold short divided by the
+average daily volume. High values are a contrarian buy signal.
+
+• High short interest can lead to panic during rallies, a process
+
+known as a “short squeeze”.
+
+137
+
+
+Can Hold At High Levels for Extended Periods of
+Time
+
+138
+
+
+Short Interest Can Increase For Several Reasons
+
+• Could indicate short positions are being opened.
+
+• Could reflect market making activities.
+
+• Put-call parity says a call plus cash is equivalent to a
+
+shares of the stock and a put.
+
+• Options could be used to provide liquidity.
+
+• Could reflect hedging activities.
+
+139
+
+
+AAII Survey
+
+• This indicator is a compilation of a survey of about 170,000
+
+AAII members. They are asked about their six-month market
+outlook. Sample size is generally 300 self-selected
+respondents in any given week.
+
+• Used as a contrarian indicator.
+
+140
+
+
+Recent Results for AAII Survey
+
+141
+
+
+Historical Results for AAII Survey
+
+142
+
+
+Trading by Insiders
+
+• Officers and investors who hold more than 10% of outstanding
+
+shares must report buys and sells to the SEC (SEC Form 4)
+• Corporate insiders have a long record of buying stocks when
+
+they're cheap and selling them high.
+
+• Insider buying emerges after severe market drops, and insider
+
+selling accelerates when the market rallies and becomes
+overpriced.
+
+• Buying or selling by a single insider is not significant, an executive
+may sell shares to meet major personal expenses or may buy to
+exercise stock options.
+
+• Generally meaningful only if 3 or more executives or large
+
+stockholders bought or sold within a month.
+
+• Clusters of insider buying tend to have a better predictive value
+
+than clusters of selling
+
+143
+
+
+Learning Objectives
+
+• Sentiment (CBOE volatility index (VIX), surveys, insider
+
+buying and selling)
+
+• Breadth (advance decline, % stocks above a moving
+
+average)
+
+144
+
+
+The Concept of Market Breadth
+
+• Market breadth measure the level of participation in a
+
+market trend.
+
+• Indexes like the S&P 500 include only a small number
+
+of stocks that are traded on an exchange.
+
+• Breadth indicators, like the advance-decline line, are
+
+based on the price action of each individual stock that is
+traded to see whether they are confirming the trend
+seen in the index.
+
+• Breadth indicators are generally based on diffusion
+
+indexes with each stock being given an equal weight in the
+calculation.
+
+145
+
+
+Breadth Analysis
+
+• Breadth either confirms or diverges from the price action.
+• Confirmation occurs when both price and the indicator
+
+makes new highs or new lows.
+
+• Divergences occur when only price or the indicator
+makes a new high or low and the other does not.
+
+• Bullish divergence: indicator makes a higher high while
+
+price is making lows.
+
+• Bearish divergence: indicator fails to surpass a previous
+
+high while price does.
+
+• Many technicians believe breadth will diverge at
+
+important turning points.
+
+146
+
+
+Strength in Numbers
+
+• The idea behind breadth indicators is that a general cannot win a
+
+war by himself.
+
+• A leader needs a number of troops behind him in order to make
+
+long-term progress.
+
+• Without the large following, a single leader is unlikely to hold any
+
+gains they make.
+
+• In the markets, a few stocks can lead an index higher even while
+the majority of stocks are declining. Breadth indicators would
+capture this divergence and show that the bullish movement of the
+index is not broadly based in the market.
+
+147
+
+
+Changes In Breadth May Signal Ahead of the Price
+Action
+
+• Breadth should ideally confirm the trend.
+
+• If the price of an index is rising, breadth indicators should be
+
+moving up.
+
+• If an index is falling, breadth should be declining.
+
+• Breadth can diverge for a significant time period.
+
+• In the internet bubble (1999/2000) some breadth indicators
+
+turned bearish two years before the top.
+
+148
+
+
+Divergences Are Not a Precise Timing Tool
+
+149
+
+
+The Advance-Decline (A/D) Line
+
+• A/D line shows broad market trends.
+
+• A/D line confirms trends or diverges from trend using all stocks
+
+rather than just leaders
+
+• Calculation:
+
+Advances = number of stocks that closed up
+Decliners = number of stocks that closed lower
+
+Advancers - Decliners
+
+• Ignore unchanged stocks.
+
+150
+
+
+A/D line Showed Strength at March 2009 Bottom
+
+151
+
+
+Divergences Can Warn of Trend Changes
+
+152
+
+
+New Highs and New Lows As a Breadth Indicator
+
+• Calculated as:
+
+NH-NL = New Highs − New Lows
+
+• Plotted as a histogram with a center line at zero.
+
+• When NHs > NLs, value is positive.
+• When NHs < NLs, value is negative.
+
+• Compares the numbers of the strongest and the weakest stocks on
+the exchange to show the balance of power between the leaders in
+strength and the leaders in weakness.
+
+• Divergences and crossovers of zero line offer trading signals.
+
+153
+
+
+Divergence Was Visible at 2009 Bottom
+
+154
+
+
+Stocks Above 50-day MA
+
+• This indicator counts the number of stocks above the MA.
+
+• When the market is trending higher, the percentage of
+
+stocks above their moving averages keeps growing
+
+• In a broad downtrend, the number of stocks above their
+
+MAs keeps shrinking
+
+155
+
+
+When the Indicator Is Above 50%, the S&P 500 Is
+Generally Moving Up
+
+156
+
+
+Longer Term View With 200-day MA. Caution Below
+65%, Bear Market Below 50%
+
+157
+
+
+High Breadth Readings Show Strength
+
+158
+
+
+Breadth Indicator vs. SP500
+
+• In the past twelve years, being out of  the market when %stocks
+
+on MACD buy signals is below 50 avoided steep losses.
+• Max loss was 14.2%.
+• Max loss for S&P 500 over that time was 56%.
+
+159
+
+
+Other Breadth Indicators
+
+• Advance-Decline Volume Line – Based on the volume of
+
+advancing and declining issues. Slightly more complex than A/D
+line alone.
+
+• Arms Index (TRIN) – Based on the advance-decline (A/D) Ratio
+
+and A/D Volume Ratio. Combines the concepts of the A/D line and
+A/D volume line.
+
+• Bullish Percent Index – Based on the percentage of stocks on point
+
+& figure chart buy signals. Could be for a sector, index or
+exchange.
+
+160
+
+
+Breadth indicators (continued)
+
+• McClellan Oscillator – uses EMAs on A/D line to measure breadth
+
+• McClellan Summation Index – an accumulation of the McClellan
+
+Oscillator which smoothes the Oscillator to highlight trends
+
+161
+
+
+McClellan Oscillator
+
+162
+
+
+McClellan Summation Index
+
+163
+
+
+Breadth Indicators
+
+• Like sentiment and momentum, a variety of indicators exist.
+
+• Breadth can be important to follow.
+
+• Select one or two and follow them, ideally after testing.
+
+164
+
+
+Module 6
+
+Relative Strength
+
+A FINANCIAL TIMES COMPANY
+
+165
+
+
+Learning Objectives
+
+• Comparative relative strength (momentum anomaly to the Efficient
+
+Market Hypothesis)
+
+• Combining relative strength with fundamentals (value anomaly to the
+
+Efficient Market Hypothesis)
+
+166
+
+
+RSI vs RS
+
+• RSI is the more popular indicator.
+• Widely available on web sites.
+• Developed for commodity markets.
+• Uses 14-days in calculation because this is equal to about ½ of the
+lunar cycle and Wilder believed commodities were influenced by
+the lunar cycle.
+
+• RS is more difficult to calculate and is not widely available.
+
+• Widely used by professional investors. Head of technical analysis
+
+research at Fidelity said “I’d never look at a chart without a relative
+strength line.”
+
+• Explained by Robert Rhea in 1933, refined by Gartley (1945), Levy
+
+(1967), Fama and French (1992) and many others.
+
+• In academic community, RS is commonly called the “momentum
+
+anomaly to the efficient market hypothesis.”
+
+• Calculated with data looking back 3-12 months; calculated in a
+
+variety of ways but a very robust indicator.
+
+167
+
+
+What Is Relative Strength?
+
+• The winner in any game is relatively stronger than the loser.
+
+• Research proves the team ahead early in the game has an
+
+advantage:
+
+• In hockey, the team ahead after 1 period wins 67% of the time.
+
+• In baseball, the team ahead after 3 innings win 80% of the time.
+
+• Basketball: the team ahead by 4 at halftime wins 60% of the
+
+time; teams up by 6 at halftime wins 80% of the time.
+
+• Cooper, H., K. M. DeNeve, F. Mosteller. 1992. Predicting professions sports game outcomes  from
+intermediate game scores. Chance 5 18–22.
+
+168
+
+
+100 Runners at the Start of a Race: How Can We Pick a
+Likely Winner?
+
+• First, define “winner.”
+
+• In a race, the winner is the individual who finishes
+
+first.
+
+• In the stock market, a winner is a stock that performs
+
+better than average.
+
+• In a 100-stock race, there will be 49 winners with
+
+this definition.
+
+• We can narrow this definition to the top 10% or
+
+the top 25% or some other percentage.
+
+169
+
+
+Picking a Winner: Understand What You Know
+
+• In a race, you know the past performance of runners.
+
+• You can make this more complex and add performance under
+different weather conditions or elevation above sea level or
+based on the age of the runner’s shoes or any other variable.
+
+• Other than past performance, you don’t know anything.
+
+• Everything besides performance is a guess based on what you
+
+don’t know.
+
+170
+
+
+With Stocks, We Know Very Little
+
+• We know past performance.
+• Some investors believe they know the company’s financials, but,
+
+financials can be, and often are, restated or revised.
+
+About 59.1% of the
+restatements had no
+impact on earnings.
+
+171
+
+
+Back to the Runners and the Race
+
+• We know:
+
+• 100 runners are starting and we have the past performance of
+
+all runners.
+
+• We define winning as selecting, in advance, a runner who finishes
+
+in the top 10%.
+
+• We can diversify and select 10 runners to bet on.
+
+172
+
+
+Who Would You Bet On?
+
+• Many will pick the best bet is to pick the top 10% based on past
+
+performance.
+
+• Some bettors will always want to go with the long shot.
+
+• They are destined to lose more often than they win.
+
+• They are also likely to buy lottery tickets.
+
+173
+
+
+Applying Past Performance to Stocks
+
+• Past performance can be measured.
+
+• Stock prices tend to move in trends.
+
+• Relative winners in past six months tend to outperform in next
+
+six and vice versa.
+
+174
+
+
+RS Is Recognized as the Momentum Anomaly to the
+EMH
+
+• Supported by academic research:
+
+• Levy (1967) demonstrated persistence of price trends over 26-
+week timeframe could be used to develop profitable trading
+strategies.
+
+• Jegadeesh & Titman (1993) found profitable strategies using RS
+
+measurements over 3- to 12-months.
+
+175
+
+
+Applying RS
+
+• Calculate a measure of RS for each stock.
+
+• Sort and rank all stocks by that measure.
+
+• Buy the top performers.
+
+• Short the worst performers.
+
+• RS consistently outperforms the broad stock market.
+
+• Independent of calculation method.
+• Time frames from 3 months to 12 months generally
+
+work in calculations.
+
+176
+
+
+Calculations for RS
+
+• Common methods include:
+
+• Rate of Change, often 6 months or 26 weeks.
+
+• ROC can exclude the most recent month or 4 weeks.
+
+• Price/Moving Average Ratios as Levy used in 1967
+
+paper.
+
+• Value Line Timeliness rank uses a ratio of ROC
+
+calculations.
+
+• IBD provides a measure of RS using 4 quarters
+
+overweighting the most recent quarter.
+
+177
+
+
+Portfolios Need to Be Reviewed Periodically
+
+• New sorts should be done periodically.
+
+• Can be done weekly, yearly or any time period in between.
+
+• Stocks falling below a rank (such as 70) should be sold and
+
+replaced with the highest ranked stocks.
+
+178
+
+
+Comparative RS
+
+• A simple ratio comparing the price action of two securities
+
+or of one security to the broad market.
+
+179
+
+
+RS Can Be Used To Confirm Trends
+
+180
+
+
+Benefits of RS Strategies
+
+• RS can be used to identify stocks that are likely to outperform the
+
+market over the next 3-6 months.
+
+• RS can be used to find the best trade candidates among a group of
+
+stocks.
+
+• RS can be applied to pairs trading.
+
+• RS avoids market laggards and can help investors avoid value
+
+traps.
+
+181
+
+
+Avoiding Laggards By Spotting Value Traps
+
+182
+
+
+An Alternative RS Formula: New High RS
+
+• Express the current price as a percentage of the 52-week
+
+high:
+
+Close / 52-week high
+
+• This represents where the price is relative to the past year.
+
+• Builds on the work of George and Hwang in 2004 Journal
+
+of Finance article, The 52 Week High and Momentum
+Investing.
+
+183
+
+
+RS Strategy
+
+• Add a 26-week moving average to the New High RS
+
+indicator:
+
+• Buy when indicator > MA.
+• Sell when indicator < MA.
+
+• The absolute value of the indicator isn’t important, the
+
+position relative to the MA is what we trade.
+
+184
+
+
+Examples
+
+• In the following slides, the NH RS indicator is shown at
+
+the bottom of the chart with its MA.
+
+• The middle of the chart shows a MACD calculation of RS.
+
+• NH RS is generally more responsive.
+
+185
+
+
+Catches Big Winners
+
+186
+
+
+Reacts to Volatility
+
+187
+
+
+Avoids Big Losses
+
+188
+
+
+Testing
+
+• These tests apply a moving average to the indicator.
+
+• MA tests always have low win rates.
+
+• They do find all big winners and they do avoid all large
+
+losses.
+
+• But, MA systems have low win rates because of small,
+whipsaw trades that are inevitable as a trend develops.
+
+• To improve win rates, consider requiring delaying action
+
+for 2-3 weeks (this is a weekly indicator).
+
+• Require two weeks of “buy” signals before buying and
+delaying selling until two consecutive weeks of “sell”
+signals are given.
+
+189
+
+
+Testing Results
+
+• Using the stocks in the S&P 500 from 1/1/2000 through
+
+9/30/2017, deducting $5 per trade for commissions.
+
+• Win rate: 36.7%.
+
+• Average annual return: 16.9%.
+
+• S&P 500 average annual return = 6.1%.
+
+• Max drawdown: 16%.
+
+• S&P 500 max drawdown = 55%.
+
+• Invested about 30% of the time and can use other
+
+strategies the rest of the time
+
+190
+
+
+Daily Data (Same Parameters, 52-day high and 26-
+day MA)
+
+191
+
+
+Long Trades
+
+192
+
+
+Short Trades
+
+193
+
+
+RS Can Be Combined With Momentum
+
+194
+
+
+Strategy Published in 2000
+
+• Stock Selection: A Test of Relative Stock Values Reported
+
+over 17 ½ Years by Charles D. Kirkpatrick II, CMT.
+
+• Calculated RS with price-to-26-week MA.
+
+• Find ratio for all stocks, sort high to low.
+
+• For fundamentals filter:
+
+• Ratio of most recent 4 quarters of EPS growth to 4
+
+quarters one quarter back:
+
+• (Q1 + Q2 + Q3 + Q4) / (Q2 + Q3 + Q4 + Q5)
+
+• Buys were stocks with highest ranks.
+
+195
+
+
+Performance, As Originally Reported
+
+Performance
+July 1982 - Dec 1998
+
+100
+
+d
+e
+t
+s
+e
+v
+n
+I
+
+1
+$
+f
+o
+e
+u
+l
+a
+V
+
+10
+
+1
+
+0.1
+
+Growth List
+
+S&P 500
+
+Value Line Geo
+
+Value of $1 at 12/31/98
+
+Growth List = 28.118
+S&P 500 = 11.030
+Value Line Geo = 5.228
+
+0
+0
+9
+1
+/
+1
+/
+1
+
+0
+0
+9
+1
+/
+3
+2
+/
+1
+
+0
+0
+9
+1
+/
+4
+1
+/
+2
+
+0
+0
+9
+1
+/
+7
+/
+3
+
+0
+0
+9
+1
+/
+9
+2
+/
+3
+
+0
+0
+9
+1
+/
+0
+2
+/
+4
+
+0
+0
+9
+1
+/
+2
+1
+/
+5
+
+0
+0
+9
+1
+/
+3
+/
+6
+
+0
+0
+9
+1
+/
+5
+2
+/
+6
+
+0
+0
+9
+1
+/
+7
+1
+/
+7
+
+0
+0
+9
+1
+/
+8
+/
+8
+
+0
+0
+9
+1
+/
+0
+3
+/
+8
+
+0
+0
+9
+1
+/
+1
+2
+/
+9
+
+0
+0
+9
+1
+/
+3
+1
+/
+0
+1
+
+0
+0
+9
+1
+/
+4
+/
+1
+1
+
+0
+0
+9
+1
+/
+6
+2
+/
+1
+1
+
+0
+0
+9
+1
+/
+8
+1
+/
+2
+1
+
+1
+0
+9
+1
+/
+9
+/
+1
+
+1
+0
+9
+1
+/
+1
+3
+/
+1
+
+1
+0
+9
+1
+/
+2
+2
+/
+2
+
+1
+0
+9
+1
+/
+6
+1
+/
+3
+
+1
+0
+9
+1
+/
+7
+/
+4
+
+1
+0
+9
+1
+/
+9
+2
+/
+4
+
+1
+0
+9
+1
+/
+1
+2
+/
+5
+
+1
+0
+9
+1
+/
+2
+1
+/
+6
+
+1
+0
+9
+1
+/
+4
+/
+7
+
+1
+0
+9
+1
+/
+6
+2
+/
+7
+
+1
+0
+9
+1
+/
+7
+1
+/
+8
+
+1
+0
+9
+1
+/
+8
+/
+9
+
+1
+0
+9
+1
+/
+0
+3
+/
+9
+
+1
+0
+9
+1
+/
+2
+2
+/
+0
+1
+
+1
+0
+9
+1
+/
+3
+1
+/
+1
+1
+
+1
+0
+9
+1
+/
+5
+/
+2
+1
+
+1
+0
+9
+1
+/
+7
+2
+/
+2
+1
+
+2
+0
+9
+1
+/
+8
+1
+/
+1
+
+2
+0
+9
+1
+/
+9
+/
+2
+
+2
+0
+9
+1
+/
+3
+/
+3
+
+2
+0
+9
+1
+/
+5
+2
+/
+3
+
+2
+0
+9
+1
+/
+6
+1
+/
+4
+
+196
+
+
+
+
+
+d
+e
+t
+s
+e
+v
+n
+I
+
+1
+$
+f
+o
+e
+u
+l
+a
+V
+
+10
+
+1
+
+0.1
+
+Growth and Value List Performance
+Jan 1999 - March 2007
+
+Value List
+
+Growth List
+
+S&P 500
+
+Value of $1 at 3/23/07
+
+Growth List = 2.972
+Value List = 8.498
+S&P 500 = 1.175
+Value Line Geo = 1.093
+
+0
+0
+9
+1
+/
+1
+/
+1
+
+0
+0
+9
+1
+/
+3
+1
+/
+1
+
+0
+0
+9
+1
+/
+5
+2
+/
+1
+
+0
+0
+9
+1
+/
+6
+/
+2
+
+0
+0
+9
+1
+/
+8
+1
+/
+2
+
+0
+0
+9
+1
+/
+1
+/
+3
+
+0
+0
+9
+1
+/
+3
+1
+/
+3
+
+0
+0
+9
+1
+/
+5
+2
+/
+3
+
+0
+0
+9
+1
+/
+6
+/
+4
+
+0
+0
+9
+1
+/
+8
+1
+/
+4
+
+0
+0
+9
+1
+/
+0
+3
+/
+4
+
+0
+0
+9
+1
+/
+2
+1
+/
+5
+
+0
+0
+9
+1
+/
+4
+2
+/
+5
+
+0
+0
+9
+1
+/
+5
+/
+6
+
+0
+0
+9
+1
+/
+7
+1
+/
+6
+
+0
+0
+9
+1
+/
+9
+2
+/
+6
+
+0
+0
+9
+1
+/
+1
+1
+/
+7
+
+0
+0
+9
+1
+/
+3
+2
+/
+7
+
+0
+0
+9
+1
+/
+4
+/
+8
+
+0
+0
+9
+1
+/
+6
+1
+/
+8
+
+0
+0
+9
+1
+/
+8
+2
+/
+8
+
+0
+0
+9
+1
+/
+9
+/
+9
+
+0
+0
+9
+1
+/
+1
+2
+/
+9
+
+0
+0
+9
+1
+/
+3
+/
+0
+1
+
+0
+0
+9
+1
+/
+5
+1
+/
+0
+1
+
+0
+0
+9
+1
+/
+7
+2
+/
+0
+1
+
+0
+0
+9
+1
+/
+8
+/
+1
+1
+
+0
+0
+9
+1
+/
+2
+/
+2
+1
+
+0
+0
+9
+1
+/
+0
+2
+/
+1
+1
+
+0
+0
+9
+1
+/
+4
+1
+/
+2
+1
+
+0
+0
+9
+1
+/
+6
+2
+/
+2
+1
+
+1
+0
+9
+1
+/
+7
+/
+1
+
+1
+0
+9
+1
+/
+9
+1
+/
+1
+
+1
+0
+9
+1
+/
+1
+3
+/
+1
+
+1
+0
+9
+1
+/
+2
+1
+/
+2
+
+1
+0
+9
+1
+/
+4
+2
+/
+2
+
+In 1998, added P/S ratio as a variable and required stock to have lowest ratio.
+
+197
+
+
+
+
+
+Use Fundamentals First
+
+• Quantitative Strategies for Achieving Alpha by Richard Tortoriello.
+
+• Selecting stocks by valuation first improves excess returns.
+
+• For example, the free cash flow to price and seven-month relative
+strength strategy resulted in excess returns of 9.5% for the top
+quintile and -8.6% for the bottom; consistency is high and
+volatility (of the top quintile) is low.
+
+• “Valuation and price momentum make a natural pair, since valuation
+
+factors identify stocks that are “cheap,” while price momentum
+indicates that investors may see a catalyst (fundamental or otherwise)
+likely to turn the stock around.”
+
+198
+
+
+Why Does RS Matter?
+
+• From Tortoriello:
+
+So-called “value” stocks often stay cheap for a long time. On the
+other hand, stocks with high price momentum sometimes sport very
+high valuations and are subject to significant declines on minor
+disappointments. The combination of valuation and price
+momentum ensures that a stock has both value and the potential for
+near-term price appreciation.
+
+199
+
+
+Module 7
+
+Technical Theories
+
+A FINANCIAL TIMES COMPANY
+
+200
+
+
+Learning Objectives
+
+• Dow theory
+• Cycle analysis
+• Elliott wave theory
+• Fibonacci sequence
+• Intermarket analysis
+
+201
+
+
+Dow Theory
+
+• Use only two indexes:
+
+• The Dow Jones Industrial Average – thirty stocks.
+• The Dow Jones Transportation Average – twenty
+
+stocks.
+
+• Plot only closing prices.
+
+• Dow said “the most important price of the day is the
+
+close.”
+
+• The two averages must confirm each other’s direction.
+
+202
+
+
+Dow Jones Industrial Average
+
+• Created by Charles Dow. First calculated in 1896.
+
+• Originally created to track economic activity.
+
+• Consisted of 12 companies.
+• Now includes 30.
+
+• Second oldest stock market index.
+• Transports is the oldest index.
+
+• Now one of the most widely followed indexes in the world.
+
+203
+
+
+Dow Jones Transportation Average
+
+• Created to track railroad stocks which were then the most
+important sector in the economy and the stock market.
+
+• First calculated in 1884.
+
+• Originally included 11 companies (9 railroads, a steamship
+
+company and Western Union).
+
+• Now includes 20 transportation companies (railroads,
+trucking companies, airlines, delivery companies and
+rental services).
+
+204
+
+
+Dow Theory Principles
+
+1. The market has three movements.
+
+2. Market trends have three phases.
+
+3. Markets discount the news.
+
+4. The averages must confirm each other.
+
+5. Trends are confirmed by volume.
+
+6. Trends exist until definitive signals confirm the trend
+
+has reversed.
+
+205
+
+
+Dow Theory Principles
+1. The market has three movements
+
+1. The Primary Tide is the major long-term trend.
+2. A Secondary Reaction is the intermediate-term.
+
+corrections that interrupt and move in an opposite
+direction against the Primary Tide.
+
+3. Minor day-to-day fluctuations known as Ripples are
+
+smaller price moves that are of no concern to
+interpreting Dow Theory.
+
+206
+
+
+Dow Theory Principles
+2. Market trends have three phases
+
+• For uptrends:
+
+1. Accumulation or smart money accumulating stocks
+
+when the economy is bad but expected to improve.
+
+2. Recognition occurs as individual investors buy
+stocks as economic news and earnings improve.
+3. Speculation occurs when the general public notices
+that all the financial news is good and begins buying
+to avoid missing out.
+
+207
+
+
+Dow Theory Principles
+2. Market trends have three phases
+
+• Downtrends:
+
+1. Distribution as smart money sells because they realize
+
+high valuations and good economic news can’t continue
+forever.
+
+2. Fear develops as stocks fall and fearful individual
+
+investors sell after suffering losses on stocks they bought
+in the speculation stage.
+
+3. Capitulation is the final down move that develops when
+
+investors are disgusted by the stock market.
+
+208
+
+
+Dow Theory
+3. Markets discount the news
+
+• Market prices reflect what is known (as Schabacker noted
+in 1930 fundamentals are reflected in technical action).
+
+• Market prices change in response to news.
+
+• This principle of Dow Theory is similar to the Efficient
+Market Hypothesis (EMH) which was developed in the
+1960s.
+
+209
+
+
+Dow Theory Principles
+4. The averages must confirm each other
+
+• For a Bull Market, both Averages must rise above previous
+
+highs which were set before the most  recent reactions.
+• To signal a Bear Market, both Averages must drop below
+their respective lows reached in the previous secondary
+reactions.
+
+• A move to a new high or new low by just one Average does
+
+not change the direction of the primary trend.
+• Dow Theory does not stipulate any time limit on
+
+confirmation by both Averages.
+
+210
+
+
+Dow Theory Principles
+5. Trends are confirmed by volume
+
+• Dow believed that volume confirmed price trends.
+
+• Not all analysts consider volume when interpreting Dow
+
+Theory.
+
+• Volume indicators may not be as relevant in modern
+markets since traders can use options, futures and
+other derivatives to establish positions.
+
+211
+
+
+Dow Theory Principles
+6. Trends exist until definitive signals confirm the
+trend has reversed
+
+• Only end-of-day, closing prices are considered. Intraday
+
+prices are ignored.
+
+• This ignores the ripples.
+
+• Both averages must reverse before a new signal is given.
+
+212
+
+
+2008 Dow Theory Primary Bull And Bear
+Signals
+
+Primary Bull Market
+
+Primary Bear Market
+
+Negative Non-Confirmation
+
+Positive Non-Confirmation
+
+213
+
+
+Current Status: Bullish
+
+214
+
+
+Learning Objectives
+
+• Dow theory
+• Cycle analysis
+• Elliott wave theory
+• Fibonacci sequence
+• Intermarket analysis
+
+215
+
+
+Market Cycles Differ From Mathematical Cycles
+
+• Cycles in math are well-defined.
+
+• Market cycles are imprecise and will not behave as a well-
+
+defined mathematical cycle.
+
+• Cycles in the markets are a guide rather than a roadmap to
+
+the future.
+
+216
+
+
+Defining Market Cycles
+
+• Cycles are a recurring phenomena with three qualities:
+
+• Amplitude.
+• Period.
+• Phase.
+
+• Amplitude measures the height of the wave that defines
+
+the cycle.
+
+• Period is the time between cycle troughs (bottoms).
+
+• Analysts generally measure cycle lengths from bottom
+
+to bottom rather than with crests (tops).
+
+• Phase is the measure of how far a cycle is from its previous
+
+trough.
+
+217
+
+
+Mathematical Cycle
+
+218
+
+
+Business Cycle (Idealized)
+
+219
+
+
+Business Cycle (Charted With the Unemployment
+Rate)
+
+220
+
+
+Belief in Business Cycles Dates Back to at Least the
+1800s
+
+• William Stanley Jevons published General Mathematical Theory
+
+of Political Economy in 1862, outlining the marginal utility
+theory of value.
+
+• Jevons found the economy seemed to oscillate between booms and
+
+busts in a rather predictable 10-year cycle.
+
+• “Assuming that variations of commercial credit and enterprise are
+
+essentially mental in their nature, must there not be external
+events to excite hopefulness at one time and disappointment and
+despondency at another?”
+
+• “I can see no reason why the human mind, in its own spontaneous
+
+action, should select a period of just 10.44 years to vary in.”
+
+• “The Solar Period and the Price of Corn” was published in 1875
+and refined in other articles including “Commercial Crises and
+Sunspots”.
+
+221
+
+
+Basic Principles of Cycles
+
+• Summation: price movements are the sum of all cycles.
+• Harmonicity: neighboring waves are usually multiples of
+
+each other.
+
+• For a 20-day cycle, there should be a 10-day cycle and a
+
+40-day cycle present in the data.
+
+• Synchronicity: waves tend to bottom at about the same
+
+time.
+
+• A 10-day, 20-day and 40-cycle should all bottom
+
+around the same day.
+
+• Proportionality: cycles with longer lengths should have
+proportionally greater amplitudes than short-period
+cycles.
+
+• Expect a 20-day cycle to have an amplitude 2x greater
+
+than a 10-day cycle.
+
+222
+
+
+Seasonal Patterns in the Markets
+
+• Seasonality is a cycle that occurs in line with the calendar.
+
+• One example is associated with the planting and harvesting of
+
+crops, which directly affect the feeding and marketing of livestock.
+Normally, prices are higher when a product is not as readily
+available.
+
+• Consumer habits can cause a seasonal pattern in airline travel or
+
+gasoline prices.
+
+• Seasonals are also found in stocks and fixed income investments
+
+and are longer than a year at times.
+
+223
+
+
+Seasonal pattern in corn
+
+224
+
+
+Prices don’t always match the seasonal pattern
+
+Prices fell rather than rose in spring, Peak came later than expected.
+
+225
+
+
+Market Cycles: Ten-Year Cycles
+
+226
+
+
+Market Cycles: Presidential Cycle
+
+227
+
+
+Market Cycle: Annual Cycle
+
+228
+
+
+Popular Seasonals
+
+• Six Best Months to own stocks, a time period that starts in
+November and runs through April. Known as “Sell in May.”
+
+• January Effect is a tendency for small cap and value stocks to
+
+outperform large cap and growth stocks in the first month of the
+year.
+
+• Holiday Seasonality: buy stocks two days before a holiday and sell
+
+at the open the day the market reopens after the holiday. This
+strategy offers low risk since you are rarely invested but its returns
+were 17 times higher than a buy and hold approach according to
+Fosback in Stock Market Logic..
+
+• Fourth Quarter Rally in stocks occurs 72% of the time.
+
+229
+
+
+To Identify a Potential Cycle, Remove the
+Trend From A Price Series
+
+• With the deviation from the mean method:
+
+• Find the first differences of log values (subtract the
+previous value from the current value) and then
+subtract the difference from the 1-year average.
+
+• This can be done with a periodogram.
+
+• More advanced methods include the Hilbert Transform
+
+and Fisher Transform.
+
+• Data mining: enter on a day and exit x-days later.
+• Can also use a triangular moving average.
+
+230
+
+
+Triangular Moving Average Overweights the
+Center Data
+
+231
+
+
+Cycle Marked With Vertical Lines
+
+232
+
+
+Longer-Term View
+
+233
+
+
+Learning Objectives
+
+• Dow theory
+• Cycle analysis
+• Elliott wave theory
+• Fibonacci sequence
+• Intermarket analysis
+
+234
+
+
+Elliott Wave Principle
+
+• Developed by Ralph Nelson Elliott (1871 – 1948)
+
+• Based on the belief that the market has structure and that structure
+
+can be seen in cycles that follow a general pattern.
+
+• Prices move in waves.
+• Waves can be motive (impulsive) or corrective.
+• The motive waves are the stronger movement of the trend.
+• Corrective waves are the countertrend moves that interrupt the
+
+motive wave.
+
+235
+
+
+Elliott Waves
+
+• Bull markets
+
+• 5 waves up in impulse waves
+• 3 waves down in corrective
+
+waves
+
+• Bear markets
+
+• 5 waves down in impulse
+• 3 waves up in corrective
+
+waves
+
+236
+
+
+Impulse Waves and Corrective Waves
+
+• Waves 1, 3 and 5 are impulse waves.
+Motive waves move the price in the
+direction of the primary trend.
+
+• Waves 2 and 4 are corrective waves.
+
+•
+
+Impulse waves breakdown into
+smaller moves of 5 waves (1,2,3,4,5).
+
+• Corrective waves breakdown into
+smaller moves of 3 wave (a,b,c).
+
+237
+
+
+Basic Rules
+
+238
+
+
+Important Elements of the Elliott Wave Theory
+
+• Every wave has a starting point and ending point in price
+
+and time.
+
+• The pattern is continuous in that the end of one wave
+
+marks the beginning of the next wave.
+
+• The basic pattern consists of  five individual waves that
+
+are linked together.
+
+• Waves are fractal, meaning they are part of larger waves
+
+and can be subdivided into smaller waves.
+
+239
+
+
+The Complete Cycle Includes a Correction
+
+(1)
+5
+
+B
+
+A
+
+C
+(2)
+
+3
+
+4
+
+1
+
+2
+
+Source: “Elliott Wave Principle” by Frost and Prechter
+
+• There are two distinct waves, motive and corrective.
+
+• Motive consists of five waves
+• Corrective consists of three waves or variations
+
+240
+
+
+Waves Break Down Into Smaller Waves
+
+The Essential Design
+
+1
+
+(5)
+
+5
+
+2
+
+1
+
+3
+
+4
+
+(B)
+
+C
+
+2
+
+4
+
+A
+
+3
+
+5
+(A)
+
+B
+
+1
+
+4
+
+3
+
+(3)
+
+5
+
+B
+
+A
+
+1
+
+2
+
+C
+(4)
+
+3
+
+4
+
+Source: “Elliott Wave Principle” by Frost and Prechter
+
+(1)
+
+5
+
+1
+
+2
+
+B
+
+A
+
+C
+
+(2)
+
+3
+
+4
+
+1
+
+2
+
+5
+(C)
+
+2
+
+241
+
+
+Useful guidelines
+
+• Equality: Wave 5 should approximately equal Wave 1 if Wave 3 is
+the longest. Remember, Wave 3 cannot be the shortest but it can
+be equal to Wave 1. If 3 = 1, expect 5 to be the longest.
+
+• After a 5-wave impulse advance, corrections (a-b-c) usually end in
+
+the area of prior Wave 4 low.
+
+242
+
+
+Wave Guidelines
+
+• Alternation: the forms for Wave 2 and Wave 4 will
+
+alternate. If Wave 2 is a sharp correction, Wave 4 will be a
+flat correction. If Wave 2 is flat, Wave 4 will be sharp.
+
+243
+
+
+Extensions
+
+• One wave often subdivides into five parts providing a
+
+count of 9 instead of 5 in the primary direction.
+
+Source: Elliott Wave International
+
+244
+
+
+Truncated Fifth Waves
+
+• Truncation occurs when the fifth wave does not move
+beyond the end of the third. Truncation often occurs
+following an extensively strong third wave.
+
+Source: Elliott Wave International
+
+245
+
+
+Waves
+
+• Motive waves
+
+• Impulse waves
+• Diagonals
+
+• Corrective waves
+
+• Zigzags
+• Flat corrections
+• Horizontal triangles
+• Combinations
+
+246
+
+
+Motive Waves: Impulse Waves
+
+Source: Elliott Wave International
+
+247
+
+
+Motive Waves: Diagonal Waves
+
+• A Diagonal Wave is the second type of motive wave. It moves
+
+prices in the direction of the primary trend and consists of five
+subwaves.
+
+• The difference is that the diagonal looks like a wedge, either
+expanding or contracting, while impulse waves form parallel
+channels.
+
+• Sub-waves of the diagonal may not have a count of five.
+
+Source: StockCharts.com
+
+248
+
+
+Motive Waves: Diagonal Waves
+
+• They are the only five-wave structures in the direction of
+
+the main trend within which wave 4 almost always
+overlaps wave 1.
+
+Source: Elliott Wave International
+
+249
+
+
+Corrective Waves: Zigzags
+
+• A single zigzag in a bull market is a simple 3-wave declining
+
+pattern labeled A-B-C and subdividing 5-3-5.
+
+• The top of wave B is noticeably lower than the start of wave A.
+
+Source: StockCharts.com
+
+250
+
+
+Corrective Waves: Zigzags
+
+•
+
+• Occasionally zigzags will occur twice, or at most, three times in succession.
+• This usually occurs when the first zigzag falls short of a normal target.
+In these cases, each zigzag is separated by an intervening "three" (labeled X),
+producing what is called a double zigzag or triple zigzag. The zigzags are
+labeled W and Y (and Z, if a triple).
+
+Source: Elliott Wave International
+
+251
+
+
+Corrective Waves: Flat Corrections
+
+• A flat correction differs from a zigzag in that the
+subwave sequence is 3-3-5.  A zigzag is 5-3-5.
+
+Source: StockCharts.com
+
+252
+
+
+Corrective Waves: Flat Corrections
+
+• Since the first actionary wave, wave A, lacks sufficient downward
+
+force to unfold into a full five waves as it does in a zigzag, the B wave
+reaction seems to inherit this lack of countertrend pressure and, not
+surprisingly, terminates near the start of wave A.
+
+• Wave C, in turn, generally terminates just slightly beyond the end of
+
+wave A rather than significantly beyond as in zigzags.
+
+• Flat corrections usually retrace less of preceding impulse waves than
+
+do zigzags.
+
+• The more powerful the underlying trend, the briefer the flat tends to
+
+be. Within impulses, fourth waves frequently sport flats, while
+second waves rarely do.
+
+253
+
+
+Corrective Waves: Flat Corrections
+
+• Three types of 3-3-5 corrections have been identified by
+
+differences in their overall shape.
+
+• In a regular flat correction, wave B terminates about at the level of
+the beginning of wave A, and wave C terminates a slight bit past
+the end of wave A.
+
+Source: Elliott Wave International
+
+254
+
+
+Corrective Waves: Flat Corrections
+
+• More common is the expanded flat, which contains a price
+
+extreme beyond that of the preceding impulse wave.
+
+• In expanded flats, wave B of the 3-3-5 pattern terminates beyond
+the starting level of wave A, and wave C ends more substantially
+beyond the ending level of wave A.
+
+Source: Elliott Wave International
+
+255
+
+
+Corrective Waves: Horizontal Triangles
+
+• Triangles are overlapping with 5 waves that subdivide
+
+3-3-3-3-3.
+
+• They appear to reflect a balance of forces, causing a
+sideways movement that is usually associated with
+decreasing volume and volatility.
+
+Source: StockCharts.com
+
+256
+
+
+Corrective Waves: Horizontal Triangles
+
+• Triangles nearly always occur in positions prior to the
+final actionary wave in the pattern of one larger degree.
+• They are seen as wave four in an impulse, wave B in an
+A-B-C, or the final wave X in a double or triple zigzag
+or combination.
+
+Running Triangle
+
+Source: Elliott Wave International
+
+257
+
+
+Corrective Waves: Horizontal Triangles
+
+•
+In addition to a running triangle, regular triangles can also form.
+• Regular triangles form within the area of preceding price action.
+• This differs from a running triangle where wave b exceeds the start of
+
+wave a.
+
+Source: Elliott Wave
+International
+
+258
+
+
+Corrective Waves: Combinations
+
+• Elliott called sideways combinations of corrective patterns “double threes"
+
+and “triple threes."
+
+• A single three is any zigzag, flat or triangle.
+• A double or triple three is a combination of simpler types of corrections,
+
+including the various types of zigzags, flats and triangles. Their occurrence
+appears to be the flat correction's way of extending sideways action.
+
+Source: StockCharts.com
+
+259
+
+
+Corrective Waves: Combinations
+
+• Double and triple threes are horizontal in character.
+• There is never more than one zigzag in a combination.
+• There is never more than one triangle in a combination.
+• Triangles occurring alone precede the final movement of a larger
+
+trend (wave 4).
+
+• Combinations appear to recognize this character and triangles occur
+
+only as the final wave in a double or triple three.
+
+Source: Elliott Wave International
+
+260
+
+
+Corrective Waves: Combinations
+
+Source: Elliott Wave International
+
+261
+
+
+Waves Can Explain the Psychology of the Market
+
+262
+
+
+Learning Objectives
+
+• Dow theory
+• Cycle analysis
+• Elliott wave theory
+• Fibonacci sequence
+• Intermarket analysis
+
+263
+
+
+Fibonacci Sequence
+
+• A numerical sequence attributed to Leonardo “Fibonacci” Pisano (c.
+
+1175 – c. 1250):
+
+• Suppose a newly-born pair of rabbits, one male, one female, are
+
+put in a field. Rabbits are able to mate at the age of one month so
+that at the end of its second month a female can produce another
+pair of rabbits. Suppose that our rabbits never die and that the
+female always produces one new pair (one male, one female) every
+month from the second month on. The question Fibonacci asked
+was “How many pairs will there be in one year?”
+
+264
+
+
+How Many Rabbits?
+
+1. At the end of the first month, they mate, but there is still one
+
+only 1 pair.
+
+2. At the end of the second month the female produces a new pair,
+
+so now there are 2 pairs of rabbits in the field.
+
+3. At the end of the third month, the original female produces a
+
+second pair, making 3 pairs in all in the field.
+
+4. At the end of the fourth month, the original female has
+
+produced yet another new pair, the female born two months ago
+produces her first pair also, making 5 pairs.
+
+• To solve the problem for the next month, add the last number to
+
+the previous number:
+
+1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987
+
+265
+
+
+The Golden Ratio
+
+1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987
+
+• Ratio of any number to the next higher number in the sequence is
+
+0.618 (21/34 = 0.6176).
+
+• Ratio to the next higher number is 0.382 (21/55 = 0.382).
+
+• Ratio of any number to the next lower number in the sequence is
+
+1.618 (55/34 = 1.6176).
+
+• Traders look for price moves related to 38.2% and 61.8% along
+
+with extensions.
+
+266
+
+
+Finding Fibonacci Ratios
+
+267
+
+
+Finding Fibonacci Ratios
+
+268
+
+
+Higher Extensions Can Also Be Used
+
+269
+
+
+Fibonacci Retracements
+
+270
+
+
+Fibonacci Retracement
+
+• Fibonacci retracements are used to estimate points where
+
+pullbacks are likely to reverse. If prices move up by 100 points, we
+expect a retracement to stop after a decline of 38 points or 62
+points.
+
+271
+
+
+Retracements
+
+272
+
+
+Expansions
+
+273
+
+
+Time Extensions
+
+274
+
+
+Learning Objectives
+
+• Dow theory
+• Cycle analysis
+• Elliott wave theory
+• Fibonacci sequence
+• Intermarket analysis
+
+275
+
+
+John Murphy Introduced the Idea of Intermarket
+Analysis in 1991
+
+• “The whole idea of the book is that all these markets are related.
+For example, if you're trading the stock market, you also have to
+follow bonds, since what happens in the bond market has an
+impact on stocks. And bonds are very much affected by commodity
+prices.”
+
+• “For example, when commodities turn up, that's an early sign of
+inflation. Commodities' turning up pushes interest rates higher,
+and, in time, that becomes bearish for stocks. Now what pushes
+commodity prices higher is the falling dollar. You can't look at any
+one of these markets all by itself—you have to understand the
+impact they have on one another. ”
+
+276
+
+
+General Concept of Intermarket Analysis
+
+• All markets are related and analysts can gain valuable insights
+
+into one market by studying the trends in other markets.
+
+• Intermarket analysis can be used to confirm trends or identify
+
+divergences. Markets used are:
+
+• Currencies.
+• Commodities.
+• Bonds.
+• Stocks.
+
+• Relationships of important markets depend on the level of
+
+inflation or deflation.
+
+277
+
+
+Key Relationships
+
+278
+
+
+In an Inflationary Environment
+
+• A POSITIVE relationship between bonds and stocks.
+
+• Both move in the same direction as interest rates rise (bond
+
+prices fall) and higher rates hurt stocks.
+
+• Bonds usually change direction ahead of stocks.
+
+• An INVERSE relationship between bonds and commodities.
+
+• Both move in opposite directions as higher interest rates are
+
+associated with higher commodity prices.
+
+• An INVERSE relationship between the US Dollar and commodities.
+• Move in opposite directions as rising commodity prices force
+
+dollars into producing countries and US prints money.
+
+279
+
+
+In a Deflationary Environment
+
+• An INVERSE relationship between bonds and stocks.
+
+• Move in opposite directions as falling interest rates (bonds prices
+
+rising) indicates slowing economy which lowers earnings.
+
+• An INVERSE relationship between bonds and commodities.
+
+• Both move in opposite directions as lower interest rates are
+
+associated with lower commodity prices.
+
+• A POSITIVE relationship between stocks and commodities.
+
+• Move in the same direction as lower commodity prices show
+
+reduced economic growth.
+
+• An INVERSE relationship between the US Dollar and commodities.
+• Move in opposite directions as falling commodity prices reduces
+
+need to create dollars.
+
+280
+
+
+Since Murphy
+
+• Correlation analysis has become more widely accepted as the
+
+means to analyze intermarket relationships.
+
+281
+
+
+Signals From Correlation Data
+
+Can be considered tradable when greater 0.70 or less than -0.70.
+
+282
+
+
+Correlations Can Provide Trading Strategies
+
+• Can be used for hedging, pairs trading, or to overcome
+
+liquidity constraints.
+
+• If high, negative correlation exists, the stronger security
+
+could be bought and the weaker sold short.
+
+• If high, positive correlation exists, a more liquid asset
+
+could be subsisted for a less liquid asset.
+
+• Should be recalculated periodically, maybe every six
+
+months, since correlations change.
+
+283
+
+
+Module 8
+
+Trading Psychology
+
+284
+
+
+Learning Objectives
+
+• Provide details on behaviors associated with successful
+
+and unsuccessful trading.
+
+285
+
+
+Psychology of Trading
+
+• Typical discussion includes ideas such as:
+
+• Many traders suffer from either fear of failure or fear of
+
+success and either can lead to low profits and large
+losses.
+
+• These problems can be overcome with discipline that
+
+includes a trading plan and a complete strategy
+expressed with rules.
+
+• Instead of defining success in terms of profits, consider
+defining a successful day as one where you followed
+your rules.
+
+286
+
+
+Problems With the Typical Approach
+
+• Success needs to measured in terms of profits.
+
+• Although it is nice to win, success should not be measured
+
+in terms of an arbitrary win rate.
+
+• Anecdotally, an old floor trader typically made the most
+
+money when he was right about 40% of the time.
+
+• When he was right 45% or more of the time, he wasn’t
+
+accepting enough risk.
+
+• When he was right 35% or less, he was accepting too
+
+much risk.
+
+287
+
+
+Popular Belief Is that Traders Are Psychopaths
+
+• “The Wisdom of Psychopaths” by Dr. Kevin Dutton
+
+(Oxford psychologist).
+
+• The traits which make a person psychopathic are often
+found in highly successful people including CEOs and
+investment managers.
+
+• Many people have some of these traits, he says.
+
+288
+
+
+Key Traits of Psychopaths
+
+• Ruthlessness.
+• Intense capacity to focus, excluding all distractions such as fear.
+• Powerful reward motivation.
+• A disposition to action.
+• Acute ability to read emotions in other people, without being
+
+moved by them.
+
+• Charisma.
+• Mental resilience.
+• Mindfulness, the ability to live in the present moment.
+
+289
+
+
+The Wisdom of Psychopaths
+
+• Those who can turn them on and off according to
+
+circumstance have a powerful toolkit for doing well in life,
+particularly in high-risk, high-reward professions.
+
+• Those with only partial control of such traits, or who have
+
+them jammed full-on all the time, may severely hurt
+others, ruin their own business or even damage the world
+economy.
+
+• Those who lack any such traits should try to embrace a
+
+few, Dutton suggests.
+
+290
+
+
+Key Traits Applied to Traders
+
+• Intense capacity to focus, excluding all distractions such
+
+as fear.
+
+• This makes it possible to follow a trading plan.
+
+• A disposition to action.
+
+• This avoids paralysis when facing fast-moving markets.
+
+• Acute ability to read emotions in other people.
+• Avoids getting caught up in group think.
+
+291
+
+
+Key Traits Applied to Traders
+
+• Charisma.
+
+• More useful for managers raising funds.
+
+• Mental resilience.
+
+• Can shake off losses.
+
+• Mindfulness, the ability to live in the present moment.
+
+• Can shake off losses.
+
+292
+
+
+These Traits Are Found in Other Professions
+
+• CEOs ranked highest in one test.
+
+• Followed by lawyers, TV and radio workers, salespeople,
+
+surgeons and journalists.
+
+• Some of these traits are similar to those exhibited by
+
+experts in Buddhist meditation.
+
+• Both are very good at reading emotions in people’s
+faces, embracing new experiences, remaining in the
+moment and practicing detachment.
+
+293
+
+
+The Mental Edge in Trading
+
+• Study by Dr. Jason Williams, MD, found that any type of
+
+personality can succeed.
+
+• Broad recommendations:
+
+• Strive to be aware of thoughts, emotions and actions
+
+and consider how they are interrelating and driving ne
+another at any given time.
+
+• Understanding your subconscious is impossible. Trying
+to control the conscious mind (thoughts, emotions and
+actions) is difficult enough and is all that is needed for
+success.
+
+294
+
+
+General Insights from Williams
+
+• “Your brain’s reward center is designed to trick you into thinking
+that pleasures will be more enjoyable than the anticipation of
+them. This is an extremely strong reinforcing pathway and can be
+very problematic for some traders.”
+
+• This is reinforced by research into behavioral economics and
+
+prospect theory.
+
+• Prospect theory is reviewed in the next section.
+
+• Personality is shaped by genetics and experience, especially that
+occurred while your brain is developing (up until your early 20s).
+
+• You cannot alter your personality but you can understand it and
+
+adapt to your personality.
+
+295
+
+
+Important Personality Traits
+
+• Neuroticism and extraversion are the two most important traits.
+
+• Traits are enduring, pervasive and distinctive.
+• There are other traits.
+
+• Broadly, neuroticism deals with the strength and depths of
+
+emotional responses to triggers.
+
+• It especially related to negative emotions (anger, anxiety, guilt
+
+and depression).
+
+• A more neurotic person responds more intensely.
+
+• Broadly, extraversion refers to the speed at which someone
+
+experiences their emotional reactions, and in particular, positive
+emotions.
+
+• It means emotions come on rapidly in response to triggers and
+
+the emotions dissipate rapidly.
+
+296
+
+
+Personal Inventory Tests Are Often Used
+
+• Myers-Briggs
+
+• Minnesota Multiphasic Personality Inventory (MMPI)
+
+• Revised NEO Personality Inventory (NEO-PI-R)
+
+• The one preferred by Williams.
+• Measures:
+
+• Neuroticism
+• Extraversion
+• Openness
+• Agreeableness
+• Conscientiousness
+
+297
+
+
+Neuroticism (N)
+
+• High N experiences strong and deep emotion.
+
+• Very high N prone to chronic negative emotions and tend to cope
+
+with stress poorly, tend to have low impulse control and have
+trouble accepting criticism.
+
+• Low N is emotionally stable.
+
+• Very low N can have too much emotional control and “miss out on
+
+life and tend to repel others.”
+
+298
+
+
+Extraversion (E)
+
+• High E (extroverts) prefer groups and may have difficulty
+
+functioning on their own. They like excitement.
+
+• Very high E may talk too much, be prone to reckless excitement
+
+seeking and attention seeking behaviors,
+
+• Low E (introverts) may be slow to react and have a tendency to
+
+reflect on the past and plan for the future.
+
+• Very low E can have social isolation abd interpersonal detachment.
+
+299
+
+
+Openness (O)
+
+• High O are intellectually curious and open to new experiences.
+
+• Very high O can be prone to accepting false ideas (UFO
+
+conspiracies).
+
+• Low O is associated with rigid routines and conventional ideas.
+
+• Very low O are uncreative and unimaginative.
+
+300
+
+
+Agreeableness (A)
+
+• High A are trusting and altruistic people.
+
+• Very high A can be gullible.
+
+• Low A are skeptical and suspicious and often egocentric.
+
+• Very low A is associated with exploitative and manipulative
+
+behavior.
+
+301
+
+
+Conscientiousness (C)
+
+• High C people are noted for orderliness and punctuality and
+
+associated with high levels of academic and professional success.
+
+• Very high C can be fastidious and compulsive overachievers who
+
+can be overly rigid.
+
+• Low C is associated with poor planning and poor self control.
+
+• Very low C tend to have poor academic and professional
+
+accomplishments and are undisciplined.
+
+302
+
+
+Personality Is More Nuanced Than Those
+Dimensions
+
+• There are other facets to personality. For example, under
+
+N are facets of:
+
+• Anxiety
+• Anger
+• Depression
+• Self-consciousness
+• Impulsivity
+• Vulnerability
+
+• The facets are identified in the tests.
+
+303
+
+
+Neuroticism and Trading
+
+• The best traders have low anxiety. But, understanding that you
+
+suffer from high anxiety means it can be overcome.
+
+• If you have low N, you will not take wins or losses personally.
+
+• High N traders must understand they can be subject to emotional
+
+swings.
+
+• They may get angry and double down or skip trades.
+• They may want to avoid high frequency strategies since they would
+
+do best allowing time to reset their emotions between trades.
+
+• A journal could help identify emotional responses and reflection
+could result in strategy adjustments (like taking time between
+trades).
+
+304
+
+
+Minimizing Anxiety-Induced Errors
+
+• Set realistic goals since anxiety will increase if you miss lofty goals.
+
+• Avoid setting goals in dollar terms.
+
+• Avoid “I will make $3,000,000 in profits this year or $250,000 per
+
+month.”
+
+• Consider process goals.
+
+• I will make X entries this month and monitor open positions Y times per
+
+day.
+
+305
+
+
+Consider How Self-Conscious and Vulnerable You
+Are
+
+• If you are high in these facets, it can be difficult to confront losses
+
+or admit losses to others.
+
+• Could result in a fear of losing money that leads to large losses.
+
+• May avoid directional market calls because of fear of being wrong.
+
+• Desire to be right could result in small profits rather than a desire
+
+to maximize gains.
+
+306
+
+
+Cognitive Behavioral Therapy
+
+• Could help with challenges.
+
+• “The key is to rehearse, over and over, a desired set of positive
+
+emotions, thoughts and behaviors during a period of time you are in a
+specific emotional state. It’s the very best way ti teach an old dog new
+tricks.”
+
+• Goal is to disrupt the pattern.
+
+• An event triggers a distorted thought (a bad trade results in
+
+thinking “I was dumb”). Thoughts lead to emotions (anger or
+depression). Feelings lead to actions (self-destructive behaviors).
+
+307
+
+
+Four S’s of CBT
+
+• Stop sign: when you sense a negative and untrue thought, imagin
+
+holding up a stop sign.
+
+• Shout it out: self-explanatory and not always practical.
+
+• Substitute: sub affirmations. Instead of “I am an idiot” try “I am a
+
+capable trader who learns from my mistakes.”
+
+• Sustain: react appropriately to all appropriate thoughts.
+
+308
+
+
+More Advanced CBT Technique
+
+• Choose a strenuous activity like exercising on a treadmill.
+• Become aware of physical response to the activity (increased heart
+
+rate and alertness).
+
+• Mentally rehearse the desired behavior (holding onto a winning
+
+trade).
+
+• Frequent repetition conditions the body to respond.
+• CBT tempers underlying personality traits so that when stress
+
+develops, you are ready to confront it appropriately.
+
+• Techniques backed by studies.
+
+309
+
+
+Risk Aversion and Trading
+
+• Openness corresponds well to risk aversion.
+
+• In particular:
+
+• Comfortable with novelty and variety rather than familiar routines
+
+but not unpredictable.
+
+• Open to arguments and enjoy brain teasers which displays they are
+
+curious and willing to consider new ideas.
+
+• Willing to examine social, political and religious values (not
+
+dogmatic or completely lacking in convictions).
+
+• If you score low on this dimension, then you should consider placing
+stops that are consistent with your level of risk aversion and using
+strategies that match your personality.
+
+310
+
+
+Conscientiousness and Trading
+
+• Highly conscientious individuals make better system traders while
+
+low levels of this trait make better discretionary traders.
+
+• If you are in the middle, blend the styles.
+
+• Overconfidence can be a problem for traders.
+
+• Many traders feel they are well-prepared and capable rather than
+
+having a tendency to seek perfectionism
+
+311
+
+
+Optimism and Trading
+
+• Overly optimistic traders may forget about losses too easily.
+
+• They see the world through “rose-colored glasses.
+
+• Overly pessimistic traders tend to doubt themselves.
+
+• Best to recognize both emotional responses can create problems and
+
+build in filters to limit risks.
+
+• Have a long term filter and a short term filter to time trade entries
+
+consistent with long term outlook.
+
+• Consider risks and rewards of a trade, and evaluate the worst case
+
+possibility
+
+312
+
+
+Excitement Seeking and Trading
+
+• Very high: reckless and dangerous.
+
+• High: crave excitement and stimulation.
+
+• Low: seek boredom.
+
+• Very low: dull and monotonous.
+
+• High levels of excitement seeking can be dangerous to traders.
+
+313
+
+
+Journals Can Be Helpful
+
+• Journals can force traders to evaluate how they feel in addition to
+
+the profit or loss on a trade.
+
+• Questions could provide a framework for the journal.
+
+• This is not a journal for each trade but a journal of the trading day.
+
+• Could be done periodically rather than continuously.
+
+314
+
+
+Questions for Journals
+
+1. Did I feel happy or sad while trading today? What was it that
+
+made me feel that way?
+
+2. Did I feel anxious or stressed out while trading today? What
+
+triggered that?
+
+3. Did I feel alert and energetic while trading today? Did I do
+
+anything different today?
+
+4. Did I feel discouraged while trading today? How did I overcome
+
+that feeling?
+
+5. Did I feel capable of succeeding at my trading today?
+
+315
+
+
+Questions for Journals
+
+6. Did I blame myself today when my trading didn’t work out as
+planned? Was I really to blame?
+
+7. Did I feel satisfied with my trading results today? Did I meet my
+goals? Did I even have any set goals for today?
+
+8. Did I feel angry, edgy or frustrated while trading today? Who or what
+was I angry at? How did I deal with those emotions? Was it healthy
+how I dealt with my emotions?
+
+9. Did I feel in control of what happened while trading today? Was it
+sustained?
+
+10. Did I make impulsive decisions while trading today?  How could I
+have prevented that?
+
+316
+
+
+Case Studies of Traders
+
+• Low anxiety and low vulnerability are normal. Strong tendency to
+
+take action relative to need for excitement.
+
+• Vulnerability
+
+• Very high scorers are overwhelmed by minor stress and are prone
+
+to panic.
+
+• High scorers are often feel hopeless and dependent on others when
+
+faced with stressful situations.
+
+• Low scorers believe that are capable of handling themselves in
+
+stressful situations.
+
+• Very low scorers feel unrealistically invincible and fail to recognize
+
+their own limitations.
+
+317
+
+
+Discretionary Traders
+
+• High interest in fantasy or daydreams, rather than preferring to
+
+keep their mind on the task at hand.
+
+• Tend to be interested in art and music.
+
+• Tend to feel both happiness and unhappiness rather than a
+
+blunted range of emotions.
+
+318
+
+
+Technical Analysis
+
+319
+
