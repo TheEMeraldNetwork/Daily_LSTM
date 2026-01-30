@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Production Backtesting — Flat</title>
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+  <style>
+    body { font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 24px; color: #111; }
+    h1 { margin: 0 0 6px; font-size: 20px; }
+    .sub { color:#666; margin: 0 0 16px; font-size: 13px; display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .meta { font-size: 12px; color:#444; }
+    .wrap { max-width: 1200px; }
+    .controls { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 8px; margin: 12px 0 14px; }
+    select, input { padding: 6px 8px; font-size: 13px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; font-size: 13px; }
+    th { background: #f7f7f7; cursor: pointer; position: sticky; top: 0; }
+    tr:nth-child(even) { background: #fafafa; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .card { border:1px solid #eee; border-radius: 8px; padding: 10px 12px; background:#fff; }
+    .muted { color:#777; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Production Backtesting — Flat</h1>
+    <p class="sub">
+      <span>Reads the combined flat CSV (cumulative + weekly). Sort, filter, and review charts. Scatter uses weekly stock-level CSV.</span>
+      <span class="meta" id="meta">Loading updated-at…</span>
+    </p>
+
+    <div class="controls">
+      <select id="f_view"><option value="">View (all)</option></select>
+      <select id="f_r4a"><option value="">R4a (all)</option></select>
+      <select id="f_market"><option value="">Market bin (all)</option></select>
+      <select id="f_ma200"><option value="">Above 200d (all)</option></select>
+      <select id="f_sent7"><option value="">Sent7d > 0.2 (all)</option></select>
+      <select id="f_prev"><option value="">Prev rule OK (all)</option></select>
+    </div>
+
+    <table id="tbl">
+      <thead>
+        <tr>
+          <th data-k="view">View</th>
+          <th data-k="r4a_reco">R4a</th>
+          <th data-k="market_bin">Market</th>
+          <th data-k="above_ma200">Above 200d</th>
+          <th data-k="sent7_gt_0_2">Sent7d > 0.2</th>
+          <th data-k="prev_rule_ok">Prev rule OK</th>
+          <th class="mono" data-k="n_closed">n_closed</th>
+          <th class="mono" data-k="pct_win">% win</th>
+          <th class="mono" data-k="pct_loss">% loss</th>
+          <th class="mono" data-k="mean_delta">mean Δ (cash)</th>
+          <th class="mono" data-k="total_delta">total Δ (cash)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="muted">Win rate by category</div>
+        <div id="bar"></div>
+      </div>
+      <div class="card">
+        <div class="muted">Mean Δ by category</div>
+        <div id="bar2"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <div class="muted">Weekly latest — stock scatter (delta vs F10)</div>
+      <div id="scatter"></div>
+    </div>
+
+    <div class="muted mono" id="debug" style="margin-top:10px;"></div>
+
+    <p class="muted" style="margin-top:16px">
+      Data sources:
+      <br> - Flat combined: mock/prod_backtest_flat_all_1dp.csv
+      <br> - Weekly stocks: mock/prod_backtest_weekly_stocks.csv
+    </p>
+  </div>
+
+  <script>
+    let rowsAll = [], rowsStocks = [];
+    let sortKey = 'pct_win', sortDir = -1;
+    function num(x) { const v = Number(x); return Number.isFinite(v) ? v : null; }
+    function fmt(x, d=1) { const v = Number(x); return Number.isFinite(v) ? v.toFixed(d) : ''; }
+    async function loadCSV(path) {
+      const res = await fetch(path, { cache: 'no-store' });
+      if (!res.ok) throw new Error('failed to load ' + path);
+      const text = await res.text();
+      const [head, ...lines] = text.trim().split(/\r?\n/);
+      const headers = head.split(',').map(h => h.replace(/^\ufeff/,'').trim());
+      return lines.filter(Boolean).map(line => {
+        const cols = line.split(',').map(c => c.trim());
+        const o = {};
+        headers.forEach((h,i) => o[h] = cols[i]);
+        return o;
+      });
+    }
+    function uniqueSorted(arr, key) {
+      return [...new Set(arr.map(o => o[key]))].filter(Boolean).sort((a,b)=> String(a).localeCompare(String(b)));
+    }
+    function populateFilters(data) {
+      const fill = (id, vals) => {
+        const el = document.getElementById(id);
+        el.innerHTML = `<option value="">${el.querySelector('option').textContent}</option>` +
+          vals.map(v => `<option value="${v}">${v}</option>`).join('');
+      };
+      fill('f_view',   uniqueSorted(data, 'view'));
+      fill('f_r4a',    uniqueSorted(data, 'r4a_reco'));
+      fill('f_market', uniqueSorted(data, 'market_bin'));
+      fill('f_ma200',  uniqueSorted(data, 'above_ma200'));
+      fill('f_sent7',  uniqueSorted(data, 'sent7_gt_0_2'));
+      fill('f_prev',   uniqueSorted(data, 'prev_rule_ok'));
+      ['f_view','f_r4a','f_market','f_ma200','f_sent7','f_prev'].forEach(id => {
+        document.getElementById(id).addEventListener('change', render);
+      });
+    }
+    function filtered() {
+      const fv = document.getElementById('f_view').value;
+      const fr = document.getElementById('f_r4a').value;
+      const fm = document.getElementById('f_market').value;
+      const fa = document.getElementById('f_ma200').value;
+      const fs = document.getElementById('f_sent7').value;
+      const fp = document.getElementById('f_prev').value;
+      return rowsAll.filter(r =>
+        (!fv || r.view===fv) &&
+        (!fr || r.r4a_reco===fr) &&
+        (!fm || r.market_bin===fm) &&
+        (!fa || r.above_ma200===fa) &&
+        (!fs || r.sent7_gt_0_2===fs) &&
+        (!fp || r.prev_rule_ok===fp));
+    }
+    function renderTable(data) {
+      const tb = document.querySelector('#tbl tbody');
+      tb.innerHTML = data.map(r => `<tr>
+        <td>${r.view}</td>
+        <td>${r.r4a_reco}</td>
+        <td>${r.market_bin}</td>
+        <td>${r.above_ma200}</td>
+        <td>${r.sent7_gt_0_2||''}</td>
+        <td>${r.prev_rule_ok}</td>
+        <td class="mono">${fmt(r.n_closed,0)}</td>
+        <td class="mono">${fmt(r.pct_win,1)}</td>
+        <td class="mono">${fmt(r.pct_loss,1)}</td>
+        <td class="mono">${fmt(r.mean_delta,1)}</td>
+        <td class="mono">${fmt(r.total_delta,1)}</td>
+      </tr>`).join('');
+    }
+    function renderBars(data) {
+      const cat = data.map(r => `${r.view} · ${r.r4a_reco} · ${r.market_bin} · ${r.above_ma200} · s7>${r.sent7_gt_0_2||''} · prev=${r.prev_rule_ok}`);
+      const wr  = data.map(r => num(r.pct_win));
+      const md  = data.map(r => num(r.mean_delta));
+      const layout = {margin:{l:40,r:10,b:120,t:10}, height:340, xaxis:{tickangle:-30}};
+      Plotly.newPlot('bar',  [{type:'bar', x:cat, y:wr, marker:{color:'#4e79a7'}}], layout, {displayModeBar:false});
+      Plotly.newPlot('bar2', [{type:'bar', x:cat, y:md, marker:{color:'#f28e2b'}}], layout, {displayModeBar:false});
+    }
+    function renderScatter() {
+      const fv = document.getElementById('f_view').value;
+      if ((fv && fv!=='weekly') || !rowsStocks.length) { Plotly.purge('scatter'); return; }
+      const x = rowsStocks.map(r => Number(r.f10_T));
+      const y = rowsStocks.map(r => Number(r.avg_a_1_10));
+      const text = rowsStocks.map(r => `${r.date} ${r.symbol} · ${r.market_bin} · ${r.above_ma200} · prev=${r.prev_rule_ok} · r4a=${r.r4a_reco}`);
+      const color = rowsStocks.map(r => r.r4a_reco==='YES' ? '#137333' : '#c5221f');
+      const layout = {margin:{l:40,r:10,b:40,t:10}, height:360, xaxis:{title:'F10(T)'}, yaxis:{title:'Avg A(T+1..T+10)'}};
+      Plotly.newPlot('scatter', [{type:'scattergl', mode:'markers', x, y, text, marker:{color, size:6}}], layout, {displayModeBar:false});
+    }
+    function applySort(data) {
+      const k = sortKey, dir = sortDir;
+      return [...data].sort((a,b) => {
+        const na = num(a[k]), nb = num(b[k]);
+        if (na!=null && nb!=null) return (nb - na) * (dir);
+        return String(a[k]).localeCompare(String(b[k])) * (dir);
+      });
+    }
+    function bindSorting() {
+      document.querySelectorAll('#tbl thead th').forEach(th => {
+        th.addEventListener('click', () => {
+          const k = th.getAttribute('data-k');
+          if (!k) return;
+          if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = -1; }
+          render();
+        });
+      });
+    }
+    function render() {
+      try {
+        const data = applySort(filtered());
+        renderTable(data);
+        renderBars(data);
+        renderScatter();
+        document.getElementById('debug').textContent = `rows=${data.length} · all=${rowsAll.length} · stocks=${rowsStocks.length}`;
+      } catch (e) {
+        document.getElementById('debug').textContent = `Error rendering: ${e}`;
+      }
+    }
+    (async () => {
+      // Load meta (updated-at, windows)
+      try {
+        const mres = await fetch('mock/prod_backtest_meta.json', { cache: 'no-store' });
+        if (mres.ok) {
+          const meta = await mres.json();
+          const ww = Array.isArray(meta.weekly_window) ? meta.weekly_window.join(' … ') : '';
+          document.getElementById('meta').textContent = `Updated at: ${meta.updated_at_cet} · Matured: ${meta.matured_last_date} · Weekly: ${ww}`;
+        } else {
+          document.getElementById('meta').textContent = 'Updated-at: (meta missing)';
+        }
+      } catch (_e) {
+        document.getElementById('meta').textContent = 'Updated-at: (meta error)';
+      }
+      rowsAll    = await loadCSV('mock/prod_backtest_flat_all_1dp.csv');
+      rowsAll    = rowsAll.map(r => ({...r,
+        n_closed: Number(r.n_closed), pct_win: Number(r.pct_win), pct_loss: Number(r.pct_loss),
+        mean_delta: Number(r.mean_delta), total_delta: Number(r.total_delta)
+      }));
+      rowsStocks = await loadCSV('mock/prod_backtest_weekly_stocks.csv').catch(()=>[]);
+      populateFilters(rowsAll);
+      bindSorting();
+      render();
+    })().catch(e => {
+      document.body.insertAdjacentHTML('beforeend', `<pre class="mono" style="color:#b00">Error: ${e}</pre>`);
+    });
+  </script>
+</body>
+</html>
+
