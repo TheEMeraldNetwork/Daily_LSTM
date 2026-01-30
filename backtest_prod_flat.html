@@ -202,7 +202,7 @@
     (async () => {
       // Load meta (updated-at, windows)
       try {
-        const mres = await fetch('mock/prod_backtest_meta.json', { cache: 'no-store' });
+        const mres = await fetch('App/data/backtest/prod_backtest_meta.json', { cache: 'no-store' });
         if (mres.ok) {
           const meta = await mres.json();
           const ww = Array.isArray(meta.weekly_window) ? meta.weekly_window.join(' … ') : '';
@@ -213,12 +213,12 @@
       } catch (_e) {
         document.getElementById('meta').textContent = 'Updated-at: (meta error)';
       }
-      rowsAll    = await loadCSV('mock/prod_backtest_flat_all_1dp.csv');
+      rowsAll    = await loadCSV('App/data/backtest/prod_backtest_flat_all_1dp.csv');
       rowsAll    = rowsAll.map(r => ({...r,
         n_closed: Number(r.n_closed), pct_win: Number(r.pct_win), pct_loss: Number(r.pct_loss),
         mean_delta: Number(r.mean_delta), total_delta: Number(r.total_delta)
       }));
-      rowsStocks = await loadCSV('mock/prod_backtest_weekly_stocks.csv').catch(()=>[]);
+      rowsStocks = await loadCSV('App/data/backtest/prod_backtest_weekly_stocks.csv').catch(()=>[]);
       populateFilters(rowsAll);
       bindSorting();
       render();
